@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Force Login Buttons - MoonCart</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/main.css" />
+        <style>
+            .fix-container {
+                max-width: 800px;
+                margin: 100px auto;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+            .fix-header {
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            .fix-header h1 {
+                color: var(--primary-color);
+                margin-bottom: 10px;
+            }
+            .fix-section {
+                margin-bottom: 30px;
+                padding: 20px;
+                border-radius: 10px;
+                background: #f9f9f9;
+            }
+            .fix-section h2 {
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
+            .fix-buttons {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+            }
+            .fix-btn {
+                padding: 12px 20px;
+                border-radius: 50px;
+                border: none;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 14px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .fix-btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                color: white;
+            }
+            .fix-btn-secondary {
+                background: white;
+                border: 2px solid var(--primary-color);
+                color: var(--primary-color);
+            }
+            .fix-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            .preview {
+                margin: 20px 0;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background: white;
+            }
+            .code {
+                background: #333;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                font-family: monospace;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .status {
+                margin-top: 15px;
+                padding: 15px;
+                background: #f0f8ff;
+                border-left: 4px solid #007bff;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="fix-container">
+            <div class="fix-header">
+                <h1>MoonCart - Login/Signup Button Fixer</h1>
+                <p>
+                    Use this tool to fix the login/signup buttons in the navbar
+                </p>
+            </div>
+
+            <div class="fix-section">
+                <h2>1. Force Show Login/Signup Buttons</h2>
+                <p>
+                    Click the button below to immediately show the login/signup
+                    buttons in the navbar:
+                </p>
+                <div class="fix-buttons">
+                    <button
+                        class="fix-btn fix-btn-primary"
+                        onclick="forceFix()"
+                    >
+                        <i class="fas fa-magic"></i>
+                        Force Show Login/Signup Buttons
+                    </button>
+                    <button
+                        class="fix-btn fix-btn-secondary"
+                        onclick="location.href='index.html'"
+                    >
+                        <i class="fas fa-home"></i>
+                        Go to Homepage
+                    </button>
+                </div>
+                <div class="status" id="status-msg"></div>
+            </div>
+
+            <div class="fix-section">
+                <h2>2. Preview</h2>
+                <p>This is how the login/signup buttons should look:</p>
+                <div class="preview">
+                    <div class="auth-buttons">
+                        <button class="btn-login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Login</span>
+                        </button>
+                        <button class="btn-signup">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Sign Up</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fix-section">
+                <h2>3. Manually Fix</h2>
+                <p>
+                    If the button above doesn't work, you can manually fix it by
+                    opening your browser console (F12) and pasting this code:
+                </p>
+                <div class="code">
+                    const accountSection =
+                    document.getElementById('account-section');<br />
+                    if (accountSection) {<br />
+                    &nbsp;&nbsp;accountSection.innerHTML = `<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="auth-buttons"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button
+                    class="btn-login"
+                    onclick="window.location.href='login.html'"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i
+                    class="fas fa-sign-in-alt"&gt;&lt;/i&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Login&lt;/span&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button
+                    class="btn-signup"
+                    onclick="window.location.href='signup.html'"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i
+                    class="fas fa-user-plus"&gt;&lt;/i&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Sign
+                    Up&lt;/span&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &nbsp;&nbsp;`;<br />
+                    }
+                </div>
+            </div>
+        </div>
+
+        <script src="js/main.js"></script>
+        <script>
+            function forceFix() {
+                const statusMsg = document.getElementById("status-msg");
+
+                try {
+                    // Try to find the account section
+                    const accountSection =
+                        document.getElementById("account-section");
+
+                    if (!accountSection) {
+                        statusMsg.innerHTML =
+                            '<strong style="color: #dc3545;">❌ Error:</strong> Account section not found on the page!';
+                        return;
+                    }
+
+                    // Try different methods to render auth buttons
+                    if (typeof window.forceRenderAuthButtons === "function") {
+                        window.forceRenderAuthButtons();
+                        statusMsg.innerHTML =
+                            '<strong style="color: #28a745;">✅ Success:</strong> Login/signup buttons have been forced to show using forceRenderAuthButtons()';
+                    } else if (
+                        typeof window.MoonCart !== "undefined" &&
+                        typeof window.MoonCart.forceRenderAuthButtons ===
+                            "function"
+                    ) {
+                        window.MoonCart.forceRenderAuthButtons();
+                        statusMsg.innerHTML =
+                            '<strong style="color: #28a745;">✅ Success:</strong> Login/signup buttons have been forced to show using MoonCart.forceRenderAuthButtons()';
+                    } else {
+                        // Direct implementation
+                        accountSection.innerHTML = `
+                        <div class="auth-buttons">
+                            <button class="btn-login" onclick="window.location.href='login.html'">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </button>
+                            <button class="btn-signup" onclick="window.location.href='signup.html'">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Sign Up</span>
+                            </button>
+                        </div>
+                    `;
+                        statusMsg.innerHTML =
+                            '<strong style="color: #28a745;">✅ Success:</strong> Login/signup buttons have been forced to show using direct HTML injection';
+                    }
+
+                    // Create event to notify main.js
+                    const event = new CustomEvent("account_buttons_fixed");
+                    document.dispatchEvent(event);
+                } catch (e) {
+                    statusMsg.innerHTML =
+                        '<strong style="color: #dc3545;">❌ Error:</strong> ' +
+                        e.message;
+                    console.error("Error in force fix:", e);
+                }
+            }
+
+            // Auto-run on page load
+            document.addEventListener("DOMContentLoaded", function () {
+                forceFix();
+            });
+        </script>
+    </body>
+</html>

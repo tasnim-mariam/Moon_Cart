@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Contact MoonCart - Your Trusted Late-Night Delivery Service for Fresh Food, Groceries, and Medicine"
+        />
+        <title>Contact Us - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+
+        <style>
+            /* Modern Contact Page Styles */
+            .contact-hero {
+                position: relative;
+                background-image: linear-gradient(
+                        to right,
+                        rgba(0, 0, 0, 0.8) 0%,
+                        rgba(0, 0, 0, 0.6) 50%,
+                        rgba(0, 0, 0, 0.4) 100%
+                    ),
+                    url("https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                color: white;
+                padding: 150px 0 100px;
+                text-align: center;
+                margin-top: 80px;
+                overflow: hidden;
+            }
+
+            .contact-hero::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                background: linear-gradient(
+                    to top,
+                    rgba(248, 249, 250, 1),
+                    rgba(248, 249, 250, 0)
+                );
+            }
+
+            .contact-subtitle {
+                color: var(--secondary-color);
+                font-size: 18px;
+                font-weight: 600;
+                letter-spacing: 3px;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                position: relative;
+                display: inline-block;
+            }
+
+            .contact-subtitle::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background: var(--secondary-color);
+                border-radius: 3px;
+            }
+
+            .contact-title {
+                font-size: 56px;
+                font-weight: 800;
+                margin-bottom: 30px;
+                line-height: 1.2;
+                background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .contact-description {
+                max-width: 700px;
+                margin: 0 auto 40px;
+                font-size: 18px;
+                line-height: 1.8;
+                opacity: 0.9;
+            }
+
+            .contact-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                padding: 15px 30px;
+                border-radius: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                font-weight: 600;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                margin-top: 20px;
+            }
+
+            .contact-cta:hover {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                border-color: transparent;
+            }
+
+            .contact-cta i {
+                font-size: 20px;
+            }
+
+            .contact-section {
+                padding: 100px 0;
+                position: relative;
+            }
+
+            .section-waves {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 150px;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .contact-section-header {
+                text-align: center;
+                max-width: 700px;
+                margin: 0 auto 60px;
+            }
+
+            .contact-section-title {
+                font-size: 36px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: var(--dark-color);
+                position: relative;
+                display: inline-block;
+            }
+
+            .contact-section-title::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -12px;
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                border-radius: 4px;
+            }
+
+            .contact-section-subtitle {
+                color: var(--text-light);
+                font-size: 18px;
+                line-height: 1.7;
+            }
+
+            .contact-info-card {
+                background: white;
+                border-radius: 20px;
+                padding: 35px;
+                height: 100%;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+            }
+
+            .contact-info-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    135deg,
+                    rgba(227, 30, 36, 0.03) 0%,
+                    rgba(255, 107, 53, 0.03) 100%
+                );
+                z-index: -1;
+            }
+
+            .contact-info-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-color: rgba(227, 30, 36, 0.2);
+            }
+
+            .contact-info-card h3 {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 25px 0 20px;
+                color: var(--dark-color);
+            }
+
+            .contact-info-card p {
+                color: var(--text-light);
+                font-size: 16px;
+                line-height: 1.7;
+                margin-bottom: 8px;
+            }
+
+            .contact-info-card a {
+                color: var(--text-light);
+                font-size: 16px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .contact-info-card a:hover {
+                color: var(--primary-color);
+                transform: translateX(5px);
+            }
+
+            .contact-icon {
+                width: 80px;
+                height: 80px;
+                border-radius: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                color: white;
+                font-size: 30px;
+                box-shadow: 0 15px 25px rgba(227, 30, 36, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .contact-icon::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: radial-gradient(
+                    circle at top right,
+                    rgba(255, 255, 255, 0.3) 0%,
+                    transparent 70%
+                );
+            }
+
+            .contact-form-wrapper {
+                background: white;
+                border-radius: 24px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+                overflow: hidden;
+                position: relative;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .contact-form {
+                padding: 50px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .form-floating {
+                position: relative;
+                margin-bottom: 25px;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 18px 22px;
+                font-size: 16px;
+                background: #f8f9fa;
+                border: 2px solid transparent;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+                color: var(--text-dark);
+                font-family: var(--font-main);
+            }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                background: white;
+                box-shadow: 0 5px 15px rgba(227, 30, 36, 0.1);
+            }
+
+            .form-control:focus + .form-label,
+            .form-control:not(:placeholder-shown) + .form-label {
+                top: 0;
+                left: 15px;
+                transform: translateY(-50%) scale(0.85);
+                background: white;
+                padding: 0 8px;
+                color: var(--primary-color);
+                font-weight: 600;
+            }
+
+            .form-label {
+                position: absolute;
+                left: 22px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 16px;
+                color: var(--text-light);
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            textarea.form-control {
+                min-height: 180px;
+                resize: vertical;
+            }
+
+            textarea.form-control + .form-label {
+                top: 25px;
+                transform: none;
+            }
+
+            textarea.form-control:focus + .form-label,
+            textarea.form-control:not(:placeholder-shown) + .form-label {
+                top: 0;
+                transform: translateY(-50%) scale(0.85);
+            }
+
+            .submit-btn {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                color: white;
+                border: none;
+                padding: 16px 35px;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 10px 20px rgba(227, 30, 36, 0.2);
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+            }
+
+            .submit-btn::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                transition: all 0.5s ease;
+                z-index: -1;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(227, 30, 36, 0.3);
+            }
+
+            .submit-btn:hover::before {
+                left: 100%;
+            }
+
+            .contact-map-section {
+                background: #f8f9fa;
+                padding: 100px 0;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .contact-map-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23e31e24" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+                background-size: cover;
+                background-position: bottom;
+                opacity: 1;
+                z-index: 0;
+            }
+
+            .contact-map {
+                height: 450px;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border: 5px solid white;
+                position: relative;
+                z-index: 1;
+            }
+
+            .contact-map iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
+            .business-hours {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                color: white;
+                padding: 40px;
+                border-radius: 24px;
+                position: relative;
+                overflow: hidden;
+                height: 100%;
+                box-shadow: 0 20px 40px rgba(227, 30, 36, 0.2);
+                z-index: 1;
+            }
+
+            .business-hours::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                left: -10%;
+                width: 150%;
+                height: 200%;
+                background: radial-gradient(
+                    circle at top right,
+                    rgba(255, 255, 255, 0.2) 0%,
+                    transparent 60%
+                );
+                z-index: -1;
+            }
+
+            .business-hours h3 {
+                font-size: 26px;
+                font-weight: 700;
+                margin-bottom: 25px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .business-hours p {
+                font-size: 16px;
+                line-height: 1.7;
+                position: relative;
+                z-index: 2;
+                opacity: 0.9;
+                margin-bottom: 8px;
+            }
+
+            .business-hours .hours-title {
+                display: block;
+                font-weight: 700;
+                font-size: 18px;
+                margin: 25px 0 15px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            .contact-social {
+                display: flex;
+                gap: 15px;
+                margin-top: 30px;
+            }
+
+            .contact-social a {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 20px;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .contact-social a:hover {
+                background: white;
+                color: var(--primary-color);
+                transform: translateY(-5px) rotate(360deg);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .faq-section {
+                padding: 100px 0;
+            }
+
+            .faq-item {
+                background: white;
+                border-radius: 16px;
+                overflow: hidden;
+                margin-bottom: 20px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .faq-item:hover {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+            }
+
+            .faq-question {
+                padding: 25px 30px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--dark-color);
+                font-weight: 600;
+                font-size: 18px;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .faq-question:hover {
+                color: var(--primary-color);
+            }
+
+            .faq-question i {
+                transition: all 0.3s ease;
+                font-size: 16px;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8f9fa;
+                border-radius: 50%;
+            }
+
+            .faq-item.active .faq-question {
+                color: var(--primary-color);
+            }
+
+            .faq-item.active .faq-question i {
+                transform: rotate(180deg);
+                background: var(--primary-color);
+                color: white;
+            }
+
+            .faq-answer {
+                padding: 0 30px;
+                height: 0;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                opacity: 0;
+            }
+
+            .faq-item.active .faq-answer {
+                height: auto;
+                padding: 0 30px 25px;
+                opacity: 1;
+            }
+
+            .faq-answer p {
+                color: var(--text-light);
+                line-height: 1.7;
+            }
+
+            .contact-cta-box {
+                background: linear-gradient(
+                    135deg,
+                    rgba(227, 30, 36, 0.05) 0%,
+                    rgba(255, 107, 53, 0.05) 100%
+                );
+                border-radius: 24px;
+                padding: 40px;
+                text-align: center;
+                margin-top: 60px;
+                border: 1px solid rgba(227, 30, 36, 0.1);
+            }
+
+            .contact-cta-box p {
+                font-size: 20px;
+                margin-bottom: 20px;
+                color: var(--text-dark);
+            }
+
+            /* Animation Classes */
+            .fade-in-up {
+                animation: fadeInUp 0.8s ease backwards;
+            }
+
+            .fade-in-up-1 {
+                animation: fadeInUp 0.8s ease 0.2s backwards;
+            }
+
+            .fade-in-up-2 {
+                animation: fadeInUp 0.8s ease 0.4s backwards;
+            }
+
+            /* Mobile responsive enhancements */
+            @media screen and (max-width: 768px) {
+                .contact-hero {
+                    padding: 120px 0 80px;
+                }
+
+                .contact-title {
+                    font-size: 42px;
+                }
+
+                .contact-form {
+                    padding: 30px;
+                }
+
+                .contact-section {
+                    padding: 70px 0;
+                }
+
+                .contact-icon {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 26px;
+                }
+
+                .business-hours,
+                .contact-map {
+                    margin-top: 30px;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .contact-hero {
+                    padding: 100px 0 70px;
+                }
+
+                .contact-title {
+                    font-size: 36px;
+                }
+
+                .contact-subtitle {
+                    font-size: 16px;
+                }
+
+                .contact-description {
+                    font-size: 16px;
+                }
+
+                .contact-form {
+                    padding: 25px;
+                }
+
+                .contact-section-title {
+                    font-size: 28px;
+                }
+
+                .faq-question {
+                    font-size: 16px;
+                    padding: 20px 25px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge"
+                            ><i class="fas fa-shipping-fast"></i> Free delivery
+                            on orders over ৳5,000</span
+                        >
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link active">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <p class="contact-subtitle fade-in-up">Get In Touch</p>
+                <h1 class="contact-title fade-in-up-1">Contact Us</h1>
+                <p class="contact-description fade-in-up-2">
+                    Have questions, suggestions, or need assistance with an
+                    order? We'd love to hear from you! Our team is ready to help
+                    you with anything you need.
+                </p>
+                <a href="#contact-form" class="contact-cta fade-in-up-2">
+                    <i class="fas fa-envelope"></i>
+                    Send us a message
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Information Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-section-header">
+                    <h2 class="contact-section-title">Our Contact Details</h2>
+                    <p class="contact-section-subtitle">
+                        There are several ways to get in touch with our team.
+                        Choose what works best for you.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4" data-animate>
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Visit Our Office</h3>
+                            <p>
+                                123 MoonCart St, Bashundhara R/A<br />
+                                Dhaka, Bangladesh
+                            </p>
+                            <p style="margin-top: 10px; color: #777">
+                                <i
+                                    class="fas fa-clock"
+                                    style="margin-right: 8px"
+                                ></i>
+                                Office Hours: 9:00 AM - 8:00 PM
+                            </p>
+                            <a
+                                href="https://maps.google.com"
+                                target="_blank"
+                                class="btn btn-outline-primary mt-20"
+                                style="
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    padding: 12px 20px;
+                                    border-radius: 50px;
+                                    border: 1px solid var(--primary-color);
+                                    color: var(--primary-color);
+                                    font-weight: 600;
+                                    transition: all 0.3s ease;
+                                    background: transparent;
+                                    font-size: 14px;
+                                    text-decoration: none;
+                                "
+                                onmouseover="this.style.background='var(--primary-color)'; this.style.color='white'"
+                                onmouseout="this.style.background='transparent'; this.style.color='var(--primary-color)'"
+                            >
+                                <i class="fas fa-directions"></i> Get Directions
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" data-animate>
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3>Call Our Team</h3>
+                            <div style="margin-bottom: 15px">
+                                <span
+                                    style="
+                                        display: block;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                        color: var(--dark-color);
+                                    "
+                                    >Customer Support:</span
+                                >
+                                <a
+                                    href="tel:+12345678900"
+                                    style="
+                                        font-size: 18px;
+                                        color: var(--primary-color);
+                                        text-decoration: none;
+                                    "
+                                    >+1 234 567 8900</a
+                                >
+                            </div>
+                            <div style="margin-bottom: 15px">
+                                <span
+                                    style="
+                                        display: block;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                        color: var(--dark-color);
+                                    "
+                                    >Order Hotline:</span
+                                >
+                                <a
+                                    href="tel:+12345678901"
+                                    style="
+                                        font-size: 18px;
+                                        color: var(--primary-color);
+                                        text-decoration: none;
+                                    "
+                                    >+1 234 567 8901</a
+                                >
+                            </div>
+                            <p style="margin-top: 10px; color: #777">
+                                <i
+                                    class="fas fa-headset"
+                                    style="margin-right: 8px"
+                                ></i>
+                                Available 24/7 for urgent matters
+                            </p>
+                            <a
+                                href="tel:+12345678900"
+                                class="btn btn-outline-primary mt-20"
+                                style="
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    padding: 12px 20px;
+                                    border-radius: 50px;
+                                    border: 1px solid var(--primary-color);
+                                    color: var(--primary-color);
+                                    font-weight: 600;
+                                    transition: all 0.3s ease;
+                                    background: transparent;
+                                    font-size: 14px;
+                                    text-decoration: none;
+                                "
+                                onmouseover="this.style.background='var(--primary-color)'; this.style.color='white'"
+                                onmouseout="this.style.background='transparent'; this.style.color='var(--primary-color)'"
+                            >
+                                <i class="fas fa-phone-alt"></i> Call Now
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" data-animate>
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email Us Directly</h3>
+                            <div style="margin-bottom: 15px">
+                                <span
+                                    style="
+                                        display: block;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                        color: var(--dark-color);
+                                    "
+                                    >General Inquiries:</span
+                                >
+                                <a
+                                    href="mailto:support@mooncart.com"
+                                    style="
+                                        font-size: 16px;
+                                        color: var(--primary-color);
+                                        text-decoration: none;
+                                        word-break: break-all;
+                                    "
+                                    >support@mooncart.com</a
+                                >
+                            </div>
+                            <div style="margin-bottom: 15px">
+                                <span
+                                    style="
+                                        display: block;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                        color: var(--dark-color);
+                                    "
+                                    >Customer Service:</span
+                                >
+                                <a
+                                    href="mailto:help@mooncart.com"
+                                    style="
+                                        font-size: 16px;
+                                        color: var(--primary-color);
+                                        text-decoration: none;
+                                        word-break: break-all;
+                                    "
+                                    >help@mooncart.com</a
+                                >
+                            </div>
+                            <p style="margin-top: 10px; color: #777">
+                                <i
+                                    class="fas fa-history"
+                                    style="margin-right: 8px"
+                                ></i>
+                                We respond within 24 hours
+                            </p>
+                            <a
+                                href="mailto:support@mooncart.com"
+                                class="btn btn-outline-primary mt-20"
+                                style="
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    padding: 12px 20px;
+                                    border-radius: 50px;
+                                    border: 1px solid var(--primary-color);
+                                    color: var(--primary-color);
+                                    font-weight: 600;
+                                    transition: all 0.3s ease;
+                                    background: transparent;
+                                    font-size: 14px;
+                                    text-decoration: none;
+                                "
+                                onmouseover="this.style.background='var(--primary-color)'; this.style.color='white'"
+                                onmouseout="this.style.background='transparent'; this.style.color='var(--primary-color)'"
+                            >
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section
+            class="contact-section"
+            style="
+                background-color: #f8f9fa;
+                position: relative;
+                overflow: hidden;
+            "
+        >
+            <div class="container">
+                <div class="contact-section-header">
+                    <h2 class="contact-section-title">Send Us a Message</h2>
+                    <p class="contact-section-subtitle">
+                        Have a question, feedback, or need support with an
+                        order? Fill out the form below and we'll get back to you
+                        as soon as possible.
+                    </p>
+                </div>
+
+                <div class="row d-flex align-center">
+                    <div class="col-lg-6" data-animate>
+                        <div class="contact-form-wrapper">
+                            <div class="contact-form">
+                                <form
+                                    id="contact-form"
+                                    onsubmit="return false;"
+                                >
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="name"
+                                                    name="name"
+                                                    placeholder=" "
+                                                    required
+                                                />
+                                                <label
+                                                    for="name"
+                                                    class="form-label"
+                                                    >Full Name</label
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input
+                                                    type="email"
+                                                    class="form-control"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder=" "
+                                                    required
+                                                />
+                                                <label
+                                                    for="email"
+                                                    class="form-label"
+                                                    >Email Address</label
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            placeholder=" "
+                                        />
+                                        <label for="phone" class="form-label"
+                                            >Phone Number (Optional)</label
+                                        >
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <select
+                                            class="form-control"
+                                            id="subject"
+                                            name="subject"
+                                            required
+                                        >
+                                            <option value="" selected disabled>
+                                                Please select
+                                            </option>
+                                            <option value="General Inquiry">
+                                                General Inquiry
+                                            </option>
+                                            <option value="Order Support">
+                                                Order Support
+                                            </option>
+                                            <option value="Product Question">
+                                                Product Question
+                                            </option>
+                                            <option value="Feedback">
+                                                Feedback
+                                            </option>
+                                            <option value="Partnership">
+                                                Partnership
+                                            </option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <label for="subject" class="form-label"
+                                            >Subject</label
+                                        >
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <textarea
+                                            class="form-control"
+                                            id="message"
+                                            name="message"
+                                            placeholder=" "
+                                            required
+                                        ></textarea>
+                                        <label for="message" class="form-label"
+                                            >Your Message</label
+                                        >
+                                    </div>
+
+                                    <div
+                                        class="form-check"
+                                        style="
+                                            margin-bottom: 20px;
+                                            padding-left: 30px;
+                                        "
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value=""
+                                            id="agreement"
+                                            style="
+                                                width: 20px;
+                                                height: 20px;
+                                                margin-left: -30px;
+                                                border: 2px solid #ddd;
+                                                border-radius: 4px;
+                                                cursor: pointer;
+                                            "
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="agreement"
+                                            style="
+                                                font-size: 14px;
+                                                color: var(--text-light);
+                                                cursor: pointer;
+                                            "
+                                        >
+                                            I agree to the
+                                            <a
+                                                href="#"
+                                                style="
+                                                    color: var(--primary-color);
+                                                    text-decoration: none;
+                                                "
+                                                >Privacy Policy</a
+                                            >
+                                            and consent to the processing of my
+                                            data.
+                                        </label>
+                                    </div>
+
+                                    <div
+                                        style="
+                                            text-align: center;
+                                            margin-top: 20px;
+                                        "
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="submit-btn"
+                                        >
+                                            <i class="fas fa-paper-plane"></i>
+                                            Send Message
+                                        </button>
+                                        <p
+                                            style="
+                                                font-size: 14px;
+                                                color: #777;
+                                                margin-top: 15px;
+                                            "
+                                        >
+                                            <i
+                                                class="fas fa-shield-alt"
+                                                style="margin-right: 5px"
+                                            ></i>
+                                            Your information is secured and
+                                            encrypted
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6" data-animate>
+                        <div style="padding: 20px">
+                            <div class="row">
+                                <div class="col-12" style="margin-bottom: 30px">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                        alt="Contact support team"
+                                        style="
+                                            width: 100%;
+                                            height: 250px;
+                                            object-fit: cover;
+                                            border-radius: 20px;
+                                            box-shadow: 0 15px 30px
+                                                rgba(0, 0, 0, 0.1);
+                                        "
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <div
+                                        style="
+                                            background: white;
+                                            border-radius: 16px;
+                                            padding: 25px;
+                                            height: 100%;
+                                            box-shadow: 0 10px 30px
+                                                rgba(0, 0, 0, 0.05);
+                                            border: 1px solid
+                                                rgba(0, 0, 0, 0.05);
+                                        "
+                                    >
+                                        <h3
+                                            style="
+                                                font-size: 20px;
+                                                margin-bottom: 15px;
+                                                color: var(--dark-color);
+                                            "
+                                        >
+                                            <i
+                                                class="fas fa-clock"
+                                                style="
+                                                    color: var(--primary-color);
+                                                    margin-right: 10px;
+                                                "
+                                            ></i>
+                                            Response Time
+                                        </h3>
+                                        <p
+                                            style="
+                                                color: var(--text-light);
+                                                font-size: 15px;
+                                                line-height: 1.6;
+                                            "
+                                        >
+                                            We aim to respond to all inquiries
+                                            within
+                                            <strong
+                                                style="color: var(--dark-color)"
+                                                >24 hours</strong
+                                            >
+                                            during business days.
+                                        </p>
+                                        <p
+                                            style="
+                                                color: var(--text-light);
+                                                font-size: 15px;
+                                                line-height: 1.6;
+                                                margin-top: 10px;
+                                            "
+                                        >
+                                            For urgent matters, please call our
+                                            hotline directly.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="margin-top: 20px">
+                                    <div
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            border-radius: 16px;
+                                            padding: 25px;
+                                            height: 100%;
+                                            color: white;
+                                            box-shadow: 0 15px 30px
+                                                rgba(227, 30, 36, 0.2);
+                                            position: relative;
+                                            overflow: hidden;
+                                        "
+                                    >
+                                        <div
+                                            style="
+                                                position: absolute;
+                                                top: -30px;
+                                                right: -30px;
+                                                width: 150px;
+                                                height: 150px;
+                                                background: rgba(
+                                                    255,
+                                                    255,
+                                                    255,
+                                                    0.1
+                                                );
+                                                border-radius: 50%;
+                                            "
+                                        ></div>
+                                        <div
+                                            style="
+                                                position: absolute;
+                                                bottom: -20px;
+                                                left: -20px;
+                                                width: 100px;
+                                                height: 100px;
+                                                background: rgba(
+                                                    255,
+                                                    255,
+                                                    255,
+                                                    0.1
+                                                );
+                                                border-radius: 50%;
+                                            "
+                                        ></div>
+
+                                        <h3
+                                            style="
+                                                font-size: 20px;
+                                                margin-bottom: 15px;
+                                                position: relative;
+                                            "
+                                        >
+                                            <i
+                                                class="fas fa-headset"
+                                                style="margin-right: 10px"
+                                            ></i>
+                                            Need Help Now?
+                                        </h3>
+                                        <p
+                                            style="
+                                                font-size: 15px;
+                                                line-height: 1.6;
+                                                opacity: 0.9;
+                                                position: relative;
+                                            "
+                                        >
+                                            Call our support hotline for
+                                            immediate assistance:
+                                        </p>
+                                        <a
+                                            href="tel:+12345678900"
+                                            style="
+                                                font-size: 20px;
+                                                font-weight: 700;
+                                                color: white;
+                                                display: block;
+                                                margin-top: 10px;
+                                                position: relative;
+                                                text-decoration: none;
+                                            "
+                                        >
+                                            +1 234 567 8900
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map & Hours Section -->
+        <section class="contact-map-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8" data-animate>
+                        <h2
+                            class="contact-section-title"
+                            style="text-align: left; margin-bottom: 40px"
+                        >
+                            Find Us
+                        </h2>
+                        <div class="contact-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14602.678639269264!2d90.41279798844534!3d23.81300996220319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c103a8093%3A0xd660a4f50365294a!2sBashundhara%20Residential%20Area%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1615815757749!5m2!1sen!2sbd"
+                                allowfullscreen=""
+                                loading="lazy"
+                            ></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" data-animate>
+                        <div class="business-hours">
+                            <h3>Business Hours</h3>
+                            <p>
+                                Our customer support team is available to assist
+                                you:
+                            </p>
+
+                            <span class="hours-title"
+                                >REGULAR SUPPORT HOURS</span
+                            >
+                            <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                            <p>Saturday: 10:00 AM - 6:00 PM</p>
+                            <p>Sunday: Closed</p>
+
+                            <span class="hours-title">DELIVERY HOURS</span>
+                            <p>Every day: 11:30 PM - 4:30 AM</p>
+
+                            <div class="contact-social">
+                                <a href="#" aria-label="Facebook"
+                                    ><i class="fab fa-facebook-f"></i
+                                ></a>
+                                <a href="#" aria-label="Twitter"
+                                    ><i class="fab fa-twitter"></i
+                                ></a>
+                                <a href="#" aria-label="Instagram"
+                                    ><i class="fab fa-instagram"></i
+                                ></a>
+                                <a href="#" aria-label="LinkedIn"
+                                    ><i class="fab fa-linkedin-in"></i
+                                ></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section
+            class="contact-section"
+            style="
+                background-color: #f8f9fa;
+                position: relative;
+                overflow: hidden;
+            "
+        >
+            <div class="container">
+                <div class="contact-section-header">
+                    <h2 class="contact-section-title">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="contact-section-subtitle">
+                        Find answers to the most commonly asked questions about
+                        our services. If you can't find what you're looking for,
+                        feel free to reach out to us directly.
+                    </p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="faq-item active" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                What are your delivery hours?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    We deliver between 11:30 PM and 4:30 AM
+                                    every day of the week. We understand that
+                                    late nights can be challenging, which is why
+                                    we're here to help you with your food,
+                                    grocery, and medicine needs during these
+                                    hours. Our service is designed specifically
+                                    for night owls, students studying late,
+                                    professionals working night shifts, or
+                                    anyone who needs essential items during late
+                                    hours.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                How long does delivery take?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    We strive to deliver all orders within 30
+                                    minutes of confirmation. However, delivery
+                                    times may vary slightly based on your
+                                    location within Bashundhara and current
+                                    demand. During peak hours or adverse weather
+                                    conditions, deliveries might take longer,
+                                    but we'll keep you updated on your order
+                                    status through our real-time tracking
+                                    system.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                Is there a minimum order amount?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    Yes, our minimum order amount is ৳500.
+                                    Orders above ৳5,000 qualify for free
+                                    delivery. For orders below ৳5,000, a
+                                    delivery fee of ৳60 is applied. We have
+                                    structured our minimum order amount to
+                                    ensure efficient service while providing
+                                    value to our customers.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                What areas do you cover?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    Currently, we serve the entire Bashundhara
+                                    Residential Area. We plan to expand to
+                                    nearby areas in the near future, including
+                                    Kuril, Jamuna Future Park, and Baridhara.
+                                    We're constantly evaluating new areas to
+                                    expand our service coverage to meet customer
+                                    demands.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                How do I pay for my order?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    We offer multiple payment options for your
+                                    convenience:
+                                </p>
+                                <ul
+                                    style="
+                                        padding-left: 20px;
+                                        margin-top: 10px;
+                                        color: var(--text-light);
+                                    "
+                                >
+                                    <li style="margin-bottom: 8px">
+                                        Cash on delivery
+                                    </li>
+                                    <li style="margin-bottom: 8px">
+                                        Credit/debit cards (Visa, MasterCard,
+                                        American Express)
+                                    </li>
+                                    <li style="margin-bottom: 8px">
+                                        Mobile banking options (bKash, Nagad,
+                                        Rocket)
+                                    </li>
+                                    <li>
+                                        Online payment through our secure
+                                        payment gateway
+                                    </li>
+                                </ul>
+                                <p style="margin-top: 10px">
+                                    All online transactions are secured with
+                                    industry-standard encryption to ensure your
+                                    financial information remains protected.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                What if I need to cancel my order?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    You can cancel your order within 5 minutes
+                                    of placing it through our app or by calling
+                                    our customer service. After that,
+                                    cancellation may not be possible if your
+                                    order is already being processed. For order
+                                    cancellations, please contact our customer
+                                    support team immediately at +1 234 567 8900
+                                    or through the "Cancel Order" option in our
+                                    mobile app.
+                                </p>
+                                <p style="margin-top: 10px">
+                                    If you've already paid for your order online
+                                    and your cancellation is approved, we'll
+                                    process a refund within 3-5 business days.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                Do you deliver medicine without prescription?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    For over-the-counter (OTC) medicines, no
+                                    prescription is required. However, for
+                                    prescription medications, we require a valid
+                                    doctor's prescription which can be uploaded
+                                    through our app or website when placing your
+                                    order. Our pharmacist will verify the
+                                    prescription before processing your order.
+                                    This is to ensure your safety and compliance
+                                    with healthcare regulations.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <div class="faq-question">
+                                How do I track my order?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>
+                                    Once your order is confirmed, you can track
+                                    its status in real-time through our mobile
+                                    app or website. You'll receive notifications
+                                    at key stages of your order: confirmation,
+                                    preparation, and when it's out for delivery.
+                                    Our tracking system provides you with the
+                                    delivery person's information and estimated
+                                    arrival time.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-cta-box">
+                    <p>Didn't find what you're looking for?</p>
+                    <a
+                        href="#contact-form"
+                        class="submit-btn"
+                        style="margin-top: 15px"
+                    >
+                        <i class="fas fa-envelope"></i> Send Us Your Question
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function toggleFaq(element) {
+                // Check if the clicked element is already active
+                const isActive = element.classList.contains("active");
+
+                // Close all FAQ items
+                document.querySelectorAll(".faq-item").forEach((item) => {
+                    item.classList.remove("active");
+                });
+
+                // If the clicked element wasn't active, make it active
+                if (!isActive) {
+                    element.classList.add("active");
+                }
+            }
+
+            // Form validation and feedback
+            document
+                .getElementById("contact-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // Simple validation
+                    let isValid = true;
+                    const form = this;
+                    const inputs = form.querySelectorAll(
+                        "input[required], textarea[required], select[required]"
+                    );
+                    const agreement = document.getElementById("agreement");
+
+                    inputs.forEach((input) => {
+                        if (!input.value.trim()) {
+                            isValid = false;
+                            input.style.borderColor = "var(--danger-color)";
+                        } else {
+                            input.style.borderColor = "var(--primary-color)";
+                        }
+                    });
+
+                    if (!agreement.checked) {
+                        isValid = false;
+                        agreement.style.borderColor = "var(--danger-color)";
+                    } else {
+                        agreement.style.borderColor = "#ddd";
+                    }
+
+                    if (isValid) {
+                        // Simulate form submission
+                        const submitBtn = form.querySelector(".submit-btn");
+                        const originalText = submitBtn.innerHTML;
+
+                        submitBtn.innerHTML =
+                            '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                        submitBtn.disabled = true;
+
+                        // Simulate API call
+                        setTimeout(() => {
+                            // Show success message
+                            alert(
+                                "Thank you for your message! We will get back to you soon."
+                            );
+
+                            // Reset form
+                            form.reset();
+
+                            // Reset button
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                        }, 1500);
+                    } else {
+                        alert(
+                            "Please fill in all required fields and agree to the privacy policy."
+                        );
+                    }
+                });
+        </script>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="logo" style="margin-bottom: 20px">
+                            <i class="fas fa-moon"></i>
+                            <span>Moon</span>Cart
+                        </h3>
+                        <p style="color: #999; margin-bottom: 20px">
+                            Your one-stop shop for fresh food, groceries, and
+                            medicine delivered to your doorstep.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li>
+                                <a href="customer-dashboard.html">My Account</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Categories</h3>
+                        <ul>
+                            <li>
+                                <a href="products.html?category=food">Food</a>
+                            </li>
+                            <li>
+                                <a href="products.html?category=grocery"
+                                    >Groceries</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=medicine"
+                                    >Medicine</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=beverages"
+                                    >Beverages</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i> 123
+                                MoonCart St, Bashundhara R/A, Dhaka, Bangladesh
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i> +1 234 567 8900
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                support@mooncart.com
+                            </li>
+                            <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 MoonCart. All rights reserved. |
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script>
+            document
+                .getElementById("contact-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // Here you would typically send the form data to a server
+                    // For now, we'll just show a success message
+                    alert(
+                        "Thank you for your message! We will get back to you soon."
+                    );
+
+                    // Clear the form
+                    this.reset();
+                });
+        </script>
+    </body>
+</html>

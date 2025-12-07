@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="MoonCart - Your one-stop shop for fresh food, groceries, and medicine delivered to your doorstep"
+        />
+        <meta
+            name="keywords"
+            content="food delivery, grocery delivery, medicine delivery, online shopping"
+        />
+        <title>MoonCart - Fresh Food & Grocery Delivery</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge"
+                            ><i class="fas fa-shipping-fast"></i> Free delivery
+                            on orders over ৳5,000</span
+                        >
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link active">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text" data-animate>
+                        <p class="hero-subtitle">Welcome to MoonCart</p>
+                        <h1 class="hero-title">
+                            Delicious Food<br />Delivered To<br />Your Door
+                        </h1>
+                        <p class="hero-description">
+                            Fresh ingredients, amazing flavors, and quick
+                            delivery. Order your favorite meals, groceries, and
+                            medicine with just a few clicks.
+                        </p>
+                        <div class="hero-buttons">
+                            <button
+                                class="btn btn-primary"
+                                onclick="window.location.href='products.html'"
+                            >
+                                Order Now <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button
+                                class="btn btn-white"
+                                onclick="window.location.href='#about'"
+                            >
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="hero-image" data-animate>
+                        <img
+                            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=600&fit=crop"
+                            alt="Delicious Food"
+                        />
+                        <div class="hero-badge">
+                            <span>50%</span>
+                            <span>OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Categories Section -->
+        <section class="section" style="background-color: var(--light-bg)">
+            <div class="container">
+                <div class="section-header" data-animate>
+                    <p class="section-subtitle">Browse Categories</p>
+                    <h2 class="section-title">Shop By Category</h2>
+                </div>
+
+                <div
+                    class="categories-grid"
+                    style="
+                        display: grid;
+                        grid-template-columns: repeat(
+                            auto-fill,
+                            minmax(200px, 1fr)
+                        );
+                        gap: 20px;
+                        margin: 40px 0;
+                    "
+                >
+                    <a
+                        href="products.html?category=handmade"
+                        class="category-card"
+                        style="
+                            text-decoration: none;
+                            text-align: center;
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0, 0, 0, 0.1)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.05)';"
+                    >
+                        <div
+                            style="
+                                font-size: 48px;
+                                margin-bottom: 15px;
+                                color: var(--primary-color);
+                            "
+                        >
+                            🍛
+                        </div>
+                        <h3
+                            style="
+                                margin: 0;
+                                font-size: 18px;
+                                color: var(--text-dark);
+                            "
+                        >
+                            Handmade Food
+                        </h3>
+                    </a>
+
+                    <a
+                        href="products.html?category=dryfood"
+                        class="category-card"
+                        style="
+                            text-decoration: none;
+                            text-align: center;
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0, 0, 0, 0.1)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.05)';"
+                    >
+                        <div
+                            style="
+                                font-size: 48px;
+                                margin-bottom: 15px;
+                                color: var(--primary-color);
+                            "
+                        >
+                            🍪
+                        </div>
+                        <h3
+                            style="
+                                margin: 0;
+                                font-size: 18px;
+                                color: var(--text-dark);
+                            "
+                        >
+                            Dry Food & Snacks
+                        </h3>
+                    </a>
+
+                    <a
+                        href="products.html?category=medicine"
+                        class="category-card"
+                        style="
+                            text-decoration: none;
+                            text-align: center;
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0, 0, 0, 0.1)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.05)';"
+                    >
+                        <div
+                            style="
+                                font-size: 48px;
+                                margin-bottom: 15px;
+                                color: var(--primary-color);
+                            "
+                        >
+                            💊
+                        </div>
+                        <h3
+                            style="
+                                margin: 0;
+                                font-size: 18px;
+                                color: var(--text-dark);
+                            "
+                        >
+                            Emergency Medicine
+                        </h3>
+                    </a>
+
+                    <a
+                        href="products.html?category=beverages"
+                        class="category-card"
+                        style="
+                            text-decoration: none;
+                            text-align: center;
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0, 0, 0, 0.1)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.05)';"
+                    >
+                        <div
+                            style="
+                                font-size: 48px;
+                                margin-bottom: 15px;
+                                color: var(--primary-color);
+                            "
+                        >
+                            🥤
+                        </div>
+                        <h3
+                            style="
+                                margin: 0;
+                                font-size: 18px;
+                                color: var(--text-dark);
+                            "
+                        >
+                            Beverages
+                        </h3>
+                    </a>
+
+                    <a
+                        href="products.html?category=grocery"
+                        class="category-card"
+                        style="
+                            text-decoration: none;
+                            text-align: center;
+                            background-color: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        "
+                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0, 0, 0, 0.1)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.05)';"
+                    >
+                        <div
+                            style="
+                                font-size: 48px;
+                                margin-bottom: 15px;
+                                color: var(--primary-color);
+                            "
+                        >
+                            🛒
+                        </div>
+                        <h3
+                            style="
+                                margin: 0;
+                                font-size: 18px;
+                                color: var(--text-dark);
+                            "
+                        >
+                            Daily Essentials
+                        </h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Products Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" data-animate>
+                    <p class="section-subtitle">Popular Items</p>
+                    <h2 class="section-title">Our Best Selling Products</h2>
+                </div>
+
+                <div class="products-grid">
+                    <div class="product-card" data-id="1" data-category="food">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop"
+                                alt="Pizza"
+                            />
+                            <span class="product-badge">Hot</span>
+                            <div class="product-actions">
+                                <button
+                                    class="product-action-btn"
+                                    data-tooltip="Add to Wishlist"
+                                >
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button
+                                    class="product-action-btn quick-view-btn"
+                                    data-tooltip="Quick View"
+                                >
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Food</span>
+                            <h3 class="product-name">Delicious Pizza</h3>
+                            <p class="product-description">
+                                Freshly baked pizza with premium toppings
+                            </p>
+                            <div class="product-footer">
+                                <span class="product-price">৳2,990</span>
+                                <button class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="2" data-category="food">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop"
+                                alt="Burger"
+                            />
+                            <span class="product-badge">New</span>
+                            <div class="product-actions">
+                                <button class="product-action-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button
+                                    class="product-action-btn quick-view-btn"
+                                >
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Food</span>
+                            <h3 class="product-name">Juicy Burger</h3>
+                            <p class="product-description">
+                                Grilled to perfection with fresh vegetables
+                            </p>
+                            <div class="product-footer">
+                                <span class="product-price">৳1,750</span>
+                                <button class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="3" data-category="food">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop"
+                                alt="Pasta"
+                            />
+                            <div class="product-actions">
+                                <button class="product-action-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button
+                                    class="product-action-btn quick-view-btn"
+                                >
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Food</span>
+                            <h3 class="product-name">Italian Pasta</h3>
+                            <p class="product-description">
+                                Authentic Italian pasta with special sauce
+                            </p>
+                            <div class="product-footer">
+                                <span class="product-price">৳2,090</span>
+                                <button class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="4" data-category="food">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&h=300&fit=crop"
+                                alt="Chicken"
+                            />
+                            <span class="product-badge">Sale</span>
+                            <div class="product-actions">
+                                <button class="product-action-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button
+                                    class="product-action-btn quick-view-btn"
+                                >
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Food</span>
+                            <h3 class="product-name">Fried Chicken</h3>
+                            <p class="product-description">
+                                Crispy fried chicken with special spices
+                            </p>
+                            <div class="product-footer">
+                                <span class="product-price">৳2,310</span>
+                                <button class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-30">
+                    <button
+                        class="btn btn-primary"
+                        onclick="window.location.href='products.html'"
+                    >
+                        View All Products <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--light-bg)">
+            <div class="container">
+                <div class="section-header" data-animate>
+                    <p class="section-subtitle">Why Choose Us</p>
+                    <h2 class="section-title">We Provide Best Food Services</h2>
+                </div>
+
+                <div class="products-grid">
+                    <div class="product-card" data-animate>
+                        <div
+                            class="product-image"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #ff6b35 0%,
+                                    #f7931e 100%
+                                );
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
+                            <i
+                                class="fas fa-shipping-fast"
+                                style="font-size: 80px; color: white"
+                            ></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Fast Delivery</h3>
+                            <p class="product-description">
+                                Get your orders delivered within 30 minutes. We
+                                value your time and ensure quick service.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-animate>
+                        <div
+                            class="product-image"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #28a745 0%,
+                                    #20c997 100%
+                                );
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
+                            <i
+                                class="fas fa-leaf"
+                                style="font-size: 80px; color: white"
+                            ></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Fresh Ingredients</h3>
+                            <p class="product-description">
+                                We source only the freshest ingredients from
+                                trusted suppliers to ensure quality.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-animate>
+                        <div
+                            class="product-image"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #e31e24 0%,
+                                    #ff6b35 100%
+                                );
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
+                            <i
+                                class="fas fa-star"
+                                style="font-size: 80px; color: white"
+                            ></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Best Quality</h3>
+                            <p class="product-description">
+                                Quality is our priority. Every product is
+                                carefully checked before delivery.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-animate>
+                        <div
+                            class="product-image"
+                            style="
+                                background: linear-gradient(
+                                    135deg,
+                                    #6f42c1 0%,
+                                    #e83e8c 100%
+                                );
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
+                            <i
+                                class="fas fa-headset"
+                                style="font-size: 80px; color: white"
+                            ></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">24/7 Support</h3>
+                            <p class="product-description">
+                                Our customer support team is always ready to
+                                help you with any queries.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section
+            class="section"
+            style="
+                background: linear-gradient(135deg, #e31e24 0%, #ff6b35 100%);
+                color: white;
+            "
+        >
+            <div class="container">
+                <div class="text-center" data-animate>
+                    <h2
+                        class="section-title"
+                        style="color: white; margin-bottom: 20px"
+                    >
+                        Download Our Mobile App
+                    </h2>
+                    <p
+                        style="
+                            font-size: 18px;
+                            margin-bottom: 30px;
+                            opacity: 0.9;
+                        "
+                    >
+                        Order on the go with our mobile app. Available on iOS
+                        and Android.
+                    </p>
+                    <div
+                        style="
+                            display: flex;
+                            gap: 20px;
+                            justify-content: center;
+                            flex-wrap: wrap;
+                        "
+                    >
+                        <button class="btn btn-white">
+                            <i class="fab fa-apple"></i> App Store
+                        </button>
+                        <button class="btn btn-white">
+                            <i class="fab fa-google-play"></i> Play Store
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="logo" style="margin-bottom: 20px">
+                            <i class="fas fa-moon"></i>
+                            <span>Moon</span>Cart
+                        </h3>
+                        <p style="color: #999; margin-bottom: 20px">
+                            Your one-stop shop for fresh food, groceries, and
+                            medicine delivered to your doorstep.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li>
+                                <a href="customer-dashboard.html">My Account</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Categories</h3>
+                        <ul>
+                            <li>
+                                <a href="products.html?category=food">Food</a>
+                            </li>
+                            <li>
+                                <a href="products.html?category=grocery"
+                                    >Groceries</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=medicine"
+                                    >Medicine</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=beverages"
+                                    >Beverages</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i> 123 Main
+                                St, City, Country
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i> +1 234 567 8900
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                info@mooncart.com
+                            </li>
+                            <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 MoonCart. All rights reserved. |
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/ui.js"></script>
+    </body>
+</html>

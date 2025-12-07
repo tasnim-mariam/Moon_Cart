@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MoonCart - Site Navigation</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Poppins", sans-serif;
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                min-height: 100vh;
+                padding: 40px 20px;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            header {
+                text-align: center;
+                color: white;
+                margin-bottom: 60px;
+            }
+
+            h1 {
+                font-size: 56px;
+                margin-bottom: 15px;
+            }
+
+            .subtitle {
+                font-size: 24px;
+                opacity: 0.8;
+            }
+
+            .pages-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .page-card {
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .page-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(227, 30, 36, 0.3);
+            }
+
+            .page-icon {
+                width: 70px;
+                height: 70px;
+                background: linear-gradient(135deg, #e31e24 0%, #ff6b35 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 32px;
+                color: white;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                color: #1a1a1a;
+            }
+
+            .page-desc {
+                color: #666;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
+
+            .page-link {
+                display: inline-block;
+                background: #e31e24;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: background 0.3s ease;
+            }
+
+            .page-link:hover {
+                background: #c31820;
+            }
+
+            .features {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                padding: 30px;
+                margin-top: 40px;
+            }
+
+            .features h3 {
+                color: white;
+                font-size: 28px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .feature-item {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 10px;
+                color: white;
+            }
+
+            .feature-item i {
+                font-size: 24px;
+                color: #ff6b35;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 36px;
+                }
+
+                .subtitle {
+                    font-size: 18px;
+                }
+
+                .pages-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>🌙 MoonCart Site Navigation</h1>
+                <p class="subtitle">
+                    Click any page below to explore the website
+                </p>
+            </header>
+
+            <div class="pages-grid">
+                <!-- Home Page -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h2>Home Page</h2>
+                    <p class="page-desc">
+                        Beautiful landing page with hero section, featured
+                        products, services, and about section. Start your
+                        journey here!
+                    </p>
+                    <a href="index.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> Visit Home
+                    </a>
+                </div>
+
+                <!-- Products -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h2>Products</h2>
+                    <p class="page-desc">
+                        Browse 16+ products with filters by category, search
+                        functionality, and quick view. Add items to cart
+                        instantly!
+                    </p>
+                    <a href="products.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> Browse Products
+                    </a>
+                </div>
+
+                <!-- Product Detail -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h2>Product Detail</h2>
+                    <p class="page-desc">
+                        View detailed product information, ratings, features,
+                        and related products. Perfect for making informed
+                        decisions!
+                    </p>
+                    <a href="product-detail.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> View Sample
+                    </a>
+                </div>
+
+                <!-- Shopping Cart -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h2>Shopping Cart</h2>
+                    <p class="page-desc">
+                        Manage cart items, update quantities, apply coupon codes
+                        (try: WELCOME20), and see calculated totals with tax &
+                        shipping.
+                    </p>
+                    <a href="cart.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> View Cart
+                    </a>
+                </div>
+
+                <!-- Checkout -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h2>Checkout</h2>
+                    <p class="page-desc">
+                        Complete order form with customer info, delivery
+                        address, time slots, payment methods, and order summary.
+                        Secure checkout!
+                    </p>
+                    <a href="checkout.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> Checkout
+                    </a>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2>Admin Dashboard</h2>
+                    <p class="page-desc">
+                        Manage orders, products, customers, and delivery
+                        personnel. View statistics and accept/decline orders
+                        with full control.
+                    </p>
+                    <a href="admin-dashboard.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> Admin Panel
+                    </a>
+                </div>
+
+                <!-- Customer Dashboard -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2>Customer Dashboard</h2>
+                    <p class="page-desc">
+                        Track orders, manage wishlist, save addresses, update
+                        profile, and request new products. Your personal account
+                        center!
+                    </p>
+                    <a href="customer-dashboard.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> My Account
+                    </a>
+                </div>
+
+                <!-- Delivery Dashboard -->
+                <div class="page-card">
+                    <div class="page-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h2>Delivery Dashboard</h2>
+                    <p class="page-desc">
+                        View active deliveries, track history, monitor earnings,
+                        and manage profile. Complete deliveries and toggle
+                        online status!
+                    </p>
+                    <a href="delivery-dashboard.html" class="page-link">
+                        <i class="fas fa-arrow-right"></i> Delivery Panel
+                    </a>
+                </div>
+            </div>
+
+            <div class="features">
+                <h3>✨ Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Fully Responsive</h4>
+                        <p>Works perfectly on mobile, tablet, and desktop</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Smooth Animations</h4>
+                        <p>Professional transitions and hover effects</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h4>Smart Cart System</h4>
+                        <p>Persistent cart with localStorage</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-tag"></i>
+                        <h4>Coupon System</h4>
+                        <p>Try: MOONCART10, WELCOME20, SAVE15</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-filter"></i>
+                        <h4>Product Filters</h4>
+                        <p>Filter by 6 categories + search</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Dashboard Analytics</h4>
+                        <p>Statistics and insights for all users</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Modern Design</h4>
+                        <p>Inspired by FreshEat theme</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-code"></i>
+                        <h4>Clean Code</h4>
+                        <p>Well-commented and organized</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px">
+                    <h4 style="color: white; margin-bottom: 15px">
+                        📚 Documentation
+                    </h4>
+                    <p
+                        style="
+                            color: rgba(255, 255, 255, 0.8);
+                            margin-bottom: 20px;
+                        "
+                    >
+                        Check out README.md and QUICK_START.md for detailed
+                        guides!
+                    </p>
+                    <p
+                        style="
+                            color: #ff6b35;
+                            font-size: 18px;
+                            font-weight: 600;
+                        "
+                    >
+                        Made with ❤️ for MoonCart
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

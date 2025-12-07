@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="View product details and add to cart"
+        />
+        <title>Product Details - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+
+        <style>
+            body {
+                background: #f8f9fa;
+            }
+
+            .product-detail-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 140px 20px 40px;
+            }
+
+            .breadcrumb {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 30px;
+                font-size: 14px;
+            }
+
+            .breadcrumb a {
+                color: var(--text-light);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .breadcrumb a:hover {
+                color: var(--primary-color);
+            }
+
+            .breadcrumb span {
+                color: var(--text-dark);
+                font-weight: 600;
+            }
+
+            .product-detail-main {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: 40px;
+            }
+
+            .product-images {
+                position: sticky;
+                top: 160px;
+                height: fit-content;
+            }
+
+            .main-image {
+                width: 100%;
+                height: 500px;
+                border-radius: 15px;
+                overflow: hidden;
+                margin-bottom: 20px;
+                background: #f5f5f5;
+                position: relative;
+            }
+
+            .main-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .main-image:hover img {
+                transform: scale(1.05);
+            }
+
+            .product-badge-detail {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                padding: 8px 20px;
+                background: var(--primary-color);
+                color: white;
+                border-radius: 25px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                box-shadow: 0 5px 15px rgba(227, 30, 36, 0.4);
+            }
+
+            .thumbnail-images {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+
+            .thumbnail {
+                width: 100%;
+                height: 100px;
+                border-radius: 10px;
+                overflow: hidden;
+                cursor: pointer;
+                border: 3px solid transparent;
+                transition: all 0.3s ease;
+            }
+
+            .thumbnail:hover,
+            .thumbnail.active {
+                border-color: var(--primary-color);
+            }
+
+            .thumbnail img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .product-info-detail {
+                padding: 20px 0;
+            }
+
+            .product-category-detail {
+                display: inline-block;
+                padding: 6px 16px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(227, 30, 36, 0.1),
+                    rgba(255, 107, 53, 0.1)
+                );
+                color: var(--primary-color);
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 15px;
+            }
+
+            .product-title-detail {
+                font-size: 36px;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+
+            .product-rating {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .stars {
+                display: flex;
+                gap: 5px;
+                color: #ffc107;
+            }
+
+            .rating-text {
+                color: var(--text-light);
+                font-size: 14px;
+            }
+
+            .product-price-detail {
+                display: flex;
+                align-items: baseline;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+
+            .current-price {
+                font-size: 42px;
+                font-weight: 700;
+                color: var(--primary-color);
+            }
+
+            .old-price {
+                font-size: 24px;
+                color: var(--text-light);
+                text-decoration: line-through;
+            }
+
+            .discount-badge {
+                padding: 5px 12px;
+                background: #28a745;
+                color: white;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .product-description-detail {
+                color: var(--text-light);
+                line-height: 1.8;
+                margin-bottom: 30px;
+                font-size: 15px;
+            }
+
+            .product-specs {
+                background: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+
+            .spec-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 12px 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .spec-item:last-child {
+                border-bottom: none;
+            }
+
+            .spec-label {
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .spec-value {
+                color: var(--text-light);
+            }
+
+            .quantity-selector {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+
+            .quantity-label {
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .quantity-controls {
+                display: flex;
+                align-items: center;
+                border: 2px solid #e0e0e0;
+                border-radius: 50px;
+                overflow: hidden;
+            }
+
+            .qty-btn {
+                width: 45px;
+                height: 45px;
+                border: none;
+                background: white;
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--text-dark);
+                transition: all 0.3s ease;
+            }
+
+            .qty-btn:hover {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            .qty-input {
+                width: 60px;
+                height: 45px;
+                border: none;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .product-actions-detail {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+
+            .btn-add-cart {
+                flex: 2;
+                padding: 18px 40px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                color: white;
+                border: none;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                box-shadow: 0 10px 30px rgba(227, 30, 36, 0.3);
+            }
+
+            .btn-add-cart:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 35px rgba(227, 30, 36, 0.4);
+            }
+
+            .btn-wishlist {
+                flex: 0;
+                padding: 18px 25px;
+                background: white;
+                border: 2px solid var(--primary-color);
+                color: var(--primary-color);
+                border-radius: 50px;
+                font-size: 18px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .btn-wishlist:hover {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            .product-meta {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 25px;
+                border-top: 2px solid #e0e0e0;
+            }
+
+            .meta-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+                color: var(--text-light);
+            }
+
+            .meta-item i {
+                color: var(--primary-color);
+                width: 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: 25px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .section-title i {
+                color: var(--primary-color);
+            }
+
+            .reviews-section,
+            .related-products-section {
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: 40px;
+            }
+
+            .review-card {
+                padding: 25px;
+                background: #f8f9fa;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            .review-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+            .reviewer-info {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .reviewer-avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 700;
+                font-size: 18px;
+            }
+
+            .reviewer-name {
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .review-date {
+                font-size: 13px;
+                color: var(--text-light);
+            }
+
+            .review-stars {
+                display: flex;
+                gap: 3px;
+                color: #ffc107;
+            }
+
+            .review-text {
+                color: var(--text-light);
+                line-height: 1.6;
+            }
+
+            .related-products-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
+            }
+
+            @media (max-width: 992px) {
+                .product-detail-main {
+                    grid-template-columns: 1fr;
+                }
+
+                .product-images {
+                    position: static;
+                }
+
+                .main-image {
+                    height: 400px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .product-title-detail {
+                    font-size: 28px;
+                }
+
+                .current-price {
+                    font-size: 32px;
+                }
+
+                .product-actions-detail {
+                    flex-direction: column;
+                }
+
+                .btn-wishlist {
+                    flex: 1;
+                    width: 100%;
+                }
+
+                .thumbnail-images {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge">
+                            <i class="fas fa-shipping-fast"></i> Free delivery
+                            on orders over ৳5,000
+                        </span>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link active">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Product Detail -->
+        <div class="product-detail-container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="products.html">Products</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumb-product">Loading...</span>
+            </div>
+
+            <!-- Main Product Detail -->
+            <div class="product-detail-main">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="main-product-image" src="" alt="Product" />
+                        <span class="product-badge-detail" id="product-badge"
+                            >New</span
+                        >
+                    </div>
+                    <div class="thumbnail-images" id="thumbnail-container">
+                        <!-- Thumbnails will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-detail">
+                    <span class="product-category-detail" id="product-category"
+                        >Food</span
+                    >
+                    <h1 class="product-title-detail" id="product-title">
+                        Loading Product...
+                    </h1>
+
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-text">(4.5) 128 Reviews</span>
+                    </div>
+
+                    <div class="product-price-detail">
+                        <span class="current-price" id="product-price">৳0</span>
+                        <span class="old-price" id="product-old-price">৳0</span>
+                        <span class="discount-badge">20% OFF</span>
+                    </div>
+
+                    <p
+                        class="product-description-detail"
+                        id="product-description"
+                    >
+                        Loading product description...
+                    </p>
+
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label"
+                                ><i class="fas fa-check-circle"></i>
+                                Availability:</span
+                            >
+                            <span class="spec-value" id="product-availability"
+                                >In Stock</span
+                            >
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label"
+                                ><i class="fas fa-tag"></i> SKU:</span
+                            >
+                            <span class="spec-value" id="product-sku"
+                                >MC-001</span
+                            >
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label"
+                                ><i class="fas fa-box"></i> Brand:</span
+                            >
+                            <span class="spec-value">MoonCart Fresh</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label"
+                                ><i class="fas fa-shipping-fast"></i>
+                                Delivery:</span
+                            >
+                            <span class="spec-value">Within 1-2 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="decreaseQty()">
+                                −
+                            </button>
+                            <input
+                                type="number"
+                                class="qty-input"
+                                id="quantity"
+                                value="1"
+                                min="1"
+                                readonly
+                            />
+                            <button class="qty-btn" onclick="increaseQty()">
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions-detail">
+                        <button
+                            class="btn-add-cart"
+                            onclick="addToCartDetail()"
+                        >
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                        <button class="btn-wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>100% Secure Payment</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-undo"></i>
+                            <span>Easy Return Policy</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-headset"></i>
+                            <span>24/7 Customer Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="reviews-section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Customer Reviews
+                </h2>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">A</div>
+                            <div>
+                                <div class="reviewer-name">Ahmed Ali</div>
+                                <div class="review-date">2 days ago</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        Excellent product! Fresh and delivered on time. The
+                        quality is amazing and the taste is just perfect. Highly
+                        recommended!
+                    </p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">S</div>
+                            <div>
+                                <div class="reviewer-name">Sarah Khan</div>
+                                <div class="review-date">5 days ago</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        Very good product. The packaging was neat and the
+                        delivery was quick. Would definitely order again!
+                    </p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">R</div>
+                            <div>
+                                <div class="reviewer-name">Rahul Ahmed</div>
+                                <div class="review-date">1 week ago</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        Outstanding quality! Exactly what I was looking for. The
+                        product exceeded my expectations. Five stars!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products-section">
+                <h2 class="section-title">
+                    <i class="fas fa-th-large"></i>
+                    Related Products
+                </h2>
+                <div class="related-products-grid" id="related-products">
+                    <!-- Related products will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+        <script>
+            // Sample product data (in real app, this would come from a database)
+            const products = {
+                prod1: {
+                    id: "prod1",
+                    name: "Chicken Biryani (Handmade)",
+                    category: "Handmade Food",
+                    price: 350,
+                    oldPrice: 450,
+                    description:
+                        "Authentic homemade chicken biryani with aromatic basmati rice, tender chicken pieces, and traditional spices. Freshly prepared by local home chefs. Perfect for late-night cravings!",
+                    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1642821373181-696a54913e93?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Hot",
+                    sku: "MC-BIRYANI-001",
+                },
+                prod2: {
+                    id: "prod2",
+                    name: "Khichuri with Chicken",
+                    category: "Handmade Food",
+                    price: 250,
+                    oldPrice: 320,
+                    description:
+                        "Comfort food Bengali-style khichuri made with rice, lentils, and aromatic spices, served with tender chicken curry. Perfect for rainy nights or when you need comfort food!",
+                    image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1603894584373-5ac82b2fb612?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Comfort",
+                    sku: "MC-KHICHURI-002",
+                },
+                prod3: {
+                    id: "prod3",
+                    name: "Samosa & Singara (6 pcs)",
+                    category: "Handmade Food",
+                    price: 120,
+                    oldPrice: 150,
+                    description:
+                        "Freshly fried crispy samosas and singaras with spiced potato and vegetable filling. Perfect evening snack! Served hot with tamarind chutney.",
+                    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1630383249896-424e482df921?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1626132647523-66f2bf380027?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Popular",
+                    sku: "MC-SAMOSA-003",
+                },
+                prod4: {
+                    id: "prod4",
+                    name: "Instant Noodles Pack (5 pcs)",
+                    category: "Dry Food",
+                    price: 180,
+                    oldPrice: 225,
+                    description:
+                        "Quick and easy instant noodles perfect for late-night hunger. Just add hot water and enjoy! Pack includes 5 assorted flavors - chicken, beef, vegetable, masala, and hot & spicy.",
+                    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Quick",
+                    sku: "MC-NOODLE-004",
+                },
+                prod5: {
+                    id: "prod5",
+                    name: "Premium Potato Chips (Family Pack)",
+                    category: "Dry Food",
+                    price: 150,
+                    oldPrice: 190,
+                    description:
+                        "Crispy and crunchy potato chips in family pack size. Perfect for late-night cravings! Available in multiple flavors - classic salted, masala, sour cream & onion. No trans fats!",
+                    image: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1600952841320-db92ec4047ca?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1528751014936-863e6e7a319c?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Deal",
+                    sku: "MC-CHIPS-005",
+                },
+                prod6: {
+                    id: "prod6",
+                    name: "Energy Bars & Dry Fruits Mix",
+                    category: "Dry Food",
+                    price: 320,
+                    oldPrice: 400,
+                    description:
+                        "Healthy energy bars with almonds, cashews, dates, and raisins. Perfect for late-night study sessions or work. High in protein and natural energy. No artificial preservatives!",
+                    image: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1508747703725-719777637510?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1527325678964-54921661f888?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1585704352688-495d3d1d0a8d?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Healthy",
+                    sku: "MC-ENERGY-006",
+                },
+                prod7: {
+                    id: "prod7",
+                    name: "Premium Basmati Rice (2kg)",
+                    category: "Grocery",
+                    price: 420,
+                    oldPrice: 500,
+                    description:
+                        "Premium quality aged basmati rice. Long grain, aromatic and fluffy when cooked. Perfect for biryani, pulao, or everyday meals. Essential for your kitchen!",
+                    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Essential",
+                    sku: "MC-RICE-007",
+                },
+                prod8: {
+                    id: "prod8",
+                    name: "Fresh Farm Eggs (12 pcs)",
+                    category: "Grocery",
+                    price: 140,
+                    oldPrice: 170,
+                    description:
+                        "Fresh farm eggs from free-range chickens. Rich in protein and perfect for breakfast or late-night omelets. Delivered fresh daily!",
+                    image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1600275669439-14e40452d20b?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Fresh",
+                    sku: "MC-EGGS-008",
+                },
+                prod9: {
+                    id: "prod9",
+                    name: "Paracetamol 500mg (Emergency)",
+                    category: "Medicine",
+                    price: 80,
+                    oldPrice: 100,
+                    description:
+                        "Fast-acting paracetamol for fever, headache, and body pain relief. Over-the-counter emergency medicine. 10 tablets per strip. Safe and effective for adults and children above 12 years.",
+                    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Emergency",
+                    sku: "MC-PARA-009",
+                },
+                prod10: {
+                    id: "prod10",
+                    name: "Cold & Flu Relief Kit",
+                    category: "Medicine",
+                    price: 280,
+                    oldPrice: 350,
+                    description:
+                        "Complete cold and flu relief kit including cough syrup, nasal spray, and vitamin C tablets. Perfect for emergency medicine needs. Get relief fast with this comprehensive package!",
+                    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1550572017-4fa14e9d6c50?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Kit",
+                    sku: "MC-COLD-010",
+                },
+                prod11: {
+                    id: "prod11",
+                    name: "Energy Drink Pack (4 cans)",
+                    category: "Beverages",
+                    price: 240,
+                    oldPrice: 300,
+                    description:
+                        "Boost your energy during late shifts! Pack of 4 energy drinks with caffeine, taurine, and B-vitamins. Perfect for students, night workers, and gamers. Stay alert and focused!",
+                    image: "https://images.unsplash.com/photo-1622543925917-763c34f7f0a6?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1622543925917-763c34f7f0a6?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1593093420938-e83e38b02e2d?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Energy",
+                    sku: "MC-ENERGY-011",
+                },
+                prod12: {
+                    id: "prod12",
+                    name: "Instant Coffee Sachets (20 pcs)",
+                    category: "Beverages",
+                    price: 280,
+                    oldPrice: 350,
+                    description:
+                        "Premium instant coffee sachets for quick caffeine fix. Rich aroma and smooth taste. Perfect for late-night work sessions. Just add hot water! 3-in-1 with creamer and sugar.",
+                    image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Popular",
+                    sku: "MC-COFFEE-012",
+                },
+                prod13: {
+                    id: "prod13",
+                    name: "Chocolate Chip Cookies (Family Pack)",
+                    category: "Dry Food",
+                    price: 220,
+                    oldPrice: 280,
+                    description:
+                        "Delicious chocolate chip cookies loaded with real chocolate chunks. Soft, chewy, and perfect for late-night cravings. Family pack with 24 cookies. Great with milk or tea!",
+                    image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1590080876876-5ec2d0c29fa0?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Sweet",
+                    sku: "MC-COOKIE-013",
+                },
+                prod14: {
+                    id: "prod14",
+                    name: "First Aid Kit (Emergency)",
+                    category: "Medicine",
+                    price: 450,
+                    oldPrice: 600,
+                    description:
+                        "Complete first aid kit with bandages, antiseptic wipes, cotton, gauze, scissors, and basic medical supplies. Essential for every home. Be prepared for emergencies!",
+                    image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1603398938214-4a6d7d2f2ab5?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Essential",
+                    sku: "MC-AID-014",
+                },
+                prod15: {
+                    id: "prod15",
+                    name: "Bottled Mineral Water (6 bottles)",
+                    category: "Beverages",
+                    price: 120,
+                    oldPrice: 150,
+                    description:
+                        "Pure mineral water bottles pack for hydration. Essential for health and daily needs. BPA-free bottles with natural minerals. Perfect for staying hydrated throughout the night!",
+                    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Essential",
+                    sku: "MC-WATER-015",
+                },
+                prod16: {
+                    id: "prod16",
+                    name: "Morog Polao (Handmade)",
+                    category: "Handmade Food",
+                    price: 380,
+                    oldPrice: 480,
+                    description:
+                        "Traditional Bengali chicken pulao (morog polao) with fragrant rice, tender chicken, ghee, and aromatic spices. Freshly prepared by home chefs. A complete meal for late-night hunger!",
+                    image: "https://images.unsplash.com/photo-1633945274309-78d05702ff06?w=600&h=600&fit=crop",
+                    images: [
+                        "https://images.unsplash.com/photo-1633945274309-78d05702ff06?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=600&h=600&fit=crop",
+                        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=600&fit=crop",
+                    ],
+                    badge: "Special",
+                    sku: "MC-POLAO-016",
+                },
+            };
+
+            // Get product ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get("id") || "prod1";
+            const product = products[productId] || products["prod1"];
+
+            // Load product details
+            function loadProductDetails() {
+                document.getElementById("breadcrumb-product").textContent =
+                    product.name;
+                document.getElementById("main-product-image").src =
+                    product.image;
+                document.getElementById("main-product-image").alt =
+                    product.name;
+                document.getElementById("product-badge").textContent =
+                    product.badge;
+                document.getElementById("product-category").textContent =
+                    product.category;
+                document.getElementById("product-title").textContent =
+                    product.name;
+                document.getElementById(
+                    "product-price"
+                ).textContent = `৳${product.price.toLocaleString()}`;
+                document.getElementById(
+                    "product-old-price"
+                ).textContent = `৳${product.oldPrice.toLocaleString()}`;
+                document.getElementById("product-description").textContent =
+                    product.description;
+                document.getElementById("product-sku").textContent =
+                    product.sku;
+                document.title = product.name + " - MoonCart";
+
+                // Load thumbnails
+                const thumbnailContainer = document.getElementById(
+                    "thumbnail-container"
+                );
+                thumbnailContainer.innerHTML = product.images
+                    .map(
+                        (img, index) => `
+                    <div class="thumbnail ${
+                        index === 0 ? "active" : ""
+                    }" onclick="changeMainImage('${img}', this)">
+                        <img src="${img}" alt="${product.name}" />
+                    </div>
+                `
+                    )
+                    .join("");
+
+                // Load related products
+                loadRelatedProducts();
+            }
+
+            function changeMainImage(imageSrc, element) {
+                document.getElementById("main-product-image").src = imageSrc;
+                document
+                    .querySelectorAll(".thumbnail")
+                    .forEach((t) => t.classList.remove("active"));
+                element.classList.add("active");
+            }
+
+            function increaseQty() {
+                const qtyInput = document.getElementById("quantity");
+                qtyInput.value = parseInt(qtyInput.value) + 1;
+            }
+
+            function decreaseQty() {
+                const qtyInput = document.getElementById("quantity");
+                if (parseInt(qtyInput.value) > 1) {
+                    qtyInput.value = parseInt(qtyInput.value) - 1;
+                }
+            }
+
+            function addToCartDetail() {
+                const quantity = parseInt(
+                    document.getElementById("quantity").value
+                );
+                const cartItem = {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity,
+                };
+
+                // Get existing cart
+                let cart =
+                    JSON.parse(localStorage.getItem("mooncart_cart")) || [];
+
+                // Check if item already exists
+                const existingIndex = cart.findIndex(
+                    (item) => item.id === product.id
+                );
+                if (existingIndex > -1) {
+                    cart[existingIndex].quantity += quantity;
+                } else {
+                    cart.push(cartItem);
+                }
+
+                // Save cart
+                localStorage.setItem("mooncart_cart", JSON.stringify(cart));
+
+                // Update cart count
+                if (window.MoonCart && window.MoonCart.updateCartCount) {
+                    window.MoonCart.updateCartCount();
+                }
+
+                // Show notification
+                if (window.MoonCart && window.MoonCart.showNotification) {
+                    window.MoonCart.showNotification(
+                        `${product.name} added to cart!`,
+                        "success"
+                    );
+                } else {
+                    alert(`${product.name} added to cart!`);
+                }
+            }
+
+            function loadRelatedProducts() {
+                const relatedContainer =
+                    document.getElementById("related-products");
+                const otherProducts = Object.values(products).filter(
+                    (p) => p.id !== product.id
+                );
+
+                relatedContainer.innerHTML = otherProducts
+                    .map(
+                        (p) => `
+                    <div class="product-card" onclick="viewProduct('${p.id}')">
+                        <div class="product-image">
+                            <img src="${p.image}" alt="${p.name}" />
+                            <span class="product-badge">${p.badge}</span>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">${p.category}</span>
+                            <h3 class="product-name">${p.name}</h3>
+                            <div class="product-footer">
+                                <span class="product-price">৳${p.price.toLocaleString()}</span>
+                                <button class="add-to-cart" onclick="event.stopPropagation(); quickAddToCart('${
+                                    p.id
+                                }')">
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `
+                    )
+                    .join("");
+            }
+
+            function viewProduct(productId) {
+                window.location.href = `product-detail.html?id=${productId}`;
+            }
+
+            function quickAddToCart(productId) {
+                const p = products[productId];
+                let cart =
+                    JSON.parse(localStorage.getItem("mooncart_cart")) || [];
+
+                const existingIndex = cart.findIndex(
+                    (item) => item.id === productId
+                );
+                if (existingIndex > -1) {
+                    cart[existingIndex].quantity += 1;
+                } else {
+                    cart.push({
+                        id: p.id,
+                        name: p.name,
+                        price: p.price,
+                        image: p.image,
+                        quantity: 1,
+                    });
+                }
+
+                localStorage.setItem("mooncart_cart", JSON.stringify(cart));
+
+                if (window.MoonCart && window.MoonCart.updateCartCount) {
+                    window.MoonCart.updateCartCount();
+                }
+
+                if (window.MoonCart && window.MoonCart.showNotification) {
+                    window.MoonCart.showNotification(
+                        `${p.name} added to cart!`,
+                        "success"
+                    );
+                }
+            }
+
+            // Initialize
+            document.addEventListener("DOMContentLoaded", function () {
+                loadProductDetails();
+            });
+        </script>
+    </body>
+</html>

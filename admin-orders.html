@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Admin Orders Management - MoonCart" />
+        <title>Orders Management - Admin Dashboard</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+
+        <style>
+            body {
+                background: #f5f6fa;
+            }
+
+            .admin-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 140px 20px 40px;
+            }
+
+            .page-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 32px;
+                font-weight: 700;
+                color: var(--text-dark);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .page-title i {
+                color: var(--primary-color);
+            }
+
+            .orders-stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+
+            .stat-card {
+                background: white;
+                padding: 25px;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                transition: all 0.3s ease;
+            }
+
+            .stat-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .stat-icon {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: white;
+            }
+
+            .stat-icon.pending {
+                background: linear-gradient(135deg, #ffc107, #ff9800);
+            }
+
+            .stat-icon.processing {
+                background: linear-gradient(135deg, #17a2b8, #138496);
+            }
+
+            .stat-icon.completed {
+                background: linear-gradient(135deg, #28a745, #218838);
+            }
+
+            .stat-icon.cancelled {
+                background: linear-gradient(135deg, #dc3545, #c82333);
+            }
+
+            .stat-info h3 {
+                font-size: 32px;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: 5px;
+            }
+
+            .stat-info p {
+                font-size: 14px;
+                color: var(--text-light);
+            }
+
+            .filter-tabs {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 25px;
+                flex-wrap: wrap;
+            }
+
+            .filter-tab {
+                padding: 10px 20px;
+                background: white;
+                border: 2px solid #e0e0e0;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+            .filter-tab:hover {
+                border-color: var(--primary-color);
+                color: var(--primary-color);
+            }
+
+            .filter-tab.active {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                color: white;
+                border-color: transparent;
+            }
+
+            .orders-table {
+                background: white;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            thead {
+                background: linear-gradient(135deg, #f5f5f5, #e9ecef);
+            }
+
+            th {
+                padding: 20px;
+                text-align: left;
+                font-weight: 700;
+                color: var(--text-dark);
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            td {
+                padding: 20px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            tbody tr {
+                transition: all 0.3s ease;
+            }
+
+            tbody tr:hover {
+                background: #f8f9fa;
+            }
+
+            .order-id {
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .order-customer {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .customer-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 700;
+            }
+
+            .customer-info {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .customer-name {
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+
+            .customer-email {
+                font-size: 12px;
+                color: var(--text-light);
+            }
+
+            .order-price {
+                font-weight: 700;
+                color: var(--primary-color);
+                font-size: 16px;
+            }
+
+            .order-status {
+                display: inline-block;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .status-pending {
+                background: #fff3cd;
+                color: #856404;
+            }
+
+            .status-processing {
+                background: #d1ecf1;
+                color: #0c5460;
+            }
+
+            .status-completed {
+                background: #d4edda;
+                color: #155724;
+            }
+
+            .status-cancelled {
+                background: #f8d7da;
+                color: #721c24;
+            }
+
+            .order-actions {
+                display: flex;
+                gap: 8px;
+            }
+
+            .btn-view,
+            .btn-update {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 12px;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .btn-view {
+                background: #007bff;
+                color: white;
+            }
+
+            .btn-view:hover {
+                background: #0056b3;
+            }
+
+            .btn-update {
+                background: #28a745;
+                color: white;
+            }
+
+            .btn-update:hover {
+                background: #218838;
+            }
+
+            .empty-state {
+                text-align: center;
+                padding: 60px 20px;
+            }
+
+            .empty-state i {
+                font-size: 80px;
+                color: #ddd;
+                margin-bottom: 20px;
+            }
+
+            .empty-state h3 {
+                color: var(--text-light);
+            }
+
+            @media (max-width: 768px) {
+                .orders-table {
+                    overflow-x: auto;
+                }
+
+                table {
+                    min-width: 800px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge">
+                            <i class="fas fa-shield-alt"></i> Admin Panel
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="admin-dashboard.html" class="nav-link">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-products.html" class="nav-link">
+                                <i class="fas fa-box"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-orders.html" class="nav-link active">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-customers.html" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <span>Customers</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="admin-container">
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Orders Management
+                </h1>
+            </div>
+
+            <!-- Stats -->
+            <div class="orders-stats">
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="stat-pending">0</h3>
+                        <p>Pending Orders</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon processing">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="stat-processing">0</h3>
+                        <p>Processing</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="stat-completed">0</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon cancelled">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="stat-cancelled">0</h3>
+                        <p>Cancelled</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-tabs">
+                <button
+                    class="filter-tab active"
+                    data-status="all"
+                    onclick="filterOrders('all')"
+                >
+                    All Orders
+                </button>
+                <button
+                    class="filter-tab"
+                    data-status="pending"
+                    onclick="filterOrders('pending')"
+                >
+                    Pending
+                </button>
+                <button
+                    class="filter-tab"
+                    data-status="processing"
+                    onclick="filterOrders('processing')"
+                >
+                    Processing
+                </button>
+                <button
+                    class="filter-tab"
+                    data-status="completed"
+                    onclick="filterOrders('completed')"
+                >
+                    Completed
+                </button>
+                <button
+                    class="filter-tab"
+                    data-status="cancelled"
+                    onclick="filterOrders('cancelled')"
+                >
+                    Cancelled
+                </button>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="orders-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        <!-- Orders will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script>
+            let allOrders = [];
+            let currentFilter = "all";
+
+            document.addEventListener("DOMContentLoaded", function () {
+                loadOrders();
+                updateStats();
+            });
+
+            function loadOrders() {
+                // Get orders from localStorage
+                allOrders =
+                    JSON.parse(localStorage.getItem("mooncart_orders")) || [];
+
+                // If no orders, create some sample orders for demonstration
+                if (allOrders.length === 0) {
+                    allOrders = [
+                        {
+                            id: "ORD-001",
+                            customer: {
+                                name: "John Doe",
+                                email: "john@example.com",
+                            },
+                            date: new Date().toISOString(),
+                            total: 450.0,
+                            status: "pending",
+                            items: [],
+                        },
+                        {
+                            id: "ORD-002",
+                            customer: {
+                                name: "Jane Smith",
+                                email: "jane@example.com",
+                            },
+                            date: new Date().toISOString(),
+                            total: 320.5,
+                            status: "processing",
+                            items: [],
+                        },
+                        {
+                            id: "ORD-003",
+                            customer: {
+                                name: "Bob Johnson",
+                                email: "bob@example.com",
+                            },
+                            date: new Date().toISOString(),
+                            total: 890.0,
+                            status: "completed",
+                            items: [],
+                        },
+                    ];
+                    localStorage.setItem(
+                        "mooncart_orders",
+                        JSON.stringify(allOrders)
+                    );
+                }
+
+                displayOrders();
+            }
+
+            function displayOrders() {
+                const tbody = document.getElementById("orders-tbody");
+
+                let filteredOrders =
+                    currentFilter === "all"
+                        ? allOrders
+                        : allOrders.filter(
+                              (order) => order.status === currentFilter
+                          );
+
+                if (filteredOrders.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <h3>No orders found</h3>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = filteredOrders
+                    .map((order) => {
+                        const customerInitial = order.customer.name
+                            .charAt(0)
+                            .toUpperCase();
+                        const orderDate = new Date(
+                            order.date
+                        ).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                        });
+
+                        return `
+                        <tr>
+                            <td class="order-id">#${order.id}</td>
+                            <td>
+                                <div class="order-customer">
+                                    <div class="customer-avatar">${customerInitial}</div>
+                                    <div class="customer-info">
+                                        <span class="customer-name">${
+                                            order.customer.name
+                                        }</span>
+                                        <span class="customer-email">${
+                                            order.customer.email
+                                        }</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>${orderDate}</td>
+                            <td class="order-price">৳${parseFloat(
+                                order.total
+                            ).toFixed(2)}</td>
+                            <td>
+                                <span class="order-status status-${
+                                    order.status
+                                }">
+                                    ${order.status}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="order-actions">
+                                    <button class="btn-view" onclick="viewOrder('${
+                                        order.id
+                                    }')">
+                                        <i class="fas fa-eye"></i>
+                                        View
+                                    </button>
+                                    <button class="btn-update" onclick="updateOrderStatus('${
+                                        order.id
+                                    }')">
+                                        <i class="fas fa-sync"></i>
+                                        Update
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    })
+                    .join("");
+            }
+
+            function updateStats() {
+                const stats = {
+                    pending: allOrders.filter((o) => o.status === "pending")
+                        .length,
+                    processing: allOrders.filter(
+                        (o) => o.status === "processing"
+                    ).length,
+                    completed: allOrders.filter((o) => o.status === "completed")
+                        .length,
+                    cancelled: allOrders.filter((o) => o.status === "cancelled")
+                        .length,
+                };
+
+                document.getElementById("stat-pending").textContent =
+                    stats.pending;
+                document.getElementById("stat-processing").textContent =
+                    stats.processing;
+                document.getElementById("stat-completed").textContent =
+                    stats.completed;
+                document.getElementById("stat-cancelled").textContent =
+                    stats.cancelled;
+            }
+
+            function filterOrders(status) {
+                currentFilter = status;
+
+                // Update active tab
+                document.querySelectorAll(".filter-tab").forEach((tab) => {
+                    tab.classList.remove("active");
+                });
+                event.target.classList.add("active");
+
+                displayOrders();
+            }
+
+            function viewOrder(orderId) {
+                const order = allOrders.find((o) => o.id === orderId);
+                if (!order) return;
+
+                alert(
+                    `Order Details:\n\nID: ${order.id}\nCustomer: ${order.customer.name}\nTotal: ৳${order.total}\nStatus: ${order.status}`
+                );
+            }
+
+            function updateOrderStatus(orderId) {
+                const order = allOrders.find((o) => o.id === orderId);
+                if (!order) return;
+
+                const statuses = [
+                    "pending",
+                    "processing",
+                    "completed",
+                    "cancelled",
+                ];
+                const currentIndex = statuses.indexOf(order.status);
+                const nextIndex = (currentIndex + 1) % statuses.length;
+
+                order.status = statuses[nextIndex];
+                localStorage.setItem(
+                    "mooncart_orders",
+                    JSON.stringify(allOrders)
+                );
+
+                if (window.MoonCart && window.MoonCart.showNotification) {
+                    window.MoonCart.showNotification(
+                        `Order status updated to: ${order.status}`,
+                        "success"
+                    );
+                }
+
+                displayOrders();
+                updateStats();
+            }
+        </script>
+    </body>
+</html>

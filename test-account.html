@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test Account System - MoonCart</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/main.css" />
+        <style>
+            .test-container {
+                max-width: 800px;
+                margin: 150px auto 80px;
+                padding: 40px;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            }
+
+            .test-header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .test-header h1 {
+                font-size: 32px;
+                color: var(--text-dark);
+                margin-bottom: 10px;
+            }
+
+            .test-header p {
+                color: var(--text-light);
+            }
+
+            .test-card {
+                background: var(--light-bg);
+                padding: 30px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            .test-card h3 {
+                font-size: 20px;
+                color: var(--text-dark);
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .test-card p {
+                color: var(--text-light);
+                margin-bottom: 20px;
+            }
+
+            .test-buttons {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .test-btn {
+                padding: 12px 24px;
+                border-radius: 50px;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                transition: var(--transition);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .test-btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+                color: white;
+            }
+
+            .test-btn-secondary {
+                background: white;
+                color: var(--primary-color);
+                border: 2px solid var(--primary-color);
+            }
+
+            .test-btn-danger {
+                background: #dc3545;
+                color: white;
+            }
+
+            .test-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .status-box {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-top: 20px;
+                border-left: 4px solid var(--primary-color);
+            }
+
+            .status-box h4 {
+                font-size: 16px;
+                color: var(--text-dark);
+                margin-bottom: 10px;
+            }
+
+            .status-box pre {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                overflow-x: auto;
+                font-size: 13px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test-container">
+            <div class="test-header">
+                <h1>🧪 Account System Test Page</h1>
+                <p>Use this page to test the login/logout functionality</p>
+            </div>
+
+            <!-- Test Customer Login -->
+            <div class="test-card">
+                <h3>
+                    <i
+                        class="fas fa-user"
+                        style="color: var(--primary-color)"
+                    ></i>
+                    Test as Customer
+                </h3>
+                <p>
+                    Login with a sample customer account to see how the profile
+                    looks in the navbar.
+                </p>
+                <div class="test-buttons">
+                    <button
+                        class="test-btn test-btn-primary"
+                        onclick="loginAsCustomer()"
+                    >
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login as Customer
+                    </button>
+                    <button
+                        class="test-btn test-btn-secondary"
+                        onclick="goToHome()"
+                    >
+                        <i class="fas fa-home"></i>
+                        Go to Homepage
+                    </button>
+                </div>
+            </div>
+
+            <!-- Test Admin Login -->
+            <div class="test-card">
+                <h3>
+                    <i
+                        class="fas fa-user-shield"
+                        style="color: var(--primary-color)"
+                    ></i>
+                    Test as Admin
+                </h3>
+                <p>
+                    Login with a sample admin account to see admin-specific
+                    features.
+                </p>
+                <div class="test-buttons">
+                    <button
+                        class="test-btn test-btn-primary"
+                        onclick="loginAsAdmin()"
+                    >
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login as Admin
+                    </button>
+                    <button
+                        class="test-btn test-btn-secondary"
+                        onclick="goToAdminDashboard()"
+                    >
+                        <i class="fas fa-tachometer-alt"></i>
+                        Go to Admin Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Test Delivery Login -->
+            <div class="test-card">
+                <h3>
+                    <i
+                        class="fas fa-truck"
+                        style="color: var(--primary-color)"
+                    ></i>
+                    Test as Delivery Person
+                </h3>
+                <p>
+                    Login with a sample delivery account to see delivery person
+                    view.
+                </p>
+                <div class="test-buttons">
+                    <button
+                        class="test-btn test-btn-primary"
+                        onclick="loginAsDelivery()"
+                    >
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login as Delivery
+                    </button>
+                    <button
+                        class="test-btn test-btn-secondary"
+                        onclick="goToDeliveryDashboard()"
+                    >
+                        <i class="fas fa-tachometer-alt"></i>
+                        Go to Delivery Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <div class="test-card">
+                <h3>
+                    <i class="fas fa-sign-out-alt" style="color: #dc3545"></i>
+                    Logout & Clear Data
+                </h3>
+                <p>Clear the current user session and return to guest view.</p>
+                <div class="test-buttons">
+                    <button
+                        class="test-btn test-btn-danger"
+                        onclick="clearSession()"
+                    >
+                        <i class="fas fa-trash"></i>
+                        Clear Session
+                    </button>
+                    <button
+                        class="test-btn test-btn-secondary"
+                        onclick="checkStatus()"
+                    >
+                        <i class="fas fa-info-circle"></i>
+                        Check Current Status
+                    </button>
+                </div>
+
+                <div
+                    class="status-box"
+                    id="status-display"
+                    style="display: none"
+                >
+                    <h4>Current Session:</h4>
+                    <pre id="status-content"></pre>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/main.js"></script>
+        <script>
+            function loginAsCustomer() {
+                const customer = {
+                    id: "cust_001",
+                    name: "John Doe",
+                    email: "john@example.com",
+                    role: "customer",
+                    phone: "01712345678",
+                    address: {
+                        block: "B",
+                        house: "45",
+                        road: "12",
+                        area: "Dhanmondi",
+                        city: "Dhaka",
+                        postalCode: "1209",
+                    },
+                    loginTime: new Date().toISOString(),
+                };
+
+                localStorage.setItem(
+                    "mooncart_current_user",
+                    JSON.stringify(customer)
+                );
+                showNotification("Logged in as Customer!", "success");
+                checkStatus();
+            }
+
+            function loginAsAdmin() {
+                const admin = {
+                    id: "admin_001",
+                    name: "Admin User",
+                    email: "admin@mooncart.com",
+                    role: "admin",
+                    phone: "01798765432",
+                    loginTime: new Date().toISOString(),
+                };
+
+                localStorage.setItem(
+                    "mooncart_current_user",
+                    JSON.stringify(admin)
+                );
+                showNotification("Logged in as Admin!", "success");
+                checkStatus();
+            }
+
+            function loginAsDelivery() {
+                const delivery = {
+                    id: "delivery_001",
+                    name: "Delivery Person",
+                    email: "delivery@mooncart.com",
+                    role: "delivery",
+                    phone: "01611223344",
+                    loginTime: new Date().toISOString(),
+                };
+
+                localStorage.setItem(
+                    "mooncart_current_user",
+                    JSON.stringify(delivery)
+                );
+                showNotification("Logged in as Delivery Person!", "success");
+                checkStatus();
+            }
+
+            function clearSession() {
+                localStorage.removeItem("mooncart_current_user");
+                showNotification("Session cleared!", "success");
+                checkStatus();
+            }
+
+            function checkStatus() {
+                const statusDisplay = document.getElementById("status-display");
+                const statusContent = document.getElementById("status-content");
+                const currentUser = localStorage.getItem(
+                    "mooncart_current_user"
+                );
+
+                statusDisplay.style.display = "block";
+
+                if (currentUser) {
+                    statusContent.textContent = JSON.stringify(
+                        JSON.parse(currentUser),
+                        null,
+                        2
+                    );
+                } else {
+                    statusContent.textContent =
+                        "No user logged in (Guest view)";
+                }
+            }
+
+            function goToHome() {
+                window.location.href = "index.html";
+            }
+
+            function goToAdminDashboard() {
+                window.location.href = "admin-dashboard.html";
+            }
+
+            function goToDeliveryDashboard() {
+                window.location.href = "delivery-dashboard.html";
+            }
+
+            function showNotification(message, type) {
+                if (
+                    typeof window.MoonCart !== "undefined" &&
+                    window.MoonCart.showNotification
+                ) {
+                    window.MoonCart.showNotification(message, type);
+                } else {
+                    alert(message);
+                }
+            }
+
+            // Check status on page load
+            window.addEventListener("load", function () {
+                checkStatus();
+            });
+        </script>
+    </body>
+</html>

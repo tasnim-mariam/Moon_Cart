@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Complete your order checkout" />
+        <title>Checkout - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge"
+                            ><i class="fas fa-shipping-fast"></i> Free delivery
+                            on orders over $50</span
+                        >
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Static) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a
+                                    href="login.html"
+                                    class="btn-login"
+                                >
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a
+                                    href="signup.html"
+                                    class="btn-signup"
+                                >
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section
+            class="section"
+            style="
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                color: white;
+                padding: 120px 0 60px;
+                margin-top: 124px;
+            "
+        >
+            <div class="container">
+                <div class="text-center">
+                    <h1
+                        class="hero-title"
+                        style="
+                            color: white;
+                            font-size: 48px;
+                            margin-bottom: 15px;
+                        "
+                    >
+                        Checkout
+                    </h1>
+                    <p style="font-size: 18px; opacity: 0.8">
+                        Complete your order details
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section class="section">
+            <div class="container">
+                <div
+                    style="
+                        display: grid;
+                        grid-template-columns: 1fr 400px;
+                        gap: 40px;
+                    "
+                >
+                    <!-- Checkout Form -->
+                    <div>
+                        <form id="checkout-form">
+                            <div
+                                style="
+                                    background: white;
+                                    padding: 30px;
+                                    border-radius: var(--border-radius);
+                                    box-shadow: var(--shadow);
+                                    margin-bottom: 30px;
+                                "
+                            >
+                                <h3
+                                    style="
+                                        margin-bottom: 20px;
+                                        padding-bottom: 15px;
+                                        border-bottom: 2px solid
+                                            var(--primary-color);
+                                    "
+                                >
+                                    <i class="fas fa-user"></i> Customer
+                                    Information
+                                </h3>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Full Name *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="fullname"
+                                        class="form-input"
+                                        required
+                                        placeholder="Enter your full name"
+                                    />
+                                </div>
+
+                                <div
+                                    style="
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 20px;
+                                    "
+                                >
+                                    <div class="form-group">
+                                        <label class="form-label"
+                                            >Email Address *</label
+                                        >
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            class="form-input"
+                                            required
+                                            placeholder="your@email.com"
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label"
+                                            >Phone Number *</label
+                                        >
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            class="form-input"
+                                            required
+                                            placeholder="+1 234 567 8900"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                style="
+                                    background: white;
+                                    padding: 30px;
+                                    border-radius: var(--border-radius);
+                                    box-shadow: var(--shadow);
+                                    margin-bottom: 30px;
+                                "
+                            >
+                                <h3
+                                    style="
+                                        margin-bottom: 20px;
+                                        padding-bottom: 15px;
+                                        border-bottom: 2px solid
+                                            var(--primary-color);
+                                    "
+                                >
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Delivery Address
+                                </h3>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Street Address *</label
+                                    >
+                                    <input
+                                        type="text"
+                                        name="address"
+                                        class="form-input"
+                                        required
+                                        placeholder="123 Main Street, Apt 4B"
+                                    />
+                                </div>
+
+                                <div
+                                    style="
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 20px;
+                                    "
+                                >
+                                    <div class="form-group">
+                                        <label class="form-label">City *</label>
+                                        <input
+                                            type="text"
+                                            name="city"
+                                            class="form-input"
+                                            required
+                                            placeholder="New York"
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label"
+                                            >Zip Code *</label
+                                        >
+                                        <input
+                                            type="text"
+                                            name="zipcode"
+                                            class="form-input"
+                                            required
+                                            placeholder="10001"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Delivery Instructions (Optional)</label
+                                    >
+                                    <textarea
+                                        name="instructions"
+                                        class="form-textarea"
+                                        placeholder="Any special instructions for delivery..."
+                                    ></textarea>
+                                </div>
+                            </div>
+
+                            <div
+                                style="
+                                    background: white;
+                                    padding: 30px;
+                                    border-radius: var(--border-radius);
+                                    box-shadow: var(--shadow);
+                                    margin-bottom: 30px;
+                                "
+                            >
+                                <h3
+                                    style="
+                                        margin-bottom: 20px;
+                                        padding-bottom: 15px;
+                                        border-bottom: 2px solid
+                                            var(--primary-color);
+                                    "
+                                >
+                                    <i class="fas fa-clock"></i> Delivery Time
+                                </h3>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Preferred Delivery Slot *</label
+                                    >
+                                    <select
+                                        name="delivery-slot"
+                                        class="form-select"
+                                        required
+                                    >
+                                        <option value="">
+                                            Select a time slot
+                                        </option>
+                                        <option value="morning">
+                                            Morning (9:00 AM - 12:00 PM)
+                                        </option>
+                                        <option value="afternoon">
+                                            Afternoon (12:00 PM - 3:00 PM)
+                                        </option>
+                                        <option value="evening">
+                                            Evening (3:00 PM - 6:00 PM)
+                                        </option>
+                                        <option value="night">
+                                            Night (6:00 PM - 9:00 PM)
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div
+                                style="
+                                    background: white;
+                                    padding: 30px;
+                                    border-radius: var(--border-radius);
+                                    box-shadow: var(--shadow);
+                                "
+                            >
+                                <h3
+                                    style="
+                                        margin-bottom: 20px;
+                                        padding-bottom: 15px;
+                                        border-bottom: 2px solid
+                                            var(--primary-color);
+                                    "
+                                >
+                                    <i class="fas fa-credit-card"></i> Payment
+                                    Method
+                                </h3>
+
+                                <div class="form-group">
+                                    <label
+                                        style="
+                                            display: flex;
+                                            align-items: center;
+                                            padding: 15px;
+                                            border: 2px solid
+                                                var(--border-color);
+                                            border-radius: var(--border-radius);
+                                            margin-bottom: 15px;
+                                            cursor: pointer;
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="payment-method"
+                                            value="cash"
+                                            checked
+                                            style="
+                                                margin-right: 15px;
+                                                width: 20px;
+                                                height: 20px;
+                                            "
+                                        />
+                                        <div>
+                                            <strong>Cash on Delivery</strong>
+                                            <p
+                                                style="
+                                                    color: var(--text-light);
+                                                    font-size: 14px;
+                                                    margin-top: 5px;
+                                                "
+                                            >
+                                                Pay when you receive your order
+                                            </p>
+                                        </div>
+                                    </label>
+
+                                    <label
+                                        style="
+                                            display: flex;
+                                            align-items: center;
+                                            padding: 15px;
+                                            border: 2px solid
+                                                var(--border-color);
+                                            border-radius: var(--border-radius);
+                                            margin-bottom: 15px;
+                                            cursor: pointer;
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="payment-method"
+                                            value="card"
+                                            style="
+                                                margin-right: 15px;
+                                                width: 20px;
+                                                height: 20px;
+                                            "
+                                        />
+                                        <div>
+                                            <strong>Credit/Debit Card</strong>
+                                            <p
+                                                style="
+                                                    color: var(--text-light);
+                                                    font-size: 14px;
+                                                    margin-top: 5px;
+                                                "
+                                            >
+                                                Pay securely online (Coming
+                                                Soon)
+                                            </p>
+                                        </div>
+                                    </label>
+
+                                    <label
+                                        style="
+                                            display: flex;
+                                            align-items: center;
+                                            padding: 15px;
+                                            border: 2px solid
+                                                var(--border-color);
+                                            border-radius: var(--border-radius);
+                                            cursor: pointer;
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="payment-method"
+                                            value="digital"
+                                            style="
+                                                margin-right: 15px;
+                                                width: 20px;
+                                                height: 20px;
+                                            "
+                                        />
+                                        <div>
+                                            <strong>Digital Wallet</strong>
+                                            <p
+                                                style="
+                                                    color: var(--text-light);
+                                                    font-size: 14px;
+                                                    margin-top: 5px;
+                                                "
+                                            >
+                                                PayPal, Apple Pay, Google Pay
+                                                (Coming Soon)
+                                            </p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div>
+                        <div
+                            style="
+                                background: white;
+                                padding: 30px;
+                                border-radius: var(--border-radius);
+                                box-shadow: var(--shadow);
+                                position: sticky;
+                                top: 100px;
+                            "
+                        >
+                            <div id="order-summary">
+                                <!-- Order summary will be inserted here by JavaScript -->
+                            </div>
+
+                            <div
+                                style="
+                                    padding: 20px 0;
+                                    border-top: 1px solid var(--border-color);
+                                    margin-top: 20px;
+                                "
+                            >
+                                <label
+                                    style="
+                                        display: flex;
+                                        align-items: start;
+                                        gap: 10px;
+                                        cursor: pointer;
+                                    "
+                                >
+                                    <input
+                                        type="checkbox"
+                                        required
+                                        style="margin-top: 3px"
+                                    />
+                                    <span
+                                        style="
+                                            font-size: 14px;
+                                            color: var(--text-light);
+                                        "
+                                    >
+                                        I agree to the
+                                        <a
+                                            href="#"
+                                            style="color: var(--primary-color)"
+                                            >Terms & Conditions</a
+                                        >
+                                        and
+                                        <a
+                                            href="#"
+                                            style="color: var(--primary-color)"
+                                            >Privacy Policy</a
+                                        >
+                                    </span>
+                                </label>
+                            </div>
+
+                            <button
+                                type="submit"
+                                form="checkout-form"
+                                class="btn btn-primary"
+                                style="width: 100%"
+                            >
+                                <i class="fas fa-check-circle"></i> Place Order
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                style="width: 100%; margin-top: 10px"
+                                onclick="window.location.href='cart.html'"
+                            >
+                                <i class="fas fa-arrow-left"></i> Back to Cart
+                            </button>
+
+                            <div
+                                style="
+                                    margin-top: 20px;
+                                    padding: 15px;
+                                    background: var(--light-bg);
+                                    border-radius: var(--border-radius);
+                                    text-align: center;
+                                "
+                            >
+                                <i
+                                    class="fas fa-shield-alt"
+                                    style="
+                                        color: var(--success-color);
+                                        font-size: 24px;
+                                        margin-bottom: 10px;
+                                    "
+                                ></i>
+                                <p
+                                    style="
+                                        font-size: 14px;
+                                        color: var(--text-light);
+                                    "
+                                >
+                                    <strong>Secure Checkout</strong><br />
+                                    Your information is safe with us
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section
+            class="section"
+            style="background: var(--light-bg); padding: 40px 0"
+        >
+            <div class="container">
+                <div
+                    style="
+                        display: grid;
+                        grid-template-columns: repeat(
+                            auto-fit,
+                            minmax(200px, 1fr)
+                        );
+                        gap: 30px;
+                        text-align: center;
+                    "
+                >
+                    <div>
+                        <i
+                            class="fas fa-truck"
+                            style="
+                                font-size: 40px;
+                                color: var(--primary-color);
+                                margin-bottom: 15px;
+                            "
+                        ></i>
+                        <h4>Fast Delivery</h4>
+                        <p style="color: var(--text-light); font-size: 14px">
+                            Get your order within 30 minutes
+                        </p>
+                    </div>
+                    <div>
+                        <i
+                            class="fas fa-shield-alt"
+                            style="
+                                font-size: 40px;
+                                color: var(--success-color);
+                                margin-bottom: 15px;
+                            "
+                        ></i>
+                        <h4>Secure Payment</h4>
+                        <p style="color: var(--text-light); font-size: 14px">
+                            100% secure transactions
+                        </p>
+                    </div>
+                    <div>
+                        <i
+                            class="fas fa-undo"
+                            style="
+                                font-size: 40px;
+                                color: var(--warning-color);
+                                margin-bottom: 15px;
+                            "
+                        ></i>
+                        <h4>Easy Returns</h4>
+                        <p style="color: var(--text-light); font-size: 14px">
+                            Hassle-free return policy
+                        </p>
+                    </div>
+                    <div>
+                        <i
+                            class="fas fa-headset"
+                            style="
+                                font-size: 40px;
+                                color: var(--secondary-color);
+                                margin-bottom: 15px;
+                            "
+                        ></i>
+                        <h4>24/7 Support</h4>
+                        <p style="color: var(--text-light); font-size: 14px">
+                            Always here to help you
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="logo" style="margin-bottom: 20px">
+                            <i class="fas fa-moon"></i>
+                            <span>Moon</span>Cart
+                        </h3>
+                        <p style="color: #999; margin-bottom: 20px">
+                            Your one-stop shop for fresh food, groceries, and
+                            medicine delivered to your doorstep.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li>
+                                <a href="customer-dashboard.html">My Account</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Categories</h3>
+                        <ul>
+                            <li>
+                                <a href="products.html?category=food">Food</a>
+                            </li>
+                            <li>
+                                <a href="products.html?category=grocery"
+                                    >Groceries</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=medicine"
+                                    >Medicine</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=beverages"
+                                    >Beverages</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i> 123 Main
+                                St, City, Country
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i> +1 234 567 8900
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                info@mooncart.com
+                            </li>
+                            <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 MoonCart. All rights reserved. |
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/order.js"></script>
+        <script src="js/ui.js"></script>
+    </body>
+</html>

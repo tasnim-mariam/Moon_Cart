@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Request new products on MoonCart"
+        />
+        <title>Product Requests - MoonCart</title>
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link active">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main style="margin-top: 120px; padding: 40px 20px">
+            <div class="container">
+                <section
+                    style="
+                        background: white;
+                        border-radius: 30px;
+                        padding: 40px;
+                        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.05);
+                        margin-bottom: 30px;
+                        text-align: center;
+                    "
+                >
+                    <span
+                        style="
+                            text-transform: uppercase;
+                            font-size: 13px;
+                            font-weight: 600;
+                            letter-spacing: 2px;
+                            color: var(--primary-color);
+                        "
+                        >MoonCart Requests</span
+                    >
+                    <h1 style="margin: 15px 0; font-size: 36px">
+                        Help us stock what you love
+                    </h1>
+                    <p style="color: var(--text-light); font-size: 18px">
+                        Submit product ideas and track your previous requests all
+                        in one place.
+                    </p>
+                </section>
+
+                <section
+                    style="
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                        gap: 30px;
+                    "
+                >
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                        "
+                    >
+                        <h2 style="margin-bottom: 20px">
+                            <i
+                                class="fas fa-plus-circle"
+                                style="color: var(--primary-color); margin-right: 8px"
+                            ></i>
+                            Request a Product
+                        </h2>
+                        <form id="product-request-form-page">
+                            <div class="form-group">
+                                <label class="form-label">Product Name</label>
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    placeholder="What should we add next?"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" required>
+                                    <option value="">Select category</option>
+                                    <option value="food">Food</option>
+                                    <option value="grocery">Grocery</option>
+                                    <option value="medicine">Medicine</option>
+                                    <option value="beverages">Beverages</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label"
+                                    >Description/Details</label
+                                >
+                                <textarea
+                                    class="form-textarea"
+                                    placeholder="Tell us why you'd love to see this product..."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Submit Request
+                            </button>
+                        </form>
+                    </div>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                            overflow-x: auto;
+                        "
+                    >
+                        <h2 style="margin-bottom: 20px">
+                            <i
+                                class="fas fa-list"
+                                style="color: var(--primary-color); margin-right: 8px"
+                            ></i>
+                            My Requests
+                        </h2>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nov 5, 2024</td>
+                                    <td>Organic Honey</td>
+                                    <td>Grocery</td>
+                                    <td>
+                                        <span class="status-badge status-pending"
+                                            >Under Review</span
+                                        >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nov 3, 2024</td>
+                                    <td>Gluten-Free Bread</td>
+                                    <td>Food</td>
+                                    <td>
+                                        <span class="status-badge status-confirmed"
+                                            >Added</span
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <script src="js/main.js"></script>
+    </body>
+</html>
+

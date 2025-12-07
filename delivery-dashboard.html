@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Delivery Dashboard - Manage your deliveries"
+        />
+        <title>Delivery Dashboard - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge"
+                            ><i class="fas fa-truck"></i> Delivery
+                            Dashboard</span
+                        >
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a
+                                href="delivery-dashboard.html"
+                                class="nav-link active"
+                            >
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <div class="account-dropdown">
+                            <div class="account-trigger">
+                                <i class="fas fa-truck"></i>
+                                <span>Delivery</span>
+                                <i
+                                    class="fas fa-chevron-down account-chevron"
+                                ></i>
+                            </div>
+                            <div class="account-menu">
+                                <div class="account-menu-header">
+                                    <h4>Delivery Dashboard</h4>
+                                    <p>Manage deliveries</p>
+                                </div>
+                                <div class="account-menu-body">
+                                    <a
+                                        href="delivery-dashboard.html"
+                                        class="account-menu-item"
+                                    >
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                    <a href="#" class="account-menu-item">
+                                        <i class="fas fa-box"></i>
+                                        <span>Active Deliveries</span>
+                                    </a>
+                                    <a href="#" class="account-menu-item">
+                                        <i class="fas fa-history"></i>
+                                        <span>Delivery History</span>
+                                    </a>
+                                    <div class="account-menu-divider"></div>
+                                    <a
+                                        href="#"
+                                        class="account-menu-item"
+                                        onclick="logout(); return false;"
+                                    >
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div
+                    style="
+                        padding: 20px 30px;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    "
+                >
+                    <div style="display: flex; align-items: center; gap: 15px">
+                        <div
+                            style="
+                                width: 60px;
+                                height: 60px;
+                                background: var(--primary-color);
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 24px;
+                                font-weight: 700;
+                            "
+                        >
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4
+                                id="delivery-name"
+                                style="margin: 0; color: white"
+                            >
+                                Mike Johnson
+                            </h4>
+                            <p style="margin: 0; font-size: 14px; opacity: 0.7">
+                                Delivery Partner
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-menu">
+                    <a
+                        href="#dashboard"
+                        class="sidebar-link active"
+                        onclick="showSection('dashboard')"
+                    >
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a
+                        href="#deliveries"
+                        class="sidebar-link"
+                        onclick="showSection('deliveries')"
+                    >
+                        <i class="fas fa-truck"></i> My Deliveries
+                    </a>
+                    <a
+                        href="#history"
+                        class="sidebar-link"
+                        onclick="showSection('history')"
+                    >
+                        <i class="fas fa-history"></i> Delivery History
+                    </a>
+                    <a
+                        href="#earnings"
+                        class="sidebar-link"
+                        onclick="showSection('earnings')"
+                    >
+                        <i class="fas fa-dollar-sign"></i> Earnings
+                    </a>
+                    <a
+                        href="#profile"
+                        class="sidebar-link"
+                        onclick="showSection('profile')"
+                    >
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="dashboard-section">
+                    <h2 style="margin-bottom: 30px">Delivery Dashboard</h2>
+
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Active Deliveries</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--success-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--success-color)"
+                            >
+                                47
+                            </div>
+                            <div class="stat-label">Completed Today</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--warning-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--warning-color)"
+                            >
+                                $285
+                            </div>
+                            <div class="stat-label">Today's Earnings</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--secondary-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--secondary-color)"
+                            >
+                                4.8
+                            </div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                    </div>
+
+                    <!-- Status Toggle -->
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                            margin-top: 30px;
+                        "
+                    >
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            "
+                        >
+                            <div>
+                                <h3 style="margin-bottom: 10px">
+                                    <i
+                                        class="fas fa-circle"
+                                        style="
+                                            color: var(--success-color);
+                                            font-size: 12px;
+                                        "
+                                    ></i>
+                                    You are currently ONLINE
+                                </h3>
+                                <p style="color: var(--text-light); margin: 0">
+                                    Toggle your availability to receive new
+                                    deliveries
+                                </p>
+                            </div>
+                            <label
+                                style="
+                                    position: relative;
+                                    display: inline-block;
+                                    width: 60px;
+                                    height: 34px;
+                                "
+                            >
+                                <input
+                                    type="checkbox"
+                                    checked
+                                    style="opacity: 0; width: 0; height: 0"
+                                />
+                                <span
+                                    style="
+                                        position: absolute;
+                                        cursor: pointer;
+                                        top: 0;
+                                        left: 0;
+                                        right: 0;
+                                        bottom: 0;
+                                        background-color: var(--success-color);
+                                        transition: 0.4s;
+                                        border-radius: 34px;
+                                    "
+                                ></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Active Deliveries -->
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                            margin-top: 30px;
+                        "
+                    >
+                        <h3 style="margin-bottom: 20px">Active Deliveries</h3>
+                        <div id="delivery-orders">
+                            <!-- Active deliveries will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Deliveries Section -->
+                <section
+                    id="deliveries-section"
+                    class="dashboard-section"
+                    style="display: none"
+                >
+                    <h2 style="margin-bottom: 30px">My Deliveries</h2>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                        "
+                    >
+                        <div style="margin-bottom: 20px">
+                            <input
+                                type="text"
+                                class="form-input"
+                                placeholder="Search by order ID or customer name..."
+                                style="max-width: 400px; margin: 0"
+                            />
+                        </div>
+
+                        <div id="delivery-orders-full">
+                            <!-- Full delivery list will be inserted here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History Section -->
+                <section
+                    id="history-section"
+                    class="dashboard-section"
+                    style="display: none"
+                >
+                    <h2 style="margin-bottom: 30px">Delivery History</h2>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                        "
+                    >
+                        <div
+                            style="
+                                display: flex;
+                                gap: 15px;
+                                margin-bottom: 20px;
+                            "
+                        >
+                            <input
+                                type="date"
+                                class="form-input"
+                                style="max-width: 200px; margin: 0"
+                            />
+                            <input
+                                type="date"
+                                class="form-input"
+                                style="max-width: 200px; margin: 0"
+                            />
+                            <button class="btn btn-primary">Filter</button>
+                        </div>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Address</th>
+                                    <th>Amount</th>
+                                    <th>Tip</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nov 7, 2024</td>
+                                    <td>#ORD001</td>
+                                    <td>John Doe</td>
+                                    <td>123 Main St</td>
+                                    <td>$45.99</td>
+                                    <td>$5.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Nov 7, 2024</td>
+                                    <td>#ORD002</td>
+                                    <td>Jane Smith</td>
+                                    <td>456 Oak Ave</td>
+                                    <td>$32.50</td>
+                                    <td>$3.50</td>
+                                </tr>
+                                <tr>
+                                    <td>Nov 6, 2024</td>
+                                    <td>#ORD003</td>
+                                    <td>Bob Wilson</td>
+                                    <td>789 Pine Rd</td>
+                                    <td>$67.25</td>
+                                    <td>$8.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Earnings Section -->
+                <section
+                    id="earnings-section"
+                    class="dashboard-section"
+                    style="display: none"
+                >
+                    <h2 style="margin-bottom: 30px">My Earnings</h2>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">$285</div>
+                            <div class="stat-label">Today</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--success-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--success-color)"
+                            >
+                                $1,890
+                            </div>
+                            <div class="stat-label">This Week</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--warning-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--warning-color)"
+                            >
+                                $7,245
+                            </div>
+                            <div class="stat-label">This Month</div>
+                        </div>
+
+                        <div
+                            class="stat-card"
+                            style="border-left-color: var(--secondary-color)"
+                        >
+                            <div
+                                class="stat-value"
+                                style="color: var(--secondary-color)"
+                            >
+                                $42,680
+                            </div>
+                            <div class="stat-label">All Time</div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                            margin-top: 30px;
+                        "
+                    >
+                        <h3 style="margin-bottom: 20px">Earnings Breakdown</h3>
+
+                        <div style="margin-bottom: 30px">
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                <span>Base Delivery Fee</span>
+                                <span style="font-weight: 600">$6,500</span>
+                            </div>
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                <span>Customer Tips</span>
+                                <span style="font-weight: 600">$620</span>
+                            </div>
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                <span>Bonuses</span>
+                                <span style="font-weight: 600">$125</span>
+                            </div>
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding-top: 15px;
+                                    border-top: 2px solid var(--border-color);
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                    color: var(--primary-color);
+                                "
+                            >
+                                <span>Total This Month</span>
+                                <span>$7,245</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i> Download Statement
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section
+                    id="profile-section"
+                    class="dashboard-section"
+                    style="display: none"
+                >
+                    <h2 style="margin-bottom: 30px">My Profile</h2>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                        "
+                    >
+                        <form>
+                            <div
+                                style="text-align: center; margin-bottom: 30px"
+                            >
+                                <div
+                                    style="
+                                        width: 120px;
+                                        height: 120px;
+                                        background: var(--primary-color);
+                                        border-radius: 50%;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 48px;
+                                        color: white;
+                                        margin-bottom: 15px;
+                                    "
+                                >
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <button type="button" class="btn btn-outline">
+                                    Change Photo
+                                </button>
+                            </div>
+
+                            <div
+                                style="
+                                    display: grid;
+                                    grid-template-columns: 1fr 1fr;
+                                    gap: 20px;
+                                "
+                            >
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        value="Mike"
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        value="Johnson"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    class="form-input"
+                                    value="mike@example.com"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input
+                                    type="tel"
+                                    class="form-input"
+                                    value="+1 234 567 8902"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Vehicle Type</label>
+                                <select class="form-select">
+                                    <option value="bike">Bike</option>
+                                    <option value="scooter" selected>
+                                        Scooter
+                                    </option>
+                                    <option value="car">Car</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Vehicle Number</label>
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    value="NYC-1234"
+                                />
+                            </div>
+
+                            <hr style="margin: 30px 0" />
+
+                            <h3 style="margin-bottom: 20px">Bank Details</h3>
+
+                            <div class="form-group">
+                                <label class="form-label"
+                                    >Account Holder Name</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    value="Mike Johnson"
+                                />
+                            </div>
+
+                            <div
+                                style="
+                                    display: grid;
+                                    grid-template-columns: 2fr 1fr;
+                                    gap: 20px;
+                                "
+                            >
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Account Number</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        value="****4567"
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Routing Number</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-input"
+                                        value="021000021"
+                                    />
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Order Details Modal -->
+        <div id="order-details-modal" class="modal" style="display: none">
+            <div class="modal-content" style="max-width: 800px">
+                <span
+                    class="modal-close"
+                    onclick="MoonCart.closeModal('order-details-modal')"
+                    >&times;</span
+                >
+                <div id="order-details"></div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/order.js"></script>
+        <script src="js/ui.js"></script>
+        <script>
+            // Mock delivery person user
+            const mockUser = {
+                id: "delivery1",
+                name: "Mike Johnson",
+                email: "mike@example.com",
+                role: "delivery",
+            };
+            MoonCart.saveCurrentUser(mockUser);
+
+            // Update delivery person info
+            document.getElementById("delivery-name").textContent =
+                mockUser.name;
+
+            // Load deliveries on page load
+            document.addEventListener("DOMContentLoaded", function () {
+                renderDeliveryOrders();
+
+                // Also render in the full deliveries section
+                setTimeout(() => {
+                    const fullDeliveriesDiv = document.createElement("div");
+                    fullDeliveriesDiv.id = "delivery-orders-temp";
+                    document
+                        .getElementById("delivery-orders-full")
+                        .appendChild(fullDeliveriesDiv);
+                    document.getElementById("delivery-orders-temp").id =
+                        "delivery-orders";
+                    renderDeliveryOrders();
+                    document.getElementById("delivery-orders").id =
+                        "delivery-orders-full2";
+                }, 100);
+            });
+
+            // Show/hide sections
+            function showSection(section) {
+                // Hide all sections
+                document
+                    .querySelectorAll(".dashboard-section")
+                    .forEach((s) => (s.style.display = "none"));
+
+                // Remove active class from all links
+                document
+                    .querySelectorAll(".sidebar-link")
+                    .forEach((l) => l.classList.remove("active"));
+
+                // Show selected section
+                document.getElementById(section + "-section").style.display =
+                    "block";
+
+                // Add active class to clicked link
+                event.target.closest(".sidebar-link").classList.add("active");
+            }
+
+            // Logout function
+            function logout() {
+                localStorage.removeItem("mooncart_user");
+                window.location.href = "index.html";
+            }
+        </script>
+    </body>
+</html>

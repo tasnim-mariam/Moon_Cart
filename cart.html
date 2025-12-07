@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="View and manage your shopping cart" />
+        <title>Shopping Cart - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge"
+                            ><i class="fas fa-shipping-fast"></i> Free delivery
+                            on orders over ৳5,000</span
+                        >
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="index.html" class="nav-link">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="products.html" class="nav-link">
+                                <i class="fas fa-utensils"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-requests.html" class="nav-link">
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a href="cart.html" class="cart-icon-wrapper">
+                            <div class="cart-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <!-- Account Section (Static) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section
+            class="section"
+            style="
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                color: white;
+                padding: 120px 0 60px;
+                margin-top: 124px;
+            "
+        >
+            <div class="container">
+                <div class="text-center">
+                    <h1
+                        class="hero-title"
+                        style="
+                            color: white;
+                            font-size: 48px;
+                            margin-bottom: 15px;
+                        "
+                    >
+                        Shopping Cart
+                    </h1>
+                    <p style="font-size: 18px; opacity: 0.8">
+                        Review your items and proceed to checkout
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section class="section">
+            <div class="container">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cart items will be dynamically inserted here -->
+                    </tbody>
+                </table>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary" style="display: none">
+                    <!-- Summary will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3 class="logo" style="margin-bottom: 20px">
+                            <i class="fas fa-moon"></i>
+                            <span>Moon</span>Cart
+                        </h3>
+                        <p style="color: #999; margin-bottom: 20px">
+                            Your one-stop shop for fresh food, groceries, and
+                            medicine delivered to your doorstep.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="social-link"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li>
+                                <a href="customer-dashboard.html">My Account</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Categories</h3>
+                        <ul>
+                            <li>
+                                <a href="products.html?category=food">Food</a>
+                            </li>
+                            <li>
+                                <a href="products.html?category=grocery"
+                                    >Groceries</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=medicine"
+                                    >Medicine</a
+                                >
+                            </li>
+                            <li>
+                                <a href="products.html?category=beverages"
+                                    >Beverages</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <ul>
+                            <li>
+                                <a href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka" target="_blank" style="color: inherit; text-decoration: none;">
+                                    <i class="fas fa-map-marker-alt"></i> 123
+                                    MoonCart St, Bashundhara R/A, Dhaka, Bangladesh
+                                </a>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i> +1 234 567 8900
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                info@mooncart.com
+                            </li>
+                            <li><i class="fas fa-clock"></i> 12:00 AM - 4:00 AM</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 MoonCart. All rights reserved. |
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/ui.js"></script>
+        <!-- Direct initialization script for account section -->
+        <script>
+            // Ensure login/signup buttons are shown
+            document.addEventListener("DOMContentLoaded", function () {
+                // Final page-specific fallback if all else fails
+                setTimeout(function () {
+                    try {
+                        if (
+                            window.MoonCart &&
+                            window.MoonCart.forceRenderAuthButtons
+                        ) {
+                            window.MoonCart.forceRenderAuthButtons();
+                        } else {
+                            console.log("Inline fallback for auth buttons");
+                            var accountSection =
+                                document.getElementById("account-section");
+                            if (
+                                accountSection &&
+                                !accountSection.innerHTML.trim()
+                            ) {
+                                accountSection.innerHTML = `
+                                    <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                                    </div>
+                                `;
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Error in force rendering:", e);
+                    }
+                }, 800); // Wait longer to ensure it's the final fallback
+            });
+        </script>
+    </body>
+</html>

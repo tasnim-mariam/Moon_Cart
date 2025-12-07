@@ -36,19 +36,21 @@
                 position: relative;
                 background-image: linear-gradient(
                         to right,
-                        rgba(0, 0, 0, 0.8) 0%,
-                        rgba(0, 0, 0, 0.6) 50%,
-                        rgba(0, 0, 0, 0.4) 100%
+                        rgba(0, 0, 0, 0.7) 0%,
+                        rgba(0, 0, 0, 0.5) 50%,
+                        rgba(0, 0, 0, 0.3) 100%
                     ),
-                    url("https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+                    url("Asset/contact us.jpg");
                 background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
                 color: white;
                 padding: 150px 0 100px;
                 text-align: center;
                 margin-top: 80px;
                 overflow: hidden;
+                min-height: 500px;
             }
 
             .contact-hero::before {
@@ -321,6 +323,19 @@
                 transition: all 0.3s ease;
                 color: var(--text-dark);
                 font-family: var(--font-main);
+            }
+
+            select.form-control {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23999%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e');
+                background-repeat: no-repeat;
+                background-position: right 15px center;
+                background-size: 20px;
+                background-color: #f8f9fa;
+                padding-right: 45px;
+                cursor: pointer;
             }
 
             .form-control:focus {
@@ -1135,9 +1150,7 @@
                                             name="subject"
                                             required
                                         >
-                                            <option value="" selected disabled>
-                                                Please select
-                                            </option>
+                                            <option value="" selected disabled hidden></option>
                                             <option value="General Inquiry">
                                                 General Inquiry
                                             </option>
@@ -1255,7 +1268,7 @@
                             <div class="row">
                                 <div class="col-12" style="margin-bottom: 30px">
                                     <img
-                                        src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                        src="Asset/contact us.jpg"
                                         alt="Contact support team"
                                         style="
                                             width: 100%;
@@ -1445,31 +1458,32 @@
                         <div class="business-hours">
                             <h3>Business Hours</h3>
                             <p>
-                                Our customer support team is available to assist
-                                you:
+                                Our late-night delivery service is available:
                             </p>
 
                             <span class="hours-title"
-                                >REGULAR SUPPORT HOURS</span
+                                >🌙 DELIVERY HOURS</span
                             >
-                            <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
-                            <p>Saturday: 10:00 AM - 6:00 PM</p>
-                            <p>Sunday: Closed</p>
+                            <p><strong>Every Day:</strong> 12:00 AM - 4:00 AM</p>
+                            <p style="font-size: 14px; opacity: 0.9; margin-top: 10px;">
+                                We specialize in late-night deliveries for your convenience!
+                            </p>
 
-                            <span class="hours-title">DELIVERY HOURS</span>
-                            <p>Every day: 11:30 PM - 4:30 AM</p>
+                            <span class="hours-title">📞 CUSTOMER SUPPORT</span>
+                            <p><strong>Order Assistance:</strong> 24/7 Available</p>
+                            <p><strong>General Inquiries:</strong> Mon-Fri, 9:00 AM - 8:00 PM</p>
 
                             <div class="contact-social">
-                                <a href="#" aria-label="Facebook"
+                                <a href="https://www.facebook.com/login" target="_blank" aria-label="Facebook"
                                     ><i class="fab fa-facebook-f"></i
                                 ></a>
-                                <a href="#" aria-label="Twitter"
+                                <a href="https://twitter.com/login" target="_blank" aria-label="Twitter"
                                     ><i class="fab fa-twitter"></i
                                 ></a>
-                                <a href="#" aria-label="Instagram"
+                                <a href="https://www.instagram.com/accounts/login/" target="_blank" aria-label="Instagram"
                                     ><i class="fab fa-instagram"></i
                                 ></a>
-                                <a href="#" aria-label="LinkedIn"
+                                <a href="https://www.linkedin.com/login" target="_blank" aria-label="LinkedIn"
                                     ><i class="fab fa-linkedin-in"></i
                                 ></a>
                             </div>
@@ -1509,7 +1523,7 @@
                             </div>
                             <div class="faq-answer">
                                 <p>
-                                    We deliver between 11:30 PM and 4:30 AM
+                                    We deliver between 12:00 AM and 4:00 AM
                                     every day of the week. We understand that
                                     late nights can be challenging, which is why
                                     we're here to help you with your food,
@@ -1586,36 +1600,14 @@
                             </div>
                             <div class="faq-answer">
                                 <p>
-                                    We offer multiple payment options for your
-                                    convenience:
+                                    We accept secure card payments for all orders. 
+                                    You can pay using credit or debit cards (Visa, MasterCard, 
+                                    American Express) through our secure payment gateway.
                                 </p>
-                                <ul
-                                    style="
-                                        padding-left: 20px;
-                                        margin-top: 10px;
-                                        color: var(--text-light);
-                                    "
-                                >
-                                    <li style="margin-bottom: 8px">
-                                        Cash on delivery
-                                    </li>
-                                    <li style="margin-bottom: 8px">
-                                        Credit/debit cards (Visa, MasterCard,
-                                        American Express)
-                                    </li>
-                                    <li style="margin-bottom: 8px">
-                                        Mobile banking options (bKash, Nagad,
-                                        Rocket)
-                                    </li>
-                                    <li>
-                                        Online payment through our secure
-                                        payment gateway
-                                    </li>
-                                </ul>
                                 <p style="margin-top: 10px">
-                                    All online transactions are secured with
-                                    industry-standard encryption to ensure your
-                                    financial information remains protected.
+                                    All online transactions are protected with industry-standard 
+                                    256-bit SSL encryption to ensure your financial information 
+                                    remains completely secure and confidential.
                                 </p>
                             </div>
                         </div>
@@ -1790,16 +1782,16 @@
                             medicine delivered to your doorstep.
                         </p>
                         <div class="social-links">
-                            <a href="#" class="social-link"
+                            <a href="https://www.facebook.com/login" target="_blank" class="social-link"
                                 ><i class="fab fa-facebook-f"></i
                             ></a>
-                            <a href="#" class="social-link"
+                            <a href="https://twitter.com/login" target="_blank" class="social-link"
                                 ><i class="fab fa-twitter"></i
                             ></a>
-                            <a href="#" class="social-link"
+                            <a href="https://www.instagram.com/accounts/login/" target="_blank" class="social-link"
                                 ><i class="fab fa-instagram"></i
                             ></a>
-                            <a href="#" class="social-link"
+                            <a href="https://www.linkedin.com/login" target="_blank" class="social-link"
                                 ><i class="fab fa-linkedin-in"></i
                             ></a>
                         </div>

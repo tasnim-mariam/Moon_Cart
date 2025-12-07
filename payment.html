@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Secure payment for your order" />
+        <title>Payment - MoonCart</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+
+        <style>
+            body {
+                background: #f8f9fa;
+            }
+
+            .payment-container {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+            }
+
+            .payment-card {
+                max-width: 500px;
+                width: 100%;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .payment-header {
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                color: white;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .payment-header h2 {
+                margin: 0 0 10px;
+                font-size: 28px;
+            }
+
+            .payment-header p {
+                margin: 0;
+                opacity: 0.9;
+                font-size: 14px;
+            }
+
+            .payment-body {
+                padding: 40px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                font-size: 14px;
+                color: var(--text-dark);
+            }
+
+            .form-input {
+                width: 100%;
+                height: 50px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 0 15px;
+                font-family: "Poppins", sans-serif;
+                font-size: 15px;
+                color: var(--text-dark);
+                transition: all 0.3s ease;
+            }
+
+            .form-input:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.1);
+                outline: none;
+            }
+
+            .card-icon {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 24px;
+                color: var(--text-light);
+            }
+
+            .input-wrapper {
+                position: relative;
+            }
+
+            .btn-pay {
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                border: none;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 16px;
+                color: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 30px;
+                box-shadow: 0 5px 20px rgba(227, 30, 36, 0.25);
+            }
+
+            .btn-pay:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 30px rgba(227, 30, 36, 0.35);
+            }
+
+            .secure-badge {
+                text-align: center;
+                margin-top: 20px;
+                padding: 15px;
+                background: var(--light-bg);
+                border-radius: 8px;
+            }
+
+            .secure-badge i {
+                color: var(--success-color);
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .order-summary-small {
+                background: var(--light-bg);
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+
+            .summary-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            .summary-row.total {
+                border-top: 2px solid var(--border-color);
+                padding-top: 10px;
+                margin-top: 10px;
+                font-weight: 700;
+                font-size: 18px;
+                color: var(--primary-color);
+            }
+
+            /* Success Modal */
+            .success-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .success-modal.active {
+                display: flex;
+            }
+
+            .success-content {
+                background: white;
+                padding: 40px;
+                border-radius: 16px;
+                text-align: center;
+                max-width: 400px;
+                animation: slideUp 0.3s ease;
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .success-icon {
+                width: 80px;
+                height: 80px;
+                background: var(--success-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 20px;
+                animation: scaleIn 0.5s ease;
+            }
+
+            @keyframes scaleIn {
+                from {
+                    transform: scale(0);
+                }
+                to {
+                    transform: scale(1);
+                }
+            }
+
+            .success-icon i {
+                font-size: 40px;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="payment-container">
+            <div class="payment-card">
+                <div class="payment-header">
+                    <i class="fas fa-lock" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <h2>Secure Payment</h2>
+                    <p>Complete your payment to confirm order</p>
+                </div>
+                <div class="payment-body">
+                    <div class="order-summary-small" id="payment-summary">
+                        <!-- Order summary will be inserted here -->
+                    </div>
+
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label class="form-label">Card Number *</label>
+                            <div class="input-wrapper">
+                                <input
+                                    type="text"
+                                    id="card-number"
+                                    class="form-input"
+                                    placeholder="1234 5678 9012 3456"
+                                    maxlength="19"
+                                    required
+                                />
+                                <i class="fas fa-credit-card card-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Cardholder Name *</label>
+                            <input
+                                type="text"
+                                id="card-name"
+                                class="form-input"
+                                placeholder="John Doe"
+                                required
+                            />
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">Expiry Date *</label>
+                                <input
+                                    type="text"
+                                    id="card-expiry"
+                                    class="form-input"
+                                    placeholder="MM/YY"
+                                    maxlength="5"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">CVV *</label>
+                                <input
+                                    type="text"
+                                    id="card-cvv"
+                                    class="form-input"
+                                    placeholder="123"
+                                    maxlength="3"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-pay">
+                            <i class="fas fa-lock"></i>
+                            <span>Pay Now</span>
+                        </button>
+                    </form>
+
+                    <div class="secure-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <p style="font-size: 14px; color: var(--text-light); margin: 0;">
+                            <strong>256-bit SSL Encrypted</strong><br />
+                            Your payment information is secure
+                        </p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="checkout.html" style="color: var(--primary-color); text-decoration: none; font-size: 14px;">
+                            <i class="fas fa-arrow-left"></i> Back to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="success-modal" id="success-modal">
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 style="margin-bottom: 10px; color: var(--text-dark);">Payment Successful!</h2>
+                <p style="color: var(--text-light); margin-bottom: 20px;">
+                    Your order has been confirmed. You will receive a confirmation email shortly.
+                </p>
+                <p style="font-size: 14px; color: var(--text-light);">
+                    Order ID: <strong id="order-id"></strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cart.js"></script>
+        <script>
+            // Load order summary
+            document.addEventListener('DOMContentLoaded', function() {
+                const orderDetails = JSON.parse(localStorage.getItem('mooncart_pending_order') || '{}');
+                
+                if (!orderDetails.cart || orderDetails.cart.length === 0) {
+                    alert('No order found. Redirecting to cart...');
+                    window.location.href = 'cart.html';
+                    return;
+                }
+
+                // Display order summary
+                const summaryDiv = document.getElementById('payment-summary');
+                const details = orderDetails.cartDetails;
+                
+                summaryDiv.innerHTML = `
+                    <h4 style="margin-bottom: 15px; color: var(--text-dark);">Order Summary</h4>
+                    <div class="summary-row">
+                        <span>Subtotal (${details.itemCount} items):</span>
+                        <span>${MoonCart.formatCurrency(details.subtotal)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (10%):</span>
+                        <span>${MoonCart.formatCurrency(details.tax)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span>${details.shipping === 0 ? 'FREE' : MoonCart.formatCurrency(details.shipping)}</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>${MoonCart.formatCurrency(details.total)}</span>
+                    </div>
+                `;
+            });
+
+            // Format card number input
+            document.getElementById('card-number').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                e.target.value = formattedValue;
+            });
+
+            // Format expiry date input
+            document.getElementById('card-expiry').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                }
+                e.target.value = value;
+            });
+
+            // Only allow numbers in CVV
+            document.getElementById('card-cvv').addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+
+            // Handle payment form submission
+            document.getElementById('payment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading
+                if (MoonCart && MoonCart.showLoading) {
+                    MoonCart.showLoading();
+                }
+
+                // Simulate payment processing
+                setTimeout(() => {
+                    if (MoonCart && MoonCart.hideLoading) {
+                        MoonCart.hideLoading();
+                    }
+
+                    // Get order details
+                    const orderDetails = JSON.parse(localStorage.getItem('mooncart_pending_order') || '{}');
+                    
+                    // Generate order ID
+                    const orderId = 'MC' + Date.now().toString().slice(-8);
+                    
+                    // Save order
+                    const order = {
+                        id: orderId,
+                        ...orderDetails,
+                        status: 'confirmed',
+                        paymentStatus: 'paid',
+                        orderDate: new Date().toISOString(),
+                        cardLastFour: document.getElementById('card-number').value.slice(-4)
+                    };
+
+                    // Save to orders
+                    const orders = JSON.parse(localStorage.getItem('mooncart_orders') || '[]');
+                    orders.push(order);
+                    localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+
+                    // Clear cart and pending order
+                    localStorage.removeItem('mooncart_pending_order');
+                    MoonCart.saveCart([]);
+
+                    // Show success modal
+                    document.getElementById('order-id').textContent = orderId;
+                    document.getElementById('success-modal').classList.add('active');
+
+                    // Redirect after 4 seconds
+                    setTimeout(() => {
+                        window.location.href = 'customer-dashboard.html';
+                    }, 4000);
+                }, 2000);
+            });
+        </script>
+    </body>
+</html>
+

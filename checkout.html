@@ -45,7 +45,7 @@
                     <div class="top-bar-right">
                         <span class="delivery-badge"
                             ><i class="fas fa-shipping-fast"></i> Free delivery
-                            on orders over $50</span
+                            on orders over ৳5,000</span
                         >
                         <div class="social-icons">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -365,17 +365,17 @@
                                         <option value="">
                                             Select a time slot
                                         </option>
-                                        <option value="morning">
-                                            Morning (9:00 AM - 12:00 PM)
+                                        <option value="slot1">
+                                            12:00 AM - 1:00 AM
                                         </option>
-                                        <option value="afternoon">
-                                            Afternoon (12:00 PM - 3:00 PM)
+                                        <option value="slot2">
+                                            1:00 AM - 2:00 AM
                                         </option>
-                                        <option value="evening">
-                                            Evening (3:00 PM - 6:00 PM)
+                                        <option value="slot3">
+                                            2:00 AM - 3:00 AM
                                         </option>
-                                        <option value="night">
-                                            Night (6:00 PM - 9:00 PM)
+                                        <option value="slot4">
+                                            3:00 AM - 4:00 AM
                                         </option>
                                     </select>
                                 </div>
@@ -408,53 +408,18 @@
                                             align-items: center;
                                             padding: 15px;
                                             border: 2px solid
-                                                var(--border-color);
+                                                var(--primary-color);
                                             border-radius: var(--border-radius);
                                             margin-bottom: 15px;
                                             cursor: pointer;
-                                        "
-                                    >
-                                        <input
-                                            type="radio"
-                                            name="payment-method"
-                                            value="cash"
-                                            checked
-                                            style="
-                                                margin-right: 15px;
-                                                width: 20px;
-                                                height: 20px;
-                                            "
-                                        />
-                                        <div>
-                                            <strong>Cash on Delivery</strong>
-                                            <p
-                                                style="
-                                                    color: var(--text-light);
-                                                    font-size: 14px;
-                                                    margin-top: 5px;
-                                                "
-                                            >
-                                                Pay when you receive your order
-                                            </p>
-                                        </div>
-                                    </label>
-
-                                    <label
-                                        style="
-                                            display: flex;
-                                            align-items: center;
-                                            padding: 15px;
-                                            border: 2px solid
-                                                var(--border-color);
-                                            border-radius: var(--border-radius);
-                                            margin-bottom: 15px;
-                                            cursor: pointer;
+                                            background: rgba(227, 30, 36, 0.05);
                                         "
                                     >
                                         <input
                                             type="radio"
                                             name="payment-method"
                                             value="card"
+                                            checked
                                             style="
                                                 margin-right: 15px;
                                                 width: 20px;
@@ -470,44 +435,7 @@
                                                     margin-top: 5px;
                                                 "
                                             >
-                                                Pay securely online (Coming
-                                                Soon)
-                                            </p>
-                                        </div>
-                                    </label>
-
-                                    <label
-                                        style="
-                                            display: flex;
-                                            align-items: center;
-                                            padding: 15px;
-                                            border: 2px solid
-                                                var(--border-color);
-                                            border-radius: var(--border-radius);
-                                            cursor: pointer;
-                                        "
-                                    >
-                                        <input
-                                            type="radio"
-                                            name="payment-method"
-                                            value="digital"
-                                            style="
-                                                margin-right: 15px;
-                                                width: 20px;
-                                                height: 20px;
-                                            "
-                                        />
-                                        <div>
-                                            <strong>Digital Wallet</strong>
-                                            <p
-                                                style="
-                                                    color: var(--text-light);
-                                                    font-size: 14px;
-                                                    margin-top: 5px;
-                                                "
-                                            >
-                                                PayPal, Apple Pay, Google Pay
-                                                (Coming Soon)
+                                                Pay securely with your card
                                             </p>
                                         </div>
                                     </label>
@@ -684,20 +612,6 @@
                             Hassle-free return policy
                         </p>
                     </div>
-                    <div>
-                        <i
-                            class="fas fa-headset"
-                            style="
-                                font-size: 40px;
-                                color: var(--secondary-color);
-                                margin-bottom: 15px;
-                            "
-                        ></i>
-                        <h4>24/7 Support</h4>
-                        <p style="color: var(--text-light); font-size: 14px">
-                            Always here to help you
-                        </p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -771,8 +685,10 @@
                         <h3>Contact Info</h3>
                         <ul>
                             <li>
-                                <i class="fas fa-map-marker-alt"></i> 123 Main
-                                St, City, Country
+                                <a href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka" target="_blank" style="color: inherit; text-decoration: none;">
+                                    <i class="fas fa-map-marker-alt"></i> 123
+                                    MoonCart St, Bashundhara R/A, Dhaka, Bangladesh
+                                </a>
                             </li>
                             <li>
                                 <i class="fas fa-phone"></i> +1 234 567 8900
@@ -781,7 +697,7 @@
                                 <i class="fas fa-envelope"></i>
                                 info@mooncart.com
                             </li>
-                            <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                            <li><i class="fas fa-clock"></i> 12:00 AM - 4:00 AM</li>
                         </ul>
                     </div>
                 </div>
@@ -801,5 +717,32 @@
         <script src="js/cart.js"></script>
         <script src="js/order.js"></script>
         <script src="js/ui.js"></script>
+        <script>
+            // Handle checkout form submission
+            document.getElementById('checkout-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Store order details in localStorage
+                const formData = new FormData(this);
+                const orderDetails = {
+                    fullname: formData.get('fullname'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    zipcode: formData.get('zipcode'),
+                    instructions: formData.get('instructions'),
+                    deliverySlot: formData.get('delivery-slot'),
+                    paymentMethod: formData.get('payment-method'),
+                    cart: MoonCart.getCart(),
+                    cartDetails: calculateCartDetails()
+                };
+                
+                localStorage.setItem('mooncart_pending_order', JSON.stringify(orderDetails));
+                
+                // Redirect to payment page
+                window.location.href = 'payment.html';
+            });
+        </script>
     </body>
 </html>

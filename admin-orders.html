@@ -172,18 +172,19 @@
             }
 
             th {
-                padding: 20px;
+                padding: 12px 10px;
                 text-align: left;
                 font-weight: 700;
                 color: var(--text-dark);
-                font-size: 14px;
+                font-size: 13px;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
             }
 
             td {
-                padding: 20px;
+                padding: 12px 10px;
                 border-bottom: 1px solid #f0f0f0;
+                font-size: 13px;
             }
 
             tr:last-child td {
@@ -210,8 +211,8 @@
             }
 
             .customer-avatar {
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
                 border-radius: 50%;
                 background: linear-gradient(
                     135deg,
@@ -223,6 +224,7 @@
                 justify-content: center;
                 color: white;
                 font-weight: 700;
+                font-size: 14px;
             }
 
             .customer-info {
@@ -233,17 +235,18 @@
             .customer-name {
                 font-weight: 600;
                 color: var(--text-dark);
+                font-size: 13px;
             }
 
             .customer-email {
-                font-size: 12px;
+                font-size: 11px;
                 color: var(--text-light);
             }
 
             .order-price {
                 font-weight: 700;
                 color: var(--primary-color);
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .order-status {
@@ -277,21 +280,23 @@
 
             .order-actions {
                 display: flex;
-                gap: 8px;
+                gap: 5px;
+                justify-content: center;
             }
 
             .btn-view,
             .btn-update {
-                padding: 8px 16px;
+                padding: 6px 12px;
                 border: none;
-                border-radius: 8px;
+                border-radius: 6px;
                 cursor: pointer;
                 font-weight: 600;
-                font-size: 12px;
+                font-size: 11px;
                 transition: all 0.3s ease;
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
+                white-space: nowrap;
             }
 
             .btn-view {
@@ -519,16 +524,16 @@
             </div>
 
             <!-- Orders Table -->
-            <div class="orders-table">
-                <table>
+            <div class="orders-table" style="overflow-x: auto; width: 100%;">
+                <table style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th style="width: 12%;">Order ID</th>
+                            <th style="width: 28%;">Customer</th>
+                            <th style="width: 15%;">Date</th>
+                            <th style="width: 12%;">Total</th>
+                            <th style="width: 13%;">Status</th>
+                            <th style="width: 20%;">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="orders-tbody">

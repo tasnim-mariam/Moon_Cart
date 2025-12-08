@@ -1834,57 +1834,50 @@
                 orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
 
                 container.innerHTML = `
-                    <table class="data-table">
-                        <thead>
+                    <div style="overflow-x: auto; width: 100%;">
+                    <table style="width: 100%; border-collapse: collapse; background: white; font-size: 13px;">
+                        <thead style="background: #f5f6fa;">
                             <tr>
-                                <th>Order ID</th>
-                                <th>Customer</th>
-                                <th>Phone</th>
-                                <th>Time Slot</th>
-                                <th>Date</th>
-                                <th>Items</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Delivery Notes</th>
-                                <th>Actions</th>
+                                <th style="padding: 12px 8px; text-align: left; white-space: nowrap; font-weight: 600;">Order ID</th>
+                                <th style="padding: 12px 8px; text-align: left; white-space: nowrap; font-weight: 600;">Customer</th>
+                                <th style="padding: 12px 8px; text-align: left; white-space: nowrap; font-weight: 600;">Phone</th>
+                                <th style="padding: 12px 8px; text-align: left; white-space: nowrap; font-weight: 600;">Slot</th>
+                                <th style="padding: 12px 8px; text-align: left; white-space: nowrap; font-weight: 600;">Date</th>
+                                <th style="padding: 12px 8px; text-align: center; white-space: nowrap; font-weight: 600;">Items</th>
+                                <th style="padding: 12px 8px; text-align: right; white-space: nowrap; font-weight: 600;">Total</th>
+                                <th style="padding: 12px 8px; text-align: center; white-space: nowrap; font-weight: 600;">Status</th>
+                                <th style="padding: 12px 8px; text-align: center; white-space: nowrap; font-weight: 600;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             ${orders
                                 .map(
                                     (order) => `
-                                <tr>
-                                    <td>#${order.id.substring(0, 8).toUpperCase()}</td>
-                                    <td>${order.customerName}</td>
-                                    <td>${order.phone}</td>
-                                    <td><span style="background: #e3f2fd; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap;"><i class="fas fa-clock"></i> ${order.deliverySlot}</span></td>
-                                    <td>${MoonCart.formatDate(order.orderDate)}</td>
-                                    <td>${order.itemCount} items</td>
-                                    <td>${MoonCart.formatCurrency(order.total)}</td>
-                                    <td><span class="status-badge status-${order.status}">${
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px 8px; white-space: nowrap; font-weight: 600;">#${order.id.substring(0, 6)}</td>
+                                    <td style="padding: 10px 8px; max-width: 120px; overflow: hidden; text-overflow: ellipsis;">${order.customerName}</td>
+                                    <td style="padding: 10px 8px; white-space: nowrap; font-size: 11px;">${order.phone.substring(0, 14)}</td>
+                                    <td style="padding: 10px 8px;"><span style="background: #e3f2fd; padding: 3px 6px; border-radius: 3px; font-size: 10px; white-space: nowrap; display: inline-block;"><i class="fas fa-clock"></i> ${order.deliverySlot.split(' - ')[0]}</span></td>
+                                    <td style="padding: 10px 8px; white-space: nowrap; font-size: 11px;">${new Date(order.orderDate).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'})}</td>
+                                    <td style="padding: 10px 8px; text-align: center;">${order.itemCount}</td>
+                                    <td style="padding: 10px 8px; text-align: right; font-weight: 600; color: var(--primary-color);">৳${order.total}</td>
+                                    <td style="padding: 10px 8px; text-align: center;"><span class="status-badge status-${order.status}" style="font-size: 10px; padding: 4px 8px;">${
                                         order.status
                                     }</span></td>
-                                    <td style="font-size: 12px; color: #666;">
-                                        ${order.status === 'out_for_delivery' ? '<i class="fas fa-map-marker-alt"></i> GPS Tracked' : ''}
-                                        ${order.status === 'pending' ? '<i class="fas fa-moon"></i> Night Delivery' : ''}
-                                        ${order.status === 'confirmed' ? '<i class="fas fa-bell"></i> Customer Notified' : ''}
-                                    </td>
-                                    <td style="white-space: nowrap;">
-                                        <button class="btn btn-sm" onclick="viewAdminOrderDetails('${
-                                            order.id
-                                        }')" style="background: #007bff; color: white; border: none; margin-right: 5px;">View</button>
+                                    <td style="padding: 10px 8px; text-align: center; white-space: nowrap;">
+                                        <button onclick="viewAdminOrderDetails('${order.id}')" style="background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; margin: 2px;" title="View Details"><i class="fas fa-eye"></i></button>
                                         ${
                                             order.status === "pending"
                                                 ? `
-                                            <button class="btn btn-sm" onclick="acceptOrder('${order.id}')" style="background: #28a745; color: white; border: none; margin-right: 5px;">Accept</button>
-                                            <button class="btn btn-sm" onclick="showDeclineModal('${order.id}')" style="background: #dc3545; color: white; border: none;">Decline</button>
+                                            <button onclick="acceptOrder('${order.id}')" style="background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; margin: 2px;" title="Accept"><i class="fas fa-check"></i></button>
+                                            <button onclick="showDeclineModal('${order.id}')" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; margin: 2px;" title="Decline"><i class="fas fa-times"></i></button>
                                         `
                                                 : ""
                                         }
                                         ${
                                             order.status === "confirmed"
                                                 ? `
-                                            <button class="btn btn-sm" onclick="showAssignModal('${order.id}')" style="background: #ff8c00; color: white; border: none;">Assign</button>
+                                            <button onclick="showAssignModal('${order.id}')" style="background: #ff8c00; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; margin: 2px;" title="Assign"><i class="fas fa-user-plus"></i></button>
                                         `
                                                 : ""
                                         }
@@ -1895,6 +1888,7 @@
                                 .join("")}
                         </tbody>
                     </table>
+                    </div>
                 `;
             }
 

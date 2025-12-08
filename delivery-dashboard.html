@@ -745,11 +745,12 @@
         </div>
 
         <!-- Order Details Modal -->
-        <div id="order-details-modal" class="modal" style="display: none">
-            <div class="modal-content" style="max-width: 800px">
+        <div id="order-details-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+            <div class="modal-content" style="max-width: 900px; background: white; border-radius: 12px; max-height: 90vh; overflow-y: auto; position: relative;">
                 <span
                     class="modal-close"
-                    onclick="MoonCart.closeModal('order-details-modal')"
+                    onclick="document.getElementById('order-details-modal').style.display='none'"
+                    style="position: absolute; right: 20px; top: 20px; font-size: 28px; cursor: pointer; color: #999; z-index: 1;"
                     >&times;</span
                 >
                 <div id="order-details"></div>
@@ -817,6 +818,109 @@
             function logout() {
                 localStorage.removeItem("mooncart_user");
                 window.location.href = "index.html";
+            }
+
+            // View order details for delivery person
+            function viewOrderDetails(orderId) {
+                const orders = MoonCart.getOrders();
+                const order = orders.find(o => o.id === orderId);
+                
+                if (!order) {
+                    alert('Order not found!');
+                    return;
+                }
+
+                const modal = document.getElementById('order-details-modal');
+                const detailsContainer = document.getElementById('order-details');
+                
+                if (!modal || !detailsContainer) {
+                    console.error('Modal or details container not found');
+                    return;
+                }
+
+                detailsContainer.innerHTML = `
+                    <div style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px;">
+                            <h2 style="margin: 0; color: var(--text-dark);">Order #${order.id.substring(0, 8).toUpperCase()}</h2>
+                            <span class="status-badge status-${order.status}" style="padding: 8px 16px; font-size: 14px; font-weight: 600;">${order.status}</span>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-user"></i> Customer Information
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Name:</strong> ${order.customerName}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Phone:</strong> ${order.phone}</p>
+                            </div>
+                            
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-map-marker-alt"></i> Delivery Address
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);">${order.address}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);">${order.city}, ${order.zipCode}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Slot:</strong> ${order.deliverySlot}</p>
+                            </div>
+                            
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-calendar"></i> Order Summary
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Total:</strong> ${MoonCart.formatCurrency(order.total)}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Payment:</strong> ${order.paymentMethod}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 15px; color: var(--text-dark); font-size: 18px;">
+                                <i class="fas fa-shopping-cart"></i> Order Items
+                            </h3>
+                            <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--primary-color); color: white;">
+                                        <th style="padding: 12px; text-align: left;">Product</th>
+                                        <th style="padding: 12px; text-align: center;">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${order.items.map((item, index) => `
+                                        <tr style="border-bottom: 1px solid #eee; ${index % 2 === 0 ? 'background: #f9f9f9;' : ''}">
+                                            <td style="padding: 12px; color: var(--text-dark);">${item.name}</td>
+                                            <td style="padding: 12px; text-align: center; color: var(--text-dark);">${item.quantity}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        ${order.status === 'out_for_delivery' ? `
+                        <div style="text-align: center; padding-top: 20px;">
+                            <button onclick="completeDelivery('${order.id}')" class="btn btn-primary" style="font-size: 16px; padding: 12px 30px;">
+                                <i class="fas fa-check"></i> Mark as Delivered
+                            </button>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
+            }
+
+            // Complete delivery
+            function completeDelivery(orderId) {
+                const orders = MoonCart.getOrders();
+                const order = orders.find(o => o.id === orderId);
+                if (order) {
+                    order.status = 'delivered';
+                    localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+                    MoonCart.showNotification('Delivery completed successfully!', 'success');
+                    document.getElementById('order-details-modal').style.display = 'none';
+                    location.reload();
+                }
             }
         </script>
     </body>

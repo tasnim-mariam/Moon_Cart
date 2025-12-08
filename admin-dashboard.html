@@ -96,12 +96,6 @@
                             </a>
                         </li>
                         <li>
-                            <a href="admin-orders.html" class="nav-link">
-                                <i class="fas fa-shopping-bag"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="admin-customers.html" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <span>Customers</span>
@@ -542,6 +536,36 @@
                     class="dashboard-section"
                     style="display: none"
                 >
+                    <!-- Night Delivery Info Cards -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; color: white;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="fas fa-moon" style="font-size: 24px;"></i>
+                                <h4 style="margin: 0;">Night Operations</h4>
+                            </div>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">Active Hours: 12:00 AM - 4:00 AM</p>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">Current Shift: Night Shift</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; color: white;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="fas fa-shield-alt" style="font-size: 24px;"></i>
+                                <h4 style="margin: 0;">Safety Priority</h4>
+                            </div>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">✓ GPS Tracking Enabled</p>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">✓ Emergency Contact Active</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 12px; color: white;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="fas fa-bell" style="font-size: 24px;"></i>
+                                <h4 style="margin: 0;">Smart Notifications</h4>
+                            </div>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">✓ Silent Delivery Alerts</p>
+                            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">✓ SMS Before Arrival</p>
+                        </div>
+                    </div>
+
                     <div
                         style="
                             background: white;
@@ -550,30 +574,59 @@
                             box-shadow: var(--shadow);
                         "
                     >
+                        <h3 style="margin-bottom: 20px; color: var(--text-dark);">
+                            <i class="fas fa-clipboard-list"></i> Order Management System
+                        </h3>
+
                         <div
                             style="
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 margin-bottom: 20px;
+                                flex-wrap: wrap;
+                                gap: 15px;
                             "
                         >
-                            <div>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                                 <input
                                     type="text"
+                                    id="order-search-input"
                                     class="form-input"
-                                    placeholder="Search orders..."
+                                    placeholder="Search by order ID, customer name..."
                                     style="width: 300px; margin: 0"
+                                    onkeyup="filterOrders()"
                                 />
+                                <select id="time-slot-filter" class="form-select" style="margin: 0; width: 180px;" onchange="filterOrders()">
+                                    <option value="all">All Time Slots</option>
+                                    <option value="12:00 AM - 1:00 AM">12:00 AM - 1:00 AM</option>
+                                    <option value="1:00 AM - 2:00 AM">1:00 AM - 2:00 AM</option>
+                                    <option value="2:00 AM - 3:00 AM">2:00 AM - 3:00 AM</option>
+                                    <option value="3:00 AM - 4:00 AM">3:00 AM - 4:00 AM</option>
+                                </select>
                             </div>
                             <div>
-                                <select class="form-select" style="margin: 0">
+                                <select id="status-filter" class="form-select" style="margin: 0" onchange="filterOrders()">
                                     <option value="all">All Orders</option>
                                     <option value="pending">Pending</option>
                                     <option value="confirmed">Confirmed</option>
+                                    <option value="out_for_delivery">Out for Delivery</option>
                                     <option value="delivered">Delivered</option>
                                     <option value="cancelled">Cancelled</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Night Delivery Features -->
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin: 0 0 10px; color: var(--text-dark);"><i class="fas fa-info-circle"></i> Night Delivery Features</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px;">
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> Contact-less Delivery</div>
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> Real-time GPS Tracking</div>
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> Pre-arrival SMS Alert</div>
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> Silent Doorbell Option</div>
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> Photo Proof Delivery</div>
+                                <div><i class="fas fa-check-circle" style="color: #28a745;"></i> 24/7 Customer Support</div>
                             </div>
                         </div>
 
@@ -600,7 +653,7 @@
                         <div style="margin-bottom: 20px">
                             <button
                                 class="btn btn-primary"
-                                onclick="openModal('add-product-modal')"
+                                onclick="addNewProduct()"
                             >
                                 <i class="fas fa-plus"></i> Add New Product
                             </button>
@@ -617,19 +670,20 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="products-table-body">
                                 <tr>
-                                    <td>#001</td>
-                                    <td>Delicious Pizza</td>
+                                    <td>#P001</td>
+                                    <td>Margherita Pizza</td>
                                     <td>Food</td>
-                                    <td>$26.99</td>
-                                    <td>50</td>
+                                    <td>৳650</td>
+                                    <td>45</td>
                                     <td>
-                                        <button class="btn btn-sm">Edit</button>
+                                        <button class="btn btn-sm" onclick="editProduct('P001')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
                                         <button
                                             class="btn btn-sm"
+                                            onclick="deleteProduct('P001')"
                                             style="
-                                                background: var(--danger-color);
+                                                background: var(--danger-color); color: white; border: none;
                                             "
                                         >
                                             Delete
@@ -637,17 +691,18 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>#002</td>
-                                    <td>Juicy Burger</td>
+                                    <td>#P002</td>
+                                    <td>Chicken Burger</td>
                                     <td>Food</td>
-                                    <td>$15.99</td>
-                                    <td>75</td>
+                                    <td>৳450</td>
+                                    <td>60</td>
                                     <td>
-                                        <button class="btn btn-sm">Edit</button>
+                                        <button class="btn btn-sm" onclick="editProduct('P002')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
                                         <button
                                             class="btn btn-sm"
+                                            onclick="deleteProduct('P002')"
                                             style="
-                                                background: var(--danger-color);
+                                                background: var(--danger-color); color: white; border: none;
                                             "
                                         >
                                             Delete
@@ -655,17 +710,151 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>#003</td>
-                                    <td>Fresh Vegetables</td>
-                                    <td>Grocery</td>
-                                    <td>$12.99</td>
+                                    <td>#P003</td>
+                                    <td>Beef Biryani</td>
+                                    <td>Food</td>
+                                    <td>৳350</td>
+                                    <td>80</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P003')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P003')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P004</td>
+                                    <td>Pasta Alfredo</td>
+                                    <td>Food</td>
+                                    <td>৳750</td>
+                                    <td>35</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P004')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P004')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P005</td>
+                                    <td>Sushi Roll Set</td>
+                                    <td>Food</td>
+                                    <td>৳1250</td>
+                                    <td>25</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P005')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P005')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P006</td>
+                                    <td>French Fries</td>
+                                    <td>Food</td>
+                                    <td>৳200</td>
                                     <td>100</td>
                                     <td>
-                                        <button class="btn btn-sm">Edit</button>
+                                        <button class="btn btn-sm" onclick="editProduct('P006')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
                                         <button
                                             class="btn btn-sm"
+                                            onclick="deleteProduct('P006')"
                                             style="
-                                                background: var(--danger-color);
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P007</td>
+                                    <td>Garlic Bread</td>
+                                    <td>Food</td>
+                                    <td>৳250</td>
+                                    <td>70</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P007')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P007')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P008</td>
+                                    <td>Mango Juice</td>
+                                    <td>Beverages</td>
+                                    <td>৳150</td>
+                                    <td>90</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P008')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P008')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P009</td>
+                                    <td>Pain Relief Medicine</td>
+                                    <td>Medicine</td>
+                                    <td>৳450</td>
+                                    <td>120</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P009')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P009')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
+                                            "
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#P010</td>
+                                    <td>Fresh Milk (1L)</td>
+                                    <td>Grocery</td>
+                                    <td>৳120</td>
+                                    <td>150</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editProduct('P010')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                                        <button
+                                            class="btn btn-sm"
+                                            onclick="deleteProduct('P010')"
+                                            style="
+                                                background: var(--danger-color); color: white; border: none;
                                             "
                                         >
                                             Delete
@@ -707,20 +896,50 @@
                                     <td>#C001</td>
                                     <td>John Doe</td>
                                     <td>john@example.com</td>
-                                    <td>+1 234 567 8900</td>
-                                    <td>12</td>
+                                    <td>+880 1234 567890</td>
+                                    <td>5</td>
                                     <td>
-                                        <button class="btn btn-sm">View</button>
+                                        <button class="btn btn-sm" onclick="viewCustomer('C001')" style="background: #007bff; color: white; border: none;">View</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>#C002</td>
-                                    <td>Jane Smith</td>
-                                    <td>jane@example.com</td>
-                                    <td>+1 234 567 8901</td>
+                                    <td>Sarah Ahmed</td>
+                                    <td>sarah@example.com</td>
+                                    <td>+880 1712 345678</td>
+                                    <td>3</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="viewCustomer('C002')" style="background: #007bff; color: white; border: none;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#C003</td>
+                                    <td>Karim Rahman</td>
+                                    <td>karim@example.com</td>
+                                    <td>+880 1987 654321</td>
                                     <td>8</td>
                                     <td>
-                                        <button class="btn btn-sm">View</button>
+                                        <button class="btn btn-sm" onclick="viewCustomer('C003')" style="background: #007bff; color: white; border: none;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#C004</td>
+                                    <td>Fatima Khan</td>
+                                    <td>fatima@example.com</td>
+                                    <td>+880 1556 789012</td>
+                                    <td>12</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="viewCustomer('C004')" style="background: #007bff; color: white; border: none;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#C005</td>
+                                    <td>Ahmed Hossain</td>
+                                    <td>ahmed@example.com</td>
+                                    <td>+880 1823 456789</td>
+                                    <td>6</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="viewCustomer('C005')" style="background: #007bff; color: white; border: none;">View</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -740,6 +959,7 @@
                             padding: 30px;
                             border-radius: var(--border-radius);
                             box-shadow: var(--shadow);
+                            margin-bottom: 30px;
                         "
                     >
                         <h3 style="margin-bottom: 20px">Delivery Personnel</h3>
@@ -752,29 +972,15 @@
                                     <th>Phone</th>
                                     <th>Status</th>
                                     <th>Active Deliveries</th>
-                                    <th>Actions</th>
+                                    <th>Total Completed</th>
+                                    <th>Rating</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>#D001</td>
                                     <td>Mike Johnson</td>
-                                    <td>+1 234 567 8902</td>
-                                    <td>
-                                        <span
-                                            class="status-badge status-confirmed"
-                                            >Active</span
-                                        >
-                                    </td>
-                                    <td>3</td>
-                                    <td>
-                                        <button class="btn btn-sm">View</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#D002</td>
-                                    <td>Sarah Wilson</td>
-                                    <td>+1 234 567 8903</td>
+                                    <td>+880 1756 234567</td>
                                     <td>
                                         <span
                                             class="status-badge status-confirmed"
@@ -782,10 +988,79 @@
                                         >
                                     </td>
                                     <td>2</td>
-                                    <td>
-                                        <button class="btn btn-sm">View</button>
-                                    </td>
+                                    <td>147</td>
+                                    <td>4.8 ⭐</td>
                                 </tr>
+                                <tr>
+                                    <td>#D002</td>
+                                    <td>Sarah Wilson</td>
+                                    <td>+880 1834 567890</td>
+                                    <td>
+                                        <span
+                                            class="status-badge status-confirmed"
+                                            >Active</span
+                                        >
+                                    </td>
+                                    <td>1</td>
+                                    <td>203</td>
+                                    <td>4.9 ⭐</td>
+                                </tr>
+                                <tr>
+                                    <td>#D003</td>
+                                    <td>Ahmed Hassan</td>
+                                    <td>+880 1912 345678</td>
+                                    <td>
+                                        <span
+                                            class="status-badge status-confirmed"
+                                            >Active</span
+                                        >
+                                    </td>
+                                    <td>3</td>
+                                    <td>189</td>
+                                    <td>4.7 ⭐</td>
+                                </tr>
+                                <tr>
+                                    <td>#D004</td>
+                                    <td>Rahim Khan</td>
+                                    <td>+880 1645 789012</td>
+                                    <td>
+                                        <span
+                                            class="status-badge status-pending"
+                                            >Offline</span
+                                        >
+                                    </td>
+                                    <td>0</td>
+                                    <td>156</td>
+                                    <td>4.6 ⭐</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow);
+                        "
+                    >
+                        <h3 style="margin-bottom: 20px">Active Deliveries & Order Details</h3>
+
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Delivery Person</th>
+                                    <th>Customer</th>
+                                    <th>Address</th>
+                                    <th>Items</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="delivery-assignments-body">
+                                <!-- Will be populated dynamically -->
                             </tbody>
                         </table>
                     </div>
@@ -854,11 +1129,12 @@
         </div>
 
         <!-- Order Details Modal -->
-        <div id="order-details-modal" class="modal" style="display: none">
-            <div class="modal-content" style="max-width: 800px">
+        <div id="order-details-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+            <div class="modal-content" style="max-width: 900px; background: white; border-radius: 12px; max-height: 90vh; overflow-y: auto; position: relative;">
                 <span
                     class="modal-close"
-                    onclick="MoonCart.closeModal('order-details-modal')"
+                    onclick="document.getElementById('order-details-modal').style.display='none'"
+                    style="position: absolute; right: 20px; top: 20px; font-size: 28px; cursor: pointer; color: #999; z-index: 1;"
                     >&times;</span
                 >
                 <div id="order-details"></div>
@@ -877,22 +1153,395 @@
                 role: "admin",
             });
 
+            // Create comprehensive mock orders for admin
+            const adminMockOrders = [
+                {
+                    id: 'ORD' + Date.now().toString().slice(-8),
+                    customerId: "cust1",
+                    customerName: "John Doe",
+                    email: "john@example.com",
+                    phone: "+880 1234 567890",
+                    address: "House 45, Road 12, Bashundhara R/A",
+                    city: "Dhaka",
+                    zipCode: "1229",
+                    deliverySlot: "12:00 AM - 1:00 AM",
+                    paymentMethod: "card",
+                    items: [
+                        { id: 'p1', name: 'Margherita Pizza', quantity: 2, price: 650, image: 'pizza.jpg', category: 'food' },
+                        { id: 'p2', name: 'Garlic Bread', quantity: 1, price: 250, image: 'bread.jpg', category: 'food' }
+                    ],
+                    orderDate: new Date(Date.now() - 3600000).toISOString(),
+                    status: "pending",
+                    subtotal: 1550,
+                    tax: 155,
+                    shipping: 0,
+                    total: 1705,
+                    itemCount: 3
+                },
+                {
+                    id: 'ORD' + (Date.now() - 1000).toString().slice(-8),
+                    customerId: "cust2",
+                    customerName: "Sarah Ahmed",
+                    email: "sarah@example.com",
+                    phone: "+880 1712 345678",
+                    address: "Flat 7B, Block C, Bashundhara R/A",
+                    city: "Dhaka",
+                    zipCode: "1229",
+                    deliverySlot: "1:00 AM - 2:00 AM",
+                    paymentMethod: "card",
+                    items: [
+                        { id: 'p3', name: 'Chicken Burger', quantity: 1, price: 450, image: 'burger.jpg', category: 'food' },
+                        { id: 'p4', name: 'French Fries', quantity: 2, price: 200, image: 'fries.jpg', category: 'food' }
+                    ],
+                    orderDate: new Date(Date.now() - 7200000).toISOString(),
+                    status: "confirmed",
+                    subtotal: 850,
+                    tax: 85,
+                    shipping: 50,
+                    total: 985,
+                    itemCount: 3,
+                    deliveryPersonId: "delivery1"
+                },
+                {
+                    id: 'ORD' + (Date.now() - 2000).toString().slice(-8),
+                    customerId: "cust3",
+                    customerName: "Karim Rahman",
+                    email: "karim@example.com",
+                    phone: "+880 1987 654321",
+                    address: "House 23, Road 8, Bashundhara R/A",
+                    city: "Dhaka",
+                    zipCode: "1229",
+                    deliverySlot: "2:00 AM - 3:00 AM",
+                    paymentMethod: "card",
+                    items: [
+                        { id: 'p5', name: 'Pasta Alfredo', quantity: 1, price: 750, image: 'pasta.jpg', category: 'food' }
+                    ],
+                    orderDate: new Date(Date.now() - 86400000).toISOString(),
+                    status: "delivered",
+                    subtotal: 750,
+                    tax: 75,
+                    shipping: 50,
+                    total: 875,
+                    itemCount: 1
+                },
+                {
+                    id: 'ORD' + (Date.now() - 3000).toString().slice(-8),
+                    customerId: "cust4",
+                    customerName: "Fatima Khan",
+                    email: "fatima@example.com",
+                    phone: "+880 1556 789012",
+                    address: "Flat 12C, Block F, Bashundhara R/A",
+                    city: "Dhaka",
+                    zipCode: "1229",
+                    deliverySlot: "3:00 AM - 4:00 AM",
+                    paymentMethod: "card",
+                    items: [
+                        { id: 'p6', name: 'Sushi Roll Set', quantity: 1, price: 1250, image: 'sushi.jpg', category: 'food' },
+                        { id: 'p7', name: 'Miso Soup', quantity: 2, price: 200, image: 'soup.jpg', category: 'food' }
+                    ],
+                    orderDate: new Date(Date.now() - 10800000).toISOString(),
+                    status: "out_for_delivery",
+                    subtotal: 1650,
+                    tax: 165,
+                    shipping: 0,
+                    total: 1815,
+                    itemCount: 3,
+                    deliveryPersonId: "delivery2"
+                },
+                {
+                    id: 'ORD' + (Date.now() - 4000).toString().slice(-8),
+                    customerId: "cust5",
+                    customerName: "Ahmed Hossain",
+                    email: "ahmed@example.com",
+                    phone: "+880 1823 456789",
+                    address: "House 78, Road 15, Bashundhara R/A",
+                    city: "Dhaka",
+                    zipCode: "1229",
+                    deliverySlot: "12:00 AM - 1:00 AM",
+                    paymentMethod: "card",
+                    items: [
+                        { id: 'p8', name: 'Pain Relief Medicine', quantity: 1, price: 450, image: 'medicine.jpg', category: 'medicine' }
+                    ],
+                    orderDate: new Date(Date.now() - 1800000).toISOString(),
+                    status: "pending",
+                    subtotal: 450,
+                    tax: 45,
+                    shipping: 0,
+                    total: 495,
+                    itemCount: 1
+                }
+            ];
+
+            // Save mock orders
+            localStorage.setItem('mooncart_orders', JSON.stringify(adminMockOrders));
+
             // Load orders on page load
             document.addEventListener("DOMContentLoaded", function () {
-                renderAdminOrders();
+                renderAdminOrdersCustom();
 
                 // Also render in the full orders section
-                const fullOrdersContainer =
-                    document.getElementById("admin-orders-full");
-                if (fullOrdersContainer) {
-                    fullOrdersContainer.id = "admin-orders-temp";
-                    document.getElementById("admin-orders-temp").id =
-                        "admin-orders";
-                    renderAdminOrders();
-                    document.getElementById("admin-orders").id =
-                        "admin-orders-full";
-                }
+                setTimeout(() => {
+                    const fullSection = document.getElementById("admin-orders-full");
+                    if (fullSection) {
+                        fullSection.innerHTML = '<div id="admin-orders-full2"></div>';
+                        displayAllAdminOrders();
+                    }
+                }, 100);
             });
+
+            // Custom render function for admin orders with colored buttons
+            function renderAdminOrdersCustom() {
+                const orders = MoonCart.getOrders();
+                const container = document.getElementById("admin-orders");
+
+                if (!container) return;
+
+                if (orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <h3>No orders yet</h3>
+                            <p>Orders will appear here once customers start placing them.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+                const recentOrders = orders.slice(0, 5);
+
+                container.innerHTML = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${recentOrders
+                                .map(
+                                    (order) => `
+                                <tr>
+                                    <td>#${order.id.substring(0, 8).toUpperCase()}</td>
+                                    <td>${order.customerName}</td>
+                                    <td>${MoonCart.formatDate(order.orderDate)}</td>
+                                    <td>${order.itemCount} items</td>
+                                    <td>${MoonCart.formatCurrency(order.total)}</td>
+                                    <td><span class="status-badge status-${order.status}">${
+                                        order.status
+                                    }</span></td>
+                                    <td style="white-space: nowrap;">
+                                        <button class="btn btn-sm" onclick="viewAdminOrderDetails('${
+                                            order.id
+                                        }')" style="background: #007bff; color: white; border: none; margin-right: 5px;">View</button>
+                                        ${
+                                            order.status === "pending"
+                                                ? `
+                                            <button class="btn btn-sm" onclick="acceptOrder('${order.id}')" style="background: #28a745; color: white; border: none; margin-right: 5px;">Accept</button>
+                                            <button class="btn btn-sm" onclick="showDeclineModal('${order.id}')" style="background: #dc3545; color: white; border: none;">Decline</button>
+                                        `
+                                                : ""
+                                        }
+                                        ${
+                                            order.status === "confirmed"
+                                                ? `
+                                            <button class="btn btn-sm" onclick="showAssignModal('${order.id}')" style="background: #ff8c00; color: white; border: none;">Assign</button>
+                                        `
+                                                : ""
+                                        }
+                                    </td>
+                                </tr>
+                            `
+                                )
+                                .join("")}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            // Display all admin orders
+            function displayAllAdminOrders() {
+                const orders = MoonCart.getOrders();
+                displayFilteredAdminOrders(orders);
+            }
+
+            // View admin order details
+            function viewAdminOrderDetails(orderId) {
+                const orders = MoonCart.getOrders();
+                const order = orders.find(o => o.id === orderId);
+                
+                if (!order) {
+                    alert('Order not found!');
+                    return;
+                }
+
+                const modal = document.getElementById('order-details-modal');
+                const detailsContainer = document.getElementById('order-details');
+                
+                if (!modal || !detailsContainer) {
+                    console.error('Modal or details container not found');
+                    return;
+                }
+
+                detailsContainer.innerHTML = `
+                    <div style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid var(--primary-color); padding-bottom: 15px;">
+                            <h2 style="margin: 0; color: var(--text-dark);">Order #${order.id.substring(0, 8).toUpperCase()}</h2>
+                            <span class="status-badge status-${order.status}" style="padding: 8px 16px; font-size: 14px; font-weight: 600;">${order.status}</span>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-user"></i> Customer Information
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Name:</strong> ${order.customerName}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Email:</strong> ${order.email}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Phone:</strong> ${order.phone}</p>
+                            </div>
+                            
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-map-marker-alt"></i> Delivery Address
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);">${order.address}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);">${order.city}, ${order.zipCode}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Slot:</strong> ${order.deliverySlot}</p>
+                            </div>
+                            
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 10px;">
+                                <h3 style="margin: 0 0 15px; color: var(--primary-color); font-size: 16px;">
+                                    <i class="fas fa-calendar"></i> Order Summary
+                                </h3>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Time:</strong> ${new Date(order.orderDate).toLocaleTimeString()}</p>
+                                <p style="margin: 5px 0; color: var(--text-dark);"><strong>Payment:</strong> ${order.paymentMethod}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h3 style="margin: 0 0 15px; color: var(--text-dark); font-size: 18px;">
+                                <i class="fas fa-shopping-cart"></i> Order Items
+                            </h3>
+                            <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--primary-color); color: white;">
+                                        <th style="padding: 12px; text-align: left;">Product</th>
+                                        <th style="padding: 12px; text-align: center;">Quantity</th>
+                                        <th style="padding: 12px; text-align: right;">Price</th>
+                                        <th style="padding: 12px; text-align: right;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${order.items.map((item, index) => `
+                                        <tr style="border-bottom: 1px solid #eee; ${index % 2 === 0 ? 'background: #f9f9f9;' : ''}">
+                                            <td style="padding: 12px; color: var(--text-dark);">${item.name}</td>
+                                            <td style="padding: 12px; text-align: center; color: var(--text-dark);">${item.quantity}</td>
+                                            <td style="padding: 12px; text-align: right; color: var(--text-dark);">${MoonCart.formatCurrency(item.price)}</td>
+                                            <td style="padding: 12px; text-align: right; font-weight: 600; color: var(--text-dark);">${MoonCart.formatCurrency(item.price * item.quantity)}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div style="background: var(--light-bg); padding: 20px; border-radius: 10px; max-width: 400px; margin-left: auto;">
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--text-dark);">
+                                <span>Subtotal:</span>
+                                <span style="font-weight: 600;">${MoonCart.formatCurrency(order.subtotal)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--text-dark);">
+                                <span>Tax (10%):</span>
+                                <span style="font-weight: 600;">${MoonCart.formatCurrency(order.tax)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--text-dark);">
+                                <span>Shipping:</span>
+                                <span style="font-weight: 600;">${order.shipping === 0 ? 'FREE' : MoonCart.formatCurrency(order.shipping)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 12px 0; margin-top: 10px; border-top: 2px solid var(--primary-color); font-size: 18px; font-weight: 700; color: var(--primary-color);">
+                                <span>Total:</span>
+                                <span>${MoonCart.formatCurrency(order.total)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.background = 'rgba(0,0,0,0.5)';
+                modal.style.zIndex = '9999';
+            }
+
+            // Accept order and refresh display
+            function acceptOrder(orderId) {
+                const orders = MoonCart.getOrders();
+                const order = orders.find(o => o.id === orderId);
+                if (order) {
+                    order.status = 'confirmed';
+                    localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+                    MoonCart.showNotification('Order accepted successfully! Customer will be notified.', 'success');
+                    renderAdminOrdersCustom();
+                    filterOrders(); // Use filter to maintain current view
+                }
+            }
+
+            // Show decline modal
+            function showDeclineModal(orderId) {
+                const reason = prompt('Please provide a reason for declining this order:');
+                if (reason) {
+                    const orders = MoonCart.getOrders();
+                    const order = orders.find(o => o.id === orderId);
+                    if (order) {
+                        order.status = 'cancelled';
+                        order.cancellationReason = reason;
+                        localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+                        MoonCart.showNotification('Order declined. Customer has been notified.', 'success');
+                        renderAdminOrdersCustom();
+                        filterOrders(); // Use filter to maintain current view
+                    }
+                }
+            }
+
+            // Show assign modal
+            function showAssignModal(orderId) {
+                const deliveryPersons = [
+                    { id: 'delivery1', name: 'Mike Johnson' },
+                    { id: 'delivery2', name: 'Sarah Wilson' },
+                    { id: 'delivery3', name: 'Ahmed Hassan' }
+                ];
+                
+                let options = deliveryPersons.map((person, index) => `${index + 1}. ${person.name}`).join('\n');
+                const choice = prompt(`Assign delivery person:\n${options}\n\nEnter number (1-${deliveryPersons.length}):`);
+                
+                if (choice) {
+                    const index = parseInt(choice) - 1;
+                    if (index >= 0 && index < deliveryPersons.length) {
+                        const orders = MoonCart.getOrders();
+                        const order = orders.find(o => o.id === orderId);
+                        if (order) {
+                            order.status = 'out_for_delivery';
+                            order.deliveryPersonId = deliveryPersons[index].id;
+                            order.deliveryPersonName = deliveryPersons[index].name;
+                            localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+                            MoonCart.showNotification(`Order assigned to ${deliveryPersons[index].name}. GPS tracking enabled.`, 'success');
+                            renderAdminOrdersCustom();
+                            filterOrders(); // Use filter to maintain current view
+                            populateDeliveryAssignments(); // Update delivery section
+                        }
+                    }
+                }
+            }
 
             // Show/hide sections
             function showSection(section) {
@@ -1055,7 +1704,249 @@
             // Initialize charts when page loads
             document.addEventListener("DOMContentLoaded", function () {
                 initCharts();
+                populateDeliveryAssignments();
             });
+
+            // Product management functions
+            function addNewProduct() {
+                const name = prompt('Enter product name:');
+                if (!name) return;
+                
+                const category = prompt('Enter category (Food/Beverages/Medicine/Grocery):');
+                if (!category) return;
+                
+                const price = prompt('Enter price in Taka (৳):');
+                if (!price || isNaN(price)) {
+                    alert('Please enter a valid price');
+                    return;
+                }
+                
+                const stock = prompt('Enter stock quantity:');
+                if (!stock || isNaN(stock)) {
+                    alert('Please enter a valid stock quantity');
+                    return;
+                }
+                
+                // Generate new product ID
+                const productId = 'P' + (Date.now().toString().slice(-3));
+                
+                // Add new row to products table
+                const tbody = document.getElementById('products-table-body');
+                if (tbody) {
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td>#${productId}</td>
+                        <td>${name}</td>
+                        <td>${category}</td>
+                        <td>৳${price}</td>
+                        <td>${stock}</td>
+                        <td>
+                            <button class="btn btn-sm" onclick="editProduct('${productId}')" style="background: #ff8c00; color: white; border: none; margin-right: 5px;">Edit</button>
+                            <button
+                                class="btn btn-sm"
+                                onclick="deleteProduct('${productId}')"
+                                style="background: var(--danger-color); color: white; border: none;"
+                            >
+                                Delete
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(newRow);
+                    
+                    MoonCart.showNotification('Product added successfully!', 'success');
+                } else {
+                    alert(`Product "${name}" added successfully!\nCategory: ${category}\nPrice: ৳${price}\nStock: ${stock}`);
+                }
+            }
+
+            function editProduct(productId) {
+                const productData = {
+                    'P001': { name: 'Margherita Pizza', category: 'Food', price: 650, stock: 45 },
+                    'P002': { name: 'Chicken Burger', category: 'Food', price: 450, stock: 60 },
+                    'P003': { name: 'Beef Biryani', category: 'Food', price: 350, stock: 80 },
+                    'P004': { name: 'Pasta Alfredo', category: 'Food', price: 750, stock: 35 },
+                    'P005': { name: 'Sushi Roll Set', category: 'Food', price: 1250, stock: 25 }
+                };
+                
+                const product = productData[productId] || { name: 'Product', category: 'Food', price: 500, stock: 50 };
+                
+                const newPrice = prompt(`Edit price for ${product.name}:\nCurrent price: ৳${product.price}`, product.price);
+                if (newPrice && newPrice !== product.price.toString()) {
+                    alert(`Price updated to ৳${newPrice}`);
+                    MoonCart.showNotification('Product updated successfully!', 'success');
+                }
+            }
+
+            function deleteProduct(productId) {
+                if (confirm('Are you sure you want to delete this product?')) {
+                    // Find and remove the row
+                    const tbody = document.getElementById('products-table-body');
+                    if (tbody) {
+                        const rows = tbody.getElementsByTagName('tr');
+                        for (let i = 0; i < rows.length; i++) {
+                            if (rows[i].cells[0].textContent.includes(productId)) {
+                                tbody.removeChild(rows[i]);
+                                MoonCart.showNotification('Product deleted', 'success');
+                                return;
+                            }
+                        }
+                    }
+                    alert('Product deleted successfully!');
+                }
+            }
+
+            // Filter orders function
+            function filterOrders() {
+                const searchTerm = document.getElementById('order-search-input')?.value.toLowerCase() || '';
+                const statusFilter = document.getElementById('status-filter')?.value || 'all';
+                const timeSlotFilter = document.getElementById('time-slot-filter')?.value || 'all';
+                
+                const orders = MoonCart.getOrders();
+                
+                const filteredOrders = orders.filter(order => {
+                    const matchesSearch = order.id.toLowerCase().includes(searchTerm) || 
+                                         order.customerName.toLowerCase().includes(searchTerm);
+                    const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
+                    const matchesTimeSlot = timeSlotFilter === 'all' || order.deliverySlot === timeSlotFilter;
+                    
+                    return matchesSearch && matchesStatus && matchesTimeSlot;
+                });
+                
+                displayFilteredAdminOrders(filteredOrders);
+            }
+
+            // Display filtered orders
+            function displayFilteredAdminOrders(orders) {
+                const container = document.getElementById("admin-orders-full2");
+                if (!container) return;
+
+                if (orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state" style="text-align: center; padding: 40px; color: var(--text-light);">
+                            <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                            <h3>No orders found</h3>
+                            <p>Try adjusting your search or filters</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+                container.innerHTML = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Time Slot</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Delivery Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${orders
+                                .map(
+                                    (order) => `
+                                <tr>
+                                    <td>#${order.id.substring(0, 8).toUpperCase()}</td>
+                                    <td>${order.customerName}</td>
+                                    <td>${order.phone}</td>
+                                    <td><span style="background: #e3f2fd; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap;"><i class="fas fa-clock"></i> ${order.deliverySlot}</span></td>
+                                    <td>${MoonCart.formatDate(order.orderDate)}</td>
+                                    <td>${order.itemCount} items</td>
+                                    <td>${MoonCart.formatCurrency(order.total)}</td>
+                                    <td><span class="status-badge status-${order.status}">${
+                                        order.status
+                                    }</span></td>
+                                    <td style="font-size: 12px; color: #666;">
+                                        ${order.status === 'out_for_delivery' ? '<i class="fas fa-map-marker-alt"></i> GPS Tracked' : ''}
+                                        ${order.status === 'pending' ? '<i class="fas fa-moon"></i> Night Delivery' : ''}
+                                        ${order.status === 'confirmed' ? '<i class="fas fa-bell"></i> Customer Notified' : ''}
+                                    </td>
+                                    <td style="white-space: nowrap;">
+                                        <button class="btn btn-sm" onclick="viewAdminOrderDetails('${
+                                            order.id
+                                        }')" style="background: #007bff; color: white; border: none; margin-right: 5px;">View</button>
+                                        ${
+                                            order.status === "pending"
+                                                ? `
+                                            <button class="btn btn-sm" onclick="acceptOrder('${order.id}')" style="background: #28a745; color: white; border: none; margin-right: 5px;">Accept</button>
+                                            <button class="btn btn-sm" onclick="showDeclineModal('${order.id}')" style="background: #dc3545; color: white; border: none;">Decline</button>
+                                        `
+                                                : ""
+                                        }
+                                        ${
+                                            order.status === "confirmed"
+                                                ? `
+                                            <button class="btn btn-sm" onclick="showAssignModal('${order.id}')" style="background: #ff8c00; color: white; border: none;">Assign</button>
+                                        `
+                                                : ""
+                                        }
+                                    </td>
+                                </tr>
+                            `
+                                )
+                                .join("")}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            // Customer management function
+            function viewCustomer(customerId) {
+                const customerData = {
+                    'C001': { name: 'John Doe', email: 'john@example.com', phone: '+880 1234 567890', address: 'House 45, Road 12, Bashundhara R/A', orders: 5, totalSpent: 8500 },
+                    'C002': { name: 'Sarah Ahmed', email: 'sarah@example.com', phone: '+880 1712 345678', address: 'Flat 7B, Block C, Bashundhara R/A', orders: 3, totalSpent: 4200 },
+                    'C003': { name: 'Karim Rahman', email: 'karim@example.com', phone: '+880 1987 654321', address: 'House 23, Road 8, Bashundhara R/A', orders: 8, totalSpent: 12800 },
+                    'C004': { name: 'Fatima Khan', email: 'fatima@example.com', phone: '+880 1556 789012', address: 'Flat 12C, Block F, Bashundhara R/A', orders: 12, totalSpent: 18500 },
+                    'C005': { name: 'Ahmed Hossain', email: 'ahmed@example.com', phone: '+880 1823 456789', address: 'House 78, Road 15, Bashundhara R/A', orders: 6, totalSpent: 9200 }
+                };
+                
+                const customer = customerData[customerId];
+                if (customer) {
+                    alert(`Customer Details:\n\nName: ${customer.name}\nEmail: ${customer.email}\nPhone: ${customer.phone}\nAddress: ${customer.address}\nTotal Orders: ${customer.orders}\nTotal Spent: ৳${customer.totalSpent}`);
+                }
+            }
+
+            // Populate delivery assignments
+            function populateDeliveryAssignments() {
+                const orders = MoonCart.getOrders();
+                const deliveryOrders = orders.filter(order => order.status === 'out_for_delivery' || order.status === 'confirmed');
+                const tbody = document.getElementById('delivery-assignments-body');
+                
+                if (!tbody) return;
+                
+                if (deliveryOrders.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-light);">
+                                No active deliveries at the moment
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                tbody.innerHTML = deliveryOrders.map(order => `
+                    <tr>
+                        <td>#${order.id.substring(0, 8).toUpperCase()}</td>
+                        <td>${order.deliveryPersonName || 'Not Assigned'}</td>
+                        <td>${order.customerName}</td>
+                        <td>${order.address}, ${order.city}</td>
+                        <td>${order.itemCount} items</td>
+                        <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                        <td>
+                            <button class="btn btn-sm" onclick="viewAdminOrderDetails('${order.id}')" style="background: #007bff; color: white; border: none;">View</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
         </script>
     </body>
 </html>

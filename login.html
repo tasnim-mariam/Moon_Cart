@@ -7,7 +7,7 @@
         <title>Login - MoonCart</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -598,109 +598,87 @@
 
         <!-- Scripts -->
         <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
         <script>
-            // Direct button click handler is now used instead of form submission
-
-            function handleLogin(event) {
+            // Login handler - calls backend API for authentication
+            async function handleLogin(event) {
                 event.preventDefault();
                 console.log("Login form submitted");
 
-                const email = document.getElementById("email").value;
+                const email = document.getElementById("email").value.trim();
                 const password = document.getElementById("password").value;
                 const userTypeElement = document.querySelector(
                     'input[name="user-type"]:checked'
                 );
 
+                // Validate inputs
+                if (!email || !password) {
+                    MoonCart.showNotification("Please enter email and password", "error");
+                    return false;
+                }
+
                 if (!userTypeElement) {
-                    console.error("No user type selected");
-                    MoonCart.showNotification(
-                        "Please select a user type",
-                        "error"
-                    );
+                    MoonCart.showNotification("Please select a user type", "error");
                     return false;
                 }
 
                 const userType = userTypeElement.value;
-                const remember = document.getElementById("remember")
-                    ? document.getElementById("remember").checked
-                    : false;
-
                 console.log(`Login attempt: ${email} as ${userType}`);
 
                 // Show loading
-                if (MoonCart && MoonCart.showLoading) {
-                    MoonCart.showLoading();
-                }
+                MoonCart.showLoading();
 
-                // Simulate API call
-                setTimeout(() => {
-                    if (MoonCart && MoonCart.hideLoading) {
-                        MoonCart.hideLoading();
-                    }
+                try {
+                    // Call backend API for authentication
+                    const response = await MoonCartAPI.login(email, password);
+                    
+                    MoonCart.hideLoading();
 
-                    // Mock user data
-                    const user = {
-                        id:
-                            MoonCart && MoonCart.generateId
-                                ? MoonCart.generateId()
-                                : Date.now().toString(),
-                        email: email,
-                        role: userType,
-                        name: email.split("@")[0],
-                        loginTime: new Date().toISOString(),
-                    };
-
-                    // Force direct localStorage usage for maximum compatibility
-                    console.log("Saving user to localStorage");
-                    localStorage.setItem("mooncart_user", JSON.stringify(user));
-
-                    // Also try MoonCart's method as backup
-                    try {
-                        if (
-                            window.MoonCart &&
-                            typeof window.MoonCart.setCurrentUser === "function"
-                        ) {
-                            window.MoonCart.setCurrentUser(user);
-                        }
-                    } catch (e) {
-                        console.error("Error with MoonCart API:", e);
-                    }
-
-                    // Show notification
-                    try {
-                        if (
-                            window.MoonCart &&
-                            typeof window.MoonCart.showNotification ===
-                                "function"
-                        ) {
-                            window.MoonCart.showNotification(
-                                `Welcome back! Logging in as ${userType}...`,
-                                "success"
+                    if (response.success && response.user) {
+                        const user = response.user;
+                        
+                        // Check if user role matches selected type
+                        if (user.role !== userType) {
+                            MoonCart.showNotification(
+                                `This account is registered as ${user.role}, not ${userType}. Please select the correct user type.`,
+                                "error"
                             );
-                        } else {
-                            // Fallback to regular alert
-                            alert(`Welcome back! Logging in as ${userType}...`);
+                            return false;
                         }
-                    } catch (e) {
-                        console.error("Error showing notification:", e);
-                        // Ensure user sees something
-                        alert(`Welcome back! Logging in as ${userType}...`);
-                    }
 
-                    // Redirect based on user type
-                    console.log(
-                        `Redirecting to ${
-                            userType === "admin" ? "admin" : "customer"
-                        } dashboard`
+                        // Save user to localStorage
+                        localStorage.setItem("mooncart_user", JSON.stringify(user));
+                        MoonCart.setCurrentUser(user);
+
+                        MoonCart.showNotification(
+                            `Welcome back, ${user.name}!`,
+                            "success"
+                        );
+
+                        // Redirect based on user role
+                        setTimeout(() => {
+                            if (user.role === "admin") {
+                                window.location.href = "admin-dashboard.html";
+                            } else if (user.role === "delivery") {
+                                window.location.href = "delivery-dashboard.html";
+                            } else {
+                                window.location.href = "customer-dashboard.html";
+                            }
+                        }, 1000);
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Login failed. Please try again.",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error("Login error:", error);
+                    MoonCart.showNotification(
+                        error.message || "Invalid email or password. Please try again.",
+                        "error"
                     );
-                    setTimeout(() => {
-                        if (userType === "admin") {
-                            window.location.href = "admin-dashboard.html";
-                        } else {
-                            window.location.href = "customer-dashboard.html";
-                        }
-                    }, 1000);
-                }, 1500);
+                }
 
                 return false;
             }

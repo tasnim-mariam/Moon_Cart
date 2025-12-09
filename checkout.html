@@ -7,7 +7,7 @@
         <title>Checkout - MoonCart</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -714,15 +714,89 @@
 
         <!-- Scripts -->
         <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
         <script src="js/cart.js"></script>
         <script src="js/order.js"></script>
         <script src="js/ui.js"></script>
         <script>
+            // Check if user is logged in
+            const currentUser = MoonCart.getCurrentUser();
+            if (!currentUser) {
+                MoonCart.showNotification('Please login to checkout', 'error');
+                setTimeout(function() { window.location.href = 'login.html'; }, 1500);
+            }
+
+            // Load and display cart on page load
+            document.addEventListener('DOMContentLoaded', async function() {
+                if (!currentUser) return;
+
+                // Load cart from backend
+                await loadCart();
+
+                // Check if cart is empty
+                if (!cartData.items || cartData.items.length === 0) {
+                    MoonCart.showNotification('Your cart is empty', 'error');
+                    setTimeout(function() { window.location.href = 'cart.html'; }, 1500);
+                    return;
+                }
+
+                // Pre-fill user info
+                const nameInput = document.querySelector('input[name="fullname"]');
+                const emailInput = document.querySelector('input[name="email"]');
+                const phoneInput = document.querySelector('input[name="phone"]');
+                
+                if (nameInput) nameInput.value = currentUser.name || '';
+                if (emailInput) emailInput.value = currentUser.email || '';
+                if (phoneInput) phoneInput.value = currentUser.phone || '';
+
+                // Display order summary
+                displayOrderSummary();
+            });
+
+            // Display order summary from cart data
+            function displayOrderSummary() {
+                const summaryContainer = document.getElementById('order-summary') || document.querySelector('.order-summary');
+                if (!summaryContainer || !cartData.items) return;
+
+                let itemsHtml = cartData.items.map(item => `
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                        <span>${item.product_name} x ${item.quantity}</span>
+                        <span>${MoonCart.formatCurrency(item.price * item.quantity)}</span>
+                    </div>
+                `).join('');
+
+                summaryContainer.innerHTML = `
+                    <h3 style="margin-bottom: 15px;">Order Summary</h3>
+                    <div style="margin-bottom: 15px;">${itemsHtml}</div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                        <span>Subtotal:</span>
+                        <span>${MoonCart.formatCurrency(cartData.subtotal)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                        <span>Tax (10%):</span>
+                        <span>${MoonCart.formatCurrency(cartData.tax)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                        <span>Shipping:</span>
+                        <span>${cartData.shipping === 0 ? 'FREE' : MoonCart.formatCurrency(cartData.shipping)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid var(--primary-color); font-weight: bold; font-size: 18px;">
+                        <span>Total:</span>
+                        <span>${MoonCart.formatCurrency(cartData.total)}</span>
+                    </div>
+                `;
+            }
+
             // Handle checkout form submission
             document.getElementById('checkout-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Store order details in localStorage
+                if (!cartData.items || cartData.items.length === 0) {
+                    MoonCart.showNotification('Your cart is empty', 'error');
+                    return;
+                }
+
+                // Store order details in localStorage for payment page
                 const formData = new FormData(this);
                 const orderDetails = {
                     fullname: formData.get('fullname'),
@@ -734,8 +808,21 @@
                     instructions: formData.get('instructions'),
                     deliverySlot: formData.get('delivery-slot'),
                     paymentMethod: formData.get('payment-method'),
-                    cart: MoonCart.getCart(),
-                    cartDetails: calculateCartDetails()
+                    // Use cart data from backend
+                    cart: cartData.items.map(item => ({
+                        id: item.product_id,
+                        name: item.product_name,
+                        price: item.price,
+                        quantity: item.quantity,
+                        image: item.image
+                    })),
+                    cartDetails: {
+                        subtotal: cartData.subtotal,
+                        tax: cartData.tax,
+                        shipping: cartData.shipping,
+                        total: cartData.total,
+                        itemCount: cartData.itemCount
+                    }
                 };
                 
                 localStorage.setItem('mooncart_pending_order', JSON.stringify(orderDetails));

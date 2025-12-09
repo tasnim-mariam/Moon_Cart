@@ -188,22 +188,44 @@ function filterByCategory(category) {
 }
 
 function updateCartCount() {
-    const cart = getCart();
     const cartCount = document.querySelector(".cart-count");
+    if (!cartCount) return;
 
-    if (cartCount) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
-        cartCount.style.display = totalItems > 0 ? "flex" : "none";
+    // If cartData is available (from cart.js), use it
+    if (typeof cartData !== 'undefined' && cartData.itemCount !== undefined) {
+        cartCount.textContent = cartData.itemCount;
+        cartCount.style.display = cartData.itemCount > 0 ? "flex" : "none";
+    } else {
+        // Fallback: Load cart count from backend if user is logged in
+        const currentUser = getCurrentUser();
+        if (currentUser && typeof MoonCartAPI !== 'undefined') {
+            MoonCartAPI.getCart(currentUser.id).then(response => {
+                if (response.success && response.cart) {
+                    cartCount.textContent = response.cart.itemCount || 0;
+                    cartCount.style.display = response.cart.itemCount > 0 ? "flex" : "none";
+                }
+            }).catch(() => {
+                cartCount.textContent = "0";
+                cartCount.style.display = "none";
+            });
+        } else {
+            cartCount.textContent = "0";
+            cartCount.style.display = "none";
+        }
     }
 }
 
+// Legacy function - kept for backward compatibility
 function getCart() {
-    return JSON.parse(localStorage.getItem("mooncart_cart")) || [];
+    // Return empty array - cart is now stored in backend
+    console.warn('getCart() is deprecated. Use MoonCartAPI.getCart() instead.');
+    return [];
 }
 
+// Legacy function - kept for backward compatibility
 function saveCart(cart) {
-    localStorage.setItem("mooncart_cart", JSON.stringify(cart));
+    // No-op - cart is now stored in backend
+    console.warn('saveCart() is deprecated. Use MoonCartAPI.addToCart() instead.');
     updateCartCount();
 }
 
@@ -522,10 +544,19 @@ window.MoonCart = {
     generateId: generateId,
     validateForm: validateForm,
 
-    // Cart functions
+    // Cart functions (now using backend API via cart.js)
     getCart: getCart,
     saveCart: saveCart,
     updateCartCount: updateCartCount,
+    
+    // Calculate cart details - uses cartData from cart.js if available
+    calculateCartDetails: function() {
+        if (typeof calculateCartDetails === 'function') {
+            return calculateCartDetails();
+        }
+        // Fallback
+        return { subtotal: 0, tax: 0, shipping: 0, total: 0, itemCount: 0 };
+    },
 
     // Order functions
     getOrders: getOrders,

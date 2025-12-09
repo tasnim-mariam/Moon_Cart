@@ -1913,6 +1913,11 @@ ol {
     color: #155724;
 }
 
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
 .status-cancelled {
     background: #f8d7da;
     color: #721c24;

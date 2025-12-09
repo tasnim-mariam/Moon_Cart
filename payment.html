@@ -7,7 +7,7 @@
         <title>Payment - MoonCart</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -347,6 +347,7 @@
 
         <!-- Scripts -->
         <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
         <script src="js/cart.js"></script>
         <script>
             // Load order summary
@@ -405,55 +406,98 @@
                 e.target.value = e.target.value.replace(/\D/g, '');
             });
 
-            // Handle payment form submission
-            document.getElementById('payment-form').addEventListener('submit', function(e) {
+            // Handle payment form submission - SAVE TO BACKEND
+            document.getElementById('payment-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Show loading
-                if (MoonCart && MoonCart.showLoading) {
-                    MoonCart.showLoading();
+                MoonCart.showLoading();
+
+                // Get order details from checkout
+                const orderDetails = JSON.parse(localStorage.getItem('mooncart_pending_order') || '{}');
+                
+                if (!orderDetails.cart || orderDetails.cart.length === 0) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification('No order found', 'error');
+                    return;
                 }
 
-                // Simulate payment processing
-                setTimeout(() => {
-                    if (MoonCart && MoonCart.hideLoading) {
-                        MoonCart.hideLoading();
+                // Get current user
+                const currentUser = MoonCart.getCurrentUser();
+                if (!currentUser) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification('Please login to place order', 'error');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Prepare order data for backend API
+                // Convert product_id to integer or null if not numeric
+                const orderItems = orderDetails.cart.map(item => {
+                    let productId = null;
+                    if (item.id && !isNaN(parseInt(item.id))) {
+                        productId = parseInt(item.id);
                     }
-
-                    // Get order details
-                    const orderDetails = JSON.parse(localStorage.getItem('mooncart_pending_order') || '{}');
-                    
-                    // Generate order ID
-                    const orderId = 'MC' + Date.now().toString().slice(-8);
-                    
-                    // Save order
-                    const order = {
-                        id: orderId,
-                        ...orderDetails,
-                        status: 'confirmed',
-                        paymentStatus: 'paid',
-                        orderDate: new Date().toISOString(),
-                        cardLastFour: document.getElementById('card-number').value.slice(-4)
+                    return {
+                        product_id: productId,
+                        name: item.name,
+                        price: parseFloat(item.price),
+                        quantity: parseInt(item.quantity) || 1
                     };
+                });
 
-                    // Save to orders
-                    const orders = JSON.parse(localStorage.getItem('mooncart_orders') || '[]');
-                    orders.push(order);
-                    localStorage.setItem('mooncart_orders', JSON.stringify(orders));
+                const orderData = {
+                    user_id: currentUser.id,
+                    customer_name: orderDetails.fullname,
+                    email: orderDetails.email,
+                    phone: orderDetails.phone,
+                    address: orderDetails.address,
+                    city: orderDetails.city,
+                    zip_code: orderDetails.zipcode,
+                    delivery_slot: orderDetails.deliverySlot,
+                    delivery_instructions: orderDetails.instructions || '',
+                    payment_method: orderDetails.paymentMethod || 'card',
+                    items: orderItems,
+                    subtotal: orderDetails.cartDetails.subtotal,
+                    tax: orderDetails.cartDetails.tax,
+                    shipping: orderDetails.cartDetails.shipping,
+                    total: orderDetails.cartDetails.total
+                };
 
-                    // Clear cart and pending order
-                    localStorage.removeItem('mooncart_pending_order');
-                    MoonCart.saveCart([]);
+                try {
+                    // Call backend API to create order
+                    const response = await MoonCartAPI.createOrder(orderData);
+                    
+                    MoonCart.hideLoading();
 
-                    // Show success modal
-                    document.getElementById('order-id').textContent = orderId;
-                    document.getElementById('success-modal').classList.add('active');
+                    if (response.success) {
+                        // Clear cart from backend and localStorage
+                        localStorage.removeItem('mooncart_pending_order');
+                        
+                        // Clear cart from backend
+                        if (currentUser && currentUser.id) {
+                            try {
+                                await MoonCartAPI.clearCart(currentUser.id);
+                            } catch (e) {
+                                console.log('Cart already cleared or error:', e);
+                            }
+                        }
 
-                    // Redirect after 4 seconds
-                    setTimeout(() => {
-                        window.location.href = 'customer-dashboard.html';
-                    }, 4000);
-                }, 2000);
+                        // Show success modal
+                        document.getElementById('order-id').textContent = response.order.order_number || response.order.id || 'Confirmed';
+                        document.getElementById('success-modal').classList.add('active');
+
+                        // Redirect after 4 seconds
+                        setTimeout(function() {
+                            window.location.href = 'customer-dashboard.html';
+                        }, 4000);
+                    } else {
+                        MoonCart.showNotification(response.message || 'Failed to place order', 'error');
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error('Order error:', error);
+                    MoonCart.showNotification('Failed to place order. Please try again.', 'error');
+                }
             });
         </script>
     </body>

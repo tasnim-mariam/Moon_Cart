@@ -8,7 +8,7 @@
             content="Request new products on MoonCart"
         />
         <title>Product Requests - MoonCart</title>
-        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -157,11 +157,12 @@
                             ></i>
                             Request a Product
                         </h2>
-                        <form id="product-request-form-page">
+                        <form id="product-request-form">
                             <div class="form-group">
-                                <label class="form-label">Product Name</label>
+                                <label class="form-label">Product Name *</label>
                                 <input
                                     type="text"
+                                    id="request-product-name"
                                     class="form-input"
                                     placeholder="What should we add next?"
                                     required
@@ -169,8 +170,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Category</label>
-                                <select class="form-select" required>
+                                <label class="form-label">Category *</label>
+                                <select id="request-category" class="form-select" required>
                                     <option value="">Select category</option>
                                     <option value="food">Food</option>
                                     <option value="grocery">Grocery</option>
@@ -181,17 +182,27 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label"
-                                    >Description/Details</label
-                                >
+                                <label class="form-label">Your Email *</label>
+                                <input
+                                    type="email"
+                                    id="request-email"
+                                    class="form-input"
+                                    placeholder="your@email.com"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description/Details</label>
                                 <textarea
+                                    id="request-description"
                                     class="form-textarea"
                                     placeholder="Tell us why you'd love to see this product..."
-                                    required
+                                    rows="4"
                                 ></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
                                 <i class="fas fa-paper-plane"></i> Submit Request
                             </button>
                         </form>
@@ -214,44 +225,203 @@
                             My Requests
                         </h2>
 
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Product Name</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Nov 5, 2024</td>
-                                    <td>Organic Honey</td>
-                                    <td>Grocery</td>
-                                    <td>
-                                        <span class="status-badge status-pending"
-                                            >Under Review</span
-                                        >
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nov 3, 2024</td>
-                                    <td>Gluten-Free Bread</td>
-                                    <td>Food</td>
-                                    <td>
-                                        <span class="status-badge status-confirmed"
-                                            >Added</span
-                                        >
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="my-requests-container">
+                            <!-- Requests will be loaded here -->
+                            <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                                <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+                                <p style="margin-top: 10px;">Loading requests...</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
+
             </div>
         </main>
 
         <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
+        <script>
+            // Get current user
+            const currentUser = MoonCart.getCurrentUser();
+
+            // Pre-fill email if logged in
+            document.addEventListener('DOMContentLoaded', function() {
+                if (currentUser && currentUser.email) {
+                    document.getElementById('request-email').value = currentUser.email;
+                }
+                
+                // Load requests
+                loadMyRequests();
+            });
+
+            // Handle form submission
+            document.getElementById('product-request-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const productName = document.getElementById('request-product-name').value.trim();
+                const category = document.getElementById('request-category').value;
+                const email = document.getElementById('request-email').value.trim();
+                const description = document.getElementById('request-description').value.trim();
+
+                if (!productName) {
+                    MoonCart.showNotification('Please enter a product name', 'error');
+                    return;
+                }
+
+                if (!category) {
+                    MoonCart.showNotification('Please select a category', 'error');
+                    return;
+                }
+
+                if (!email) {
+                    MoonCart.showNotification('Please enter your email', 'error');
+                    return;
+                }
+
+                MoonCart.showLoading();
+
+                const requestData = {
+                    product_name: productName,
+                    category: category,
+                    email: email,
+                    description: description,
+                    user_id: currentUser ? currentUser.id : null
+                };
+
+                try {
+                    const response = await MoonCartAPI.submitProductRequest(requestData);
+                    MoonCart.hideLoading();
+
+                    if (response.success) {
+                        MoonCart.showNotification('Product request submitted successfully! We\'ll review it soon.', 'success');
+                        
+                        // Clear form
+                        document.getElementById('request-product-name').value = '';
+                        document.getElementById('request-category').value = '';
+                        document.getElementById('request-description').value = '';
+                        
+                        // Reload requests
+                        loadMyRequests();
+                    } else {
+                        MoonCart.showNotification(response.message || 'Failed to submit request', 'error');
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error('Request error:', error);
+                    MoonCart.showNotification(error.message || 'Failed to submit request. Please try again.', 'error');
+                }
+            });
+
+            // Load user's requests
+            async function loadMyRequests() {
+                const container = document.getElementById('my-requests-container');
+                
+                if (!currentUser) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 30px; color: var(--text-light);">
+                            <i class="fas fa-sign-in-alt" style="font-size: 40px; margin-bottom: 15px; color: var(--primary-color);"></i>
+                            <p>Please <a href="login.html" style="color: var(--primary-color); font-weight: 600;">login</a> to see your requests</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                try {
+                    const response = await MoonCartAPI.getUserProductRequests(currentUser.id);
+                    
+                    if (response.success && response.requests && response.requests.length > 0) {
+                        container.innerHTML = `
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Product Name</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${response.requests.map(req => `
+                                        <tr>
+                                            <td>${formatDate(req.created_at)}</td>
+                                            <td>${escapeHtml(req.product_name)}</td>
+                                            <td style="text-transform: capitalize;">${escapeHtml(req.category || 'N/A')}</td>
+                                            <td>
+                                                <span class="status-badge status-${getStatusClass(req.status)}">
+                                                    ${formatStatus(req.status)}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        `;
+                    } else {
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 30px; color: var(--text-light);">
+                                <i class="fas fa-inbox" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                                <p>You haven't submitted any requests yet.</p>
+                                <p style="font-size: 14px;">Use the form to request a product!</p>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Error loading requests:', error);
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 30px; color: var(--text-light);">
+                            <i class="fas fa-exclamation-circle" style="font-size: 40px; margin-bottom: 15px; color: var(--danger-color);"></i>
+                            <p>Failed to load requests.</p>
+                            <button class="btn btn-sm" onclick="loadMyRequests()">Try Again</button>
+                        </div>
+                    `;
+                }
+            }
+
+
+            // Helper functions
+            function formatDate(dateStr) {
+                if (!dateStr) return 'N/A';
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+
+            function formatStatus(status) {
+                const statusMap = {
+                    'pending': 'Pending',
+                    'under_review': 'Under Review',
+                    'approved': 'Approved',
+                    'rejected': 'Rejected'
+                };
+                return statusMap[status] || status;
+            }
+
+            function getStatusClass(status) {
+                const classMap = {
+                    'pending': 'pending',
+                    'under_review': 'pending',
+                    'approved': 'confirmed',
+                    'rejected': 'cancelled'
+                };
+                return classMap[status] || 'pending';
+            }
+
+            function getStatusColor(status) {
+                const colorMap = {
+                    'pending': '#ffc107',
+                    'under_review': '#17a2b8',
+                    'approved': '#28a745',
+                    'rejected': '#dc3545'
+                };
+                return colorMap[status] || '#6c757d';
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        </script>
     </body>
 </html>
 

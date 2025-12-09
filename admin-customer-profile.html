@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Customer Profile - MoonCart Admin</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+    </head>
+    <body>
+        <div class="admin-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <a href="admin-dashboard.html" class="logo">
+                        <i class="fas fa-moon"></i>
+                        <span>MoonCart Admin</span>
+                    </a>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="admin-dashboard.html" class="sidebar-link">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a href="admin-customers.html" class="sidebar-link active">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <header class="admin-header">
+                    <h1><i class="fas fa-user-circle"></i> Customer Profile</h1>
+                    <div class="admin-actions">
+                        <button
+                            onclick="history.back()"
+                            class="btn"
+                            style="background: #6c757d"
+                        >
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button onclick="logout()" class="btn btn-primary">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </header>
+
+                <div class="dashboard-content">
+                    <!-- Customer Info Card -->
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                            margin-bottom: 30px;
+                        "
+                    >
+                        <div id="customer-info-card"></div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div
+                        style="
+                            display: grid;
+                            grid-template-columns: repeat(
+                                auto-fit,
+                                minmax(200px, 1fr)
+                            );
+                            gap: 20px;
+                            margin-bottom: 30px;
+                        "
+                        id="customer-stats"
+                    ></div>
+
+                    <!-- Orders Section -->
+                    <div
+                        style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                        "
+                    >
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 20px;
+                            "
+                        >
+                            <h2>
+                                <i class="fas fa-shopping-bag"></i> Order
+                                History
+                            </h2>
+                            <button
+                                onclick="window.location.href='admin-customers.html'"
+                                class="btn"
+                                style="background: #30cfd0"
+                            >
+                                <i class="fas fa-list"></i> All Customers
+                            </button>
+                        </div>
+                        <div id="customer-orders-list"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Order Details Modal -->
+        <div
+            id="order-details-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 15px;
+                    max-width: 900px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #667eea 0%,
+                            #764ba2 100%
+                        );
+                        padding: 25px;
+                        border-radius: 15px 15px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2 style="margin: 0; color: white; font-size: 24px">
+                        <i class="fas fa-receipt"></i> Order Details
+                    </h2>
+                    <span
+                        onclick="closeOrderModal()"
+                        style="
+                            position: absolute;
+                            right: 20px;
+                            top: 20px;
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div id="order-modal-content" style="padding: 30px"></div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .modal {
+                display: none;
+            }
+
+            .modal.active {
+                display: flex !important;
+            }
+
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            .data-table th {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 15px;
+                text-align: left;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+            .data-table th:first-child {
+                border-radius: 10px 0 0 0;
+            }
+
+            .data-table th:last-child {
+                border-radius: 0 10px 0 0;
+            }
+
+            .data-table td {
+                padding: 15px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .data-table tr:hover {
+                background: #f8f9fa;
+            }
+
+            .btn-sm {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .btn-sm:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            }
+
+            .status-badge {
+                padding: 5px 12px;
+                border-radius: 15px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+
+            .status-pending {
+                background: #fff3cd;
+                color: #856404;
+            }
+
+            .status-confirmed {
+                background: #d1ecf1;
+                color: #0c5460;
+            }
+
+            .status-shipped {
+                background: #d4edda;
+                color: #155724;
+            }
+
+            .status-delivered {
+                background: #d4edda;
+                color: #155724;
+            }
+
+            .status-cancelled {
+                background: #f8d7da;
+                color: #721c24;
+            }
+        </style>
+
+        <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
+        <script>
+            // Get customer ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerId = urlParams.get("id");
+
+            let customerData = null;
+            let customerOrders = [];
+
+            if (!customerId) {
+                MoonCart.showNotification("Customer ID not provided", "error");
+                setTimeout(
+                    () => (window.location.href = "admin-customers.html"),
+                    1500
+                );
+            }
+
+            // Load customer data
+            async function loadCustomerProfile() {
+                MoonCart.showLoading();
+                try {
+                    // Load customer info
+                    const userResponse = await MoonCartAPI.getProfile(
+                        customerId
+                    );
+                    if (userResponse.success && userResponse.user) {
+                        customerData = userResponse.user;
+                        renderCustomerInfo();
+                    }
+
+                    // Load customer orders
+                    const ordersResponse = await MoonCartAPI.getUserOrders(
+                        customerId
+                    );
+                    if (ordersResponse.success && ordersResponse.orders) {
+                        customerOrders = ordersResponse.orders;
+                        renderCustomerStats();
+                        renderCustomerOrders();
+                    }
+
+                    MoonCart.hideLoading();
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error("Error loading customer:", error);
+                    MoonCart.showNotification(
+                        "Failed to load customer data",
+                        "error"
+                    );
+                }
+            }
+
+            function renderCustomerInfo() {
+                const container = document.getElementById("customer-info-card");
+                container.innerHTML = `
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: center;">
+                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: bold;">
+                        ${customerData.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase()}
+                    </div>
+                    <div>
+                        <h2 style="margin: 0 0 10px 0; color: #333;">${
+                            customerData.name
+                        }</h2>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                            <div>
+                                <i class="fas fa-envelope" style="color: #30cfd0; margin-right: 8px;"></i>
+                                <span style="color: #666;">${
+                                    customerData.email
+                                }</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-phone" style="color: #30cfd0; margin-right: 8px;"></i>
+                                <span style="color: #666;">${
+                                    customerData.phone || "N/A"
+                                }</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-calendar" style="color: #30cfd0; margin-right: 8px;"></i>
+                                <span style="color: #666;">Member since ${new Date(
+                                    customerData.created_at
+                                ).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }
+
+            function renderCustomerStats() {
+                const totalSpent = customerOrders.reduce(
+                    (sum, o) => sum + parseFloat(o.total || 0),
+                    0
+                );
+                const completedOrders = customerOrders.filter(
+                    (o) => o.status === "delivered"
+                ).length;
+                const pendingOrders = customerOrders.filter(
+                    (o) => o.status === "pending" || o.status === "confirmed"
+                ).length;
+
+                const container = document.getElementById("customer-stats");
+                container.innerHTML = `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; color: white;">
+                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Total Orders</div>
+                    <div style="font-size: 32px; font-weight: 700;">${
+                        customerOrders.length
+                    }</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; color: white;">
+                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Total Spent</div>
+                    <div style="font-size: 32px; font-weight: 700;">৳${MoonCart.formatCurrency(
+                        totalSpent
+                    )}</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 20px; border-radius: 12px; color: white;">
+                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Completed</div>
+                    <div style="font-size: 32px; font-weight: 700;">${completedOrders}</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 12px; color: white;">
+                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Pending</div>
+                    <div style="font-size: 32px; font-weight: 700;">${pendingOrders}</div>
+                </div>
+            `;
+            }
+
+            function renderCustomerOrders() {
+                const container = document.getElementById(
+                    "customer-orders-list"
+                );
+
+                if (customerOrders.length === 0) {
+                    container.innerHTML = `
+                    <div style="text-align: center; padding: 60px;">
+                        <i class="fas fa-shopping-cart" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                        <h3 style="color: #999;">No orders yet</h3>
+                    </div>
+                `;
+                    return;
+                }
+
+                container.innerHTML = `
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${customerOrders
+                                .map(
+                                    (order) => `
+                                <tr>
+                                    <td style="font-weight: 600; color: #667eea;">#${String(
+                                        order.order_number || order.id
+                                    )
+                                        .substring(0, 12)
+                                        .toUpperCase()}</td>
+                                    <td>${new Date(
+                                        order.created_at
+                                    ).toLocaleDateString()}</td>
+                                    <td>${
+                                        order.item_count ||
+                                        order.items?.length ||
+                                        0
+                                    } items</td>
+                                    <td style="font-weight: 600; color: #30cfd0;">৳${MoonCart.formatCurrency(
+                                        parseFloat(order.total)
+                                    )}</td>
+                                    <td><span class="status-badge status-${
+                                        order.status
+                                    }">${order.status}</span></td>
+                                    <td><span style="text-transform: capitalize;">${
+                                        order.payment_method || "N/A"
+                                    }</span></td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="viewOrderDetails('${
+                                            order.id
+                                        }')" style="background: #007bff; color: white; padding: 8px 16px;">
+                                            <i class="fas fa-eye"></i> View Details
+                                        </button>
+                                    </td>
+                                </tr>
+                            `
+                                )
+                                .join("")}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            }
+
+            async function viewOrderDetails(orderId) {
+                MoonCart.showLoading();
+                try {
+                    const response = await MoonCartAPI.getOrder(orderId);
+                    if (response.success && response.order) {
+                        const order = response.order;
+                        const content = document.getElementById(
+                            "order-modal-content"
+                        );
+
+                        content.innerHTML = `
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="margin-bottom: 15px; color: #333;">Order #${
+                                order.order_number || order.id
+                            }</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #666; font-size: 14px; margin-bottom: 10px;">CUSTOMER INFO</h4>
+                                    <p style="margin: 5px 0;"><strong>Name:</strong> ${
+                                        order.customer_name
+                                    }</p>
+                                    <p style="margin: 5px 0;"><strong>Email:</strong> ${
+                                        order.email
+                                    }</p>
+                                    <p style="margin: 5px 0;"><strong>Phone:</strong> ${
+                                        order.phone
+                                    }</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: #666; font-size: 14px; margin-bottom: 10px;">DELIVERY INFO</h4>
+                                    <p style="margin: 5px 0;"><strong>Address:</strong> ${
+                                        order.address
+                                    }</p>
+                                    <p style="margin: 5px 0;"><strong>City:</strong> ${
+                                        order.city
+                                    }</p>
+                                    <p style="margin: 5px 0;"><strong>Slot:</strong> ${
+                                        order.delivery_slot || "N/A"
+                                    }</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 20px 0 15px 0; color: #333;">Order Items</h4>
+                        <table class="data-table" style="margin-bottom: 20px;">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${(order.items || [])
+                                    .map(
+                                        (item) => `
+                                    <tr>
+                                        <td>${item.product_name}</td>
+                                        <td>${item.quantity}</td>
+                                        <td>৳${MoonCart.formatCurrency(
+                                            parseFloat(item.price)
+                                        )}</td>
+                                        <td>৳${MoonCart.formatCurrency(
+                                            parseFloat(item.total)
+                                        )}</td>
+                                    </tr>
+                                `
+                                    )
+                                    .join("")}
+                            </tbody>
+                        </table>
+
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Subtotal:</span>
+                                <span style="font-weight: 600;">৳${MoonCart.formatCurrency(
+                                    parseFloat(order.subtotal)
+                                )}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Tax:</span>
+                                <span style="font-weight: 600;">৳${MoonCart.formatCurrency(
+                                    parseFloat(order.tax)
+                                )}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #ddd;">
+                                <span>Shipping:</span>
+                                <span style="font-weight: 600;">${
+                                    order.shipping == 0
+                                        ? '<span style="color: #28a745;">FREE</span>'
+                                        : "৳" +
+                                          MoonCart.formatCurrency(
+                                              parseFloat(order.shipping)
+                                          )
+                                }</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-size: 18px; font-weight: 700;">Total:</span>
+                                <span style="font-size: 20px; font-weight: 700; color: #667eea;">৳${MoonCart.formatCurrency(
+                                    parseFloat(order.total)
+                                )}</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <span style="font-weight: 600;">Status: </span>
+                            <span class="status-badge status-${order.status}">${
+                            order.status
+                        }</span>
+                        </div>
+                    `;
+
+                        document
+                            .getElementById("order-details-modal")
+                            .classList.add("active");
+                    }
+                    MoonCart.hideLoading();
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error("Error loading order:", error);
+                    MoonCart.showNotification(
+                        "Failed to load order details",
+                        "error"
+                    );
+                }
+            }
+
+            function closeOrderModal() {
+                document
+                    .getElementById("order-details-modal")
+                    .classList.remove("active");
+            }
+
+            function logout() {
+                localStorage.removeItem("mooncart_user");
+                window.location.href = "login.html";
+            }
+
+            // Load data on page load
+            document.addEventListener("DOMContentLoaded", loadCustomerProfile);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test Checkout Button</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+            }
+            .btn {
+                padding: 15px 30px;
+                font-size: 16px;
+                cursor: pointer;
+                margin: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+            .btn-primary {
+                background: #e31e24;
+                color: white;
+            }
+            .test-result {
+                margin: 20px 0;
+                padding: 15px;
+                background: #f0f0f0;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Checkout Button Test</h1>
+
+        <div class="test-result">
+            <h3>Test Results:</h3>
+            <div id="test-output"></div>
+        </div>
+
+        <h3>Test 1: Simple onclick</h3>
+        <button
+            class="btn btn-primary"
+            onclick="alert('Button clicked!'); window.location.href='checkout.html'"
+        >
+            Test Simple Redirect
+        </button>
+
+        <h3>Test 2: With preventDefault</h3>
+        <button class="btn btn-primary" onclick="testCheckout(event)">
+            Test With Function
+        </button>
+
+        <h3>Test 3: With Link</h3>
+        <a
+            href="checkout.html"
+            class="btn btn-primary"
+            style="display: inline-block; text-decoration: none"
+        >
+            Test Link
+        </a>
+
+        <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/cart.js"></script>
+
+        <script>
+            const output = document.getElementById("test-output");
+
+            // Log initial state
+            output.innerHTML += "<p>✓ Scripts loaded</p>";
+            output.innerHTML +=
+                "<p>MoonCart available: " +
+                (typeof MoonCart !== "undefined") +
+                "</p>";
+
+            if (typeof MoonCart !== "undefined") {
+                const user = MoonCart.getCurrentUser();
+                output.innerHTML +=
+                    "<p>Current user: " +
+                    (user ? user.email : "Not logged in") +
+                    "</p>";
+            }
+
+            function testCheckout(event) {
+                console.log("Test function called");
+                output.innerHTML += "<p>✓ Test function executed</p>";
+
+                if (event) {
+                    event.preventDefault();
+                    output.innerHTML += "<p>✓ PreventDefault called</p>";
+                }
+
+                setTimeout(() => {
+                    output.innerHTML +=
+                        "<p>→ Redirecting to checkout.html...</p>";
+                    window.location.href = "checkout.html";
+                }, 1000);
+            }
+
+            window.testCheckout = testCheckout;
+        </script>
+    </body>
+</html>

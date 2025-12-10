@@ -492,14 +492,18 @@ function confirmDecline() {
 // Initialize checkout page
 if (window.location.pathname.includes("checkout.html")) {
     document.addEventListener("DOMContentLoaded", function () {
+        // Deprecated: Cart validation is now handled in checkout.html using async loadCart()
+        /*
         const cart = MoonCart.getCart();
 
         if (cart.length === 0) {
             window.location.href = "cart.html";
             return;
         }
+        */
 
-        // Display order summary
+        // Display order summary - Handled by checkout.html
+        /*
         const orderSummary = document.getElementById("order-summary");
         if (orderSummary) {
             const details = MoonCart.calculateCartDetails();
@@ -541,6 +545,7 @@ if (window.location.pathname.includes("checkout.html")) {
                 </div>
             `;
         }
+        */
 
         // Setup form submission
         const checkoutForm = document.getElementById("checkout-form");

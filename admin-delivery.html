@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Delivery Management - MoonCart Admin"
+        />
+        <title>Delivery Management - Admin Dashboard</title>
+
+        <!-- Favicon -->
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="assets/images/favicon.svg"
+        />
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+
+        <style>
+            body {
+                background: #f5f6fa;
+            }
+
+            .admin-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 140px 20px 40px;
+            }
+
+            .page-header {
+                margin-bottom: 30px;
+            }
+
+            .page-title {
+                font-size: 32px;
+                font-weight: 700;
+                color: var(--text-dark);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .page-title i {
+                color: var(--primary-color);
+            }
+
+            .table-container {
+                background: white;
+                padding: 30px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                margin-bottom: 30px;
+            }
+
+            .table-container h3 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--text-dark);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .table-container h3 i {
+                color: var(--primary-color);
+            }
+
+            .filter-section {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+            }
+
+            .filter-section input,
+            .filter-section select {
+                padding: 12px 15px;
+                border: 2px solid #e0e0e0;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                font-family: inherit;
+            }
+
+            .filter-section input:focus,
+            .filter-section select:focus {
+                outline: none;
+                border-color: var(--primary-color);
+            }
+
+            .filter-section input {
+                flex: 1;
+                min-width: 250px;
+            }
+
+            .filter-section select {
+                min-width: 180px;
+            }
+
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .data-table thead {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%
+                );
+            }
+
+            .data-table th {
+                color: white;
+                padding: 18px 15px;
+                text-align: left;
+                font-weight: 600;
+                font-size: 15px;
+                white-space: nowrap;
+            }
+
+            .data-table td {
+                padding: 15px;
+                border-bottom: 1px solid #f0f0f0;
+                color: var(--text-dark);
+            }
+
+            .data-table tbody tr {
+                transition: all 0.2s ease;
+            }
+
+            .data-table tbody tr:hover {
+                background: #f8f9fa;
+            }
+
+            .status-badge {
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+
+            .status-pending {
+                background: #fff3cd;
+                color: #856404;
+            }
+
+            .status-confirmed {
+                background: #d1ecf1;
+                color: #0c5460;
+            }
+
+            .status-out_for_delivery {
+                background: #cce5ff;
+                color: #004085;
+            }
+
+            .status-delivered {
+                background: #d4edda;
+                color: #155724;
+            }
+
+            .status-cancelled {
+                background: #f8d7da;
+                color: #721c24;
+            }
+
+            .btn-view {
+                padding: 6px 12px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background: #007bff;
+                color: white;
+                font-size: 13px;
+                transition: all 0.3s ease;
+            }
+
+            .btn-view:hover {
+                background: #0056b3;
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .modal {
+                display: none;
+            }
+
+            .modal.active {
+                display: flex !important;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">
+                        <span
+                            ><i class="fas fa-phone-alt"></i> +1 234 567
+                            8900</span
+                        >
+                        <span
+                            ><i class="fas fa-envelope"></i>
+                            info@mooncart.com</span
+                        >
+                    </div>
+                    <div class="top-bar-right">
+                        <span class="delivery-badge">
+                            <i class="fas fa-shield-alt"></i> Admin Panel
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main"
+                                >Moon<span class="logo-accent">Cart</span></span
+                            >
+                            <span class="logo-tagline">Fresh & Fast</span>
+                        </div>
+                    </a>
+
+                    <ul class="nav-menu">
+                        <li>
+                            <a href="admin-dashboard.html" class="nav-link">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-products.html" class="nav-link">
+                                <i class="fas fa-box"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin-orders.html" class="nav-link">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="admin-delivery.html"
+                                class="nav-link active"
+                            >
+                                <i class="fas fa-truck"></i>
+                                <span>Delivery</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <!-- Account Section (Dynamic) -->
+                        <div id="account-section" class="account-section">
+                            <div class="auth-buttons">
+                                <a href="login.html" class="btn-login">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <a href="signup.html" class="btn-signup">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="admin-container">
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-truck"></i>
+                    Delivery Management
+                </h1>
+            </div>
+
+            <!-- Delivery and Order Details -->
+            <div class="table-container">
+                <h3>
+                    <i class="fas fa-clipboard-list"></i>
+                    Delivery and Order Details
+                </h3>
+
+                <!-- Search and Filter Section -->
+                <div class="filter-section">
+                    <input
+                        type="text"
+                        id="delivery-order-search"
+                        placeholder="Search by order ID, customer name, delivery person..."
+                        onkeyup="filterDeliveryOrders()"
+                    />
+                    <select
+                        id="delivery-status-filter"
+                        onchange="filterDeliveryOrders()"
+                    >
+                        <option value="all">All Status</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="out_for_delivery">
+                            Out for Delivery
+                        </option>
+                        <option value="delivered">Delivered</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <select
+                        id="delivery-person-filter"
+                        onchange="filterDeliveryOrders()"
+                    >
+                        <option value="all">All Delivery Persons</option>
+                    </select>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Delivery Person</th>
+                            <th>Customer</th>
+                            <th>Address</th>
+                            <th>Items</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="delivery-orders-body">
+                        <!-- Will be populated dynamically -->
+                        <tr>
+                            <td
+                                colspan="9"
+                                style="
+                                    text-align: center;
+                                    padding: 40px;
+                                    color: var(--text-light);
+                                "
+                            >
+                                <i
+                                    class="fas fa-spinner fa-spin"
+                                    style="
+                                        font-size: 24px;
+                                        display: block;
+                                        margin-bottom: 10px;
+                                    "
+                                ></i>
+                                Loading delivery orders...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Active Deliveries & Order Details -->
+            <div class="table-container">
+                <h3>
+                    <i class="fas fa-shipping-fast"></i>
+                    Active Deliveries & Order Details
+                </h3>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Delivery Person</th>
+                            <th>Customer</th>
+                            <th>Address</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="delivery-assignments-body">
+                        <!-- Will be populated dynamically -->
+                        <tr>
+                            <td
+                                colspan="7"
+                                style="
+                                    text-align: center;
+                                    padding: 40px;
+                                    color: var(--text-light);
+                                "
+                            >
+                                <i
+                                    class="fas fa-spinner fa-spin"
+                                    style="
+                                        font-size: 24px;
+                                        display: block;
+                                        margin-bottom: 10px;
+                                    "
+                                ></i>
+                                Loading active deliveries...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Order Details Modal -->
+        <div
+            id="order-details-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    max-width: 900px;
+                    width: 90%;
+                    background: white;
+                    border-radius: 15px;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    position: relative;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #667eea 0%,
+                            #764ba2 100%
+                        );
+                        padding: 25px;
+                        border-radius: 15px 15px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2 style="margin: 0; color: white; font-size: 24px">
+                        <i class="fas fa-receipt"></i> Order Details
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeOrderDetailsModal()"
+                        style="
+                            position: absolute;
+                            right: 20px;
+                            top: 20px;
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                            transition: opacity 0.2s;
+                        "
+                        onmouseover="this.style.opacity='1';"
+                        onmouseout="this.style.opacity='0.9';"
+                        >&times;</span
+                    >
+                </div>
+                <div id="order-modal-content" style="padding: 30px"></div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/order.js"></script>
+        <script src="js/ui.js"></script>
+        <script>
+            // Check admin access
+            const currentUser = MoonCart.getCurrentUser();
+            if (!currentUser || currentUser.role !== "admin") {
+                MoonCart.showNotification("Admin access required", "error");
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 1500);
+            }
+
+            let allOrders = [];
+            let allDeliveryOrders = [];
+            let deliveryMenData = [];
+
+            // Load data on page load
+            document.addEventListener("DOMContentLoaded", async function () {
+                MoonCart.showLoading();
+                await Promise.all([loadAllOrders(), loadDeliveryMen()]);
+                MoonCart.hideLoading();
+                loadDeliveryOrders();
+                populateDeliveryPersonFilter();
+                populateDeliveryAssignments();
+            });
+
+            async function loadAllOrders() {
+                try {
+                    const response = await MoonCartAPI.getAllOrders();
+                    if (response.success && response.orders) {
+                        // Map backend fields to frontend expected fields
+                        allOrders = response.orders.map((order) => {
+                            // Map delivery_man_name to deliveryPersonName for frontend compatibility
+                            if (
+                                order.delivery_man_name &&
+                                !order.deliveryPersonName
+                            ) {
+                                order.deliveryPersonName =
+                                    order.delivery_man_name;
+                            }
+                            // Ensure delivery_man_id is properly set
+                            if (order.delivery_man_id) {
+                                order.delivery_man_id = String(
+                                    order.delivery_man_id
+                                );
+                            }
+                            // If delivery_man_id exists but name doesn't, try to get it from deliveryMenData
+                            if (
+                                order.delivery_man_id &&
+                                !order.delivery_man_name &&
+                                !order.deliveryPersonName
+                            ) {
+                                const dm = deliveryMenData.find(
+                                    (d) =>
+                                        String(d.id) ===
+                                        String(order.delivery_man_id)
+                                );
+                                if (dm) {
+                                    order.delivery_man_name = dm.name;
+                                    order.deliveryPersonName = dm.name;
+                                    order.delivery_man_phone = dm.phone;
+                                }
+                            }
+                            return order;
+                        });
+                    }
+                } catch (error) {
+                    console.error("Failed to load orders:", error);
+                    allOrders = [];
+                }
+            }
+
+            async function loadDeliveryMen() {
+                try {
+                    const response = await MoonCartAPI.getDeliveryMen();
+                    if (response.success && response.delivery_men) {
+                        deliveryMenData = response.delivery_men;
+                    }
+                } catch (error) {
+                    console.error("Failed to load delivery men:", error);
+                    deliveryMenData = [];
+                }
+            }
+
+            function loadDeliveryOrders() {
+                // Get all orders that have delivery_man_id or are in delivery statuses
+                allDeliveryOrders = allOrders.filter(
+                    (o) =>
+                        o.delivery_man_id ||
+                        o.status === "confirmed" ||
+                        o.status === "out_for_delivery" ||
+                        o.status === "delivered"
+                );
+                filterDeliveryOrders();
+            }
+
+            function filterDeliveryOrders() {
+                const searchTerm = (
+                    document.getElementById("delivery-order-search")?.value ||
+                    ""
+                ).toLowerCase();
+                const statusFilter =
+                    document.getElementById("delivery-status-filter")?.value ||
+                    "all";
+                const personFilter =
+                    document.getElementById("delivery-person-filter")?.value ||
+                    "all";
+
+                let filtered = allDeliveryOrders.filter((order) => {
+                    const deliveryManName =
+                        order.delivery_man_name ||
+                        order.deliveryPersonName ||
+                        "";
+                    const matchesSearch =
+                        !searchTerm ||
+                        String(order.id || order.order_number || "")
+                            .toLowerCase()
+                            .includes(searchTerm) ||
+                        (order.customer_name || order.customerName || "")
+                            .toLowerCase()
+                            .includes(searchTerm) ||
+                        deliveryManName.toLowerCase().includes(searchTerm) ||
+                        (order.address || "")
+                            .toLowerCase()
+                            .includes(searchTerm);
+
+                    const matchesStatus =
+                        statusFilter === "all" || order.status === statusFilter;
+                    const matchesPerson =
+                        personFilter === "all" ||
+                        String(order.delivery_man_id) === personFilter;
+
+                    return matchesSearch && matchesStatus && matchesPerson;
+                });
+
+                renderDeliveryOrders(filtered);
+            }
+
+            function renderDeliveryOrders(orders) {
+                const tbody = document.getElementById("delivery-orders-body");
+                if (!tbody) return;
+
+                if (orders.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-light);">
+                                <i class="fas fa-inbox" style="font-size: 48px; display: block; margin-bottom: 15px; opacity: 0.5;"></i>
+                                No delivery orders found
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = orders
+                    .map((order) => {
+                        const orderDate = new Date(
+                            order.created_at || order.date || Date.now()
+                        ).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        });
+
+                        return `
+                            <tr style="transition: all 0.2s ease;" onmouseover="this.style.background='#f8f9fa';">
+                                <td style="font-weight: 600; color: var(--primary-color);">
+                                    #${String(
+                                        order.id || order.order_number || ""
+                                    )
+                                        .substring(0, 8)
+                                        .toUpperCase()}
+                                </td>
+                                <td>${
+                                    order.delivery_man_name ||
+                                    order.deliveryPersonName ||
+                                    (order.delivery_man_id
+                                        ? "Assigned (ID: " +
+                                          order.delivery_man_id +
+                                          ")"
+                                        : "Not Assigned")
+                                }</td>
+                                <td>${
+                                    order.customer_name ||
+                                    order.customerName ||
+                                    "N/A"
+                                }</td>
+                                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    ${order.address || ""}, ${order.city || ""}
+                                </td>
+                                <td style="text-align: center;">
+                                    ${
+                                        order.item_count ||
+                                        order.items?.length ||
+                                        0
+                                    } items
+                                </td>
+                                <td style="font-weight: 600; color: #28a745;">
+                                    ৳${MoonCart.formatCurrency(
+                                        parseFloat(order.total || 0)
+                                    )}
+                                </td>
+                                <td>
+                                    <span class="status-badge status-${
+                                        order.status
+                                    }">
+                                        ${order.status}
+                                    </span>
+                                </td>
+                                <td style="font-size: 13px; color: var(--text-light);">
+                                    ${orderDate}
+                                </td>
+                                <td>
+                                    <button onclick="viewAdminOrderDetails('${
+                                        order.id
+                                    }')" class="btn-view">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    })
+                    .join("");
+            }
+
+            function populateDeliveryPersonFilter() {
+                const select = document.getElementById(
+                    "delivery-person-filter"
+                );
+                if (!select) return;
+
+                // Get unique delivery persons from orders
+                const deliveryPersons = new Map();
+                allOrders.forEach((order) => {
+                    const deliveryManId = order.delivery_man_id;
+                    const deliveryManName =
+                        order.delivery_man_name || order.deliveryPersonName;
+
+                    if (deliveryManId && deliveryManName) {
+                        if (!deliveryPersons.has(String(deliveryManId))) {
+                            deliveryPersons.set(
+                                String(deliveryManId),
+                                deliveryManName
+                            );
+                        }
+                    }
+                });
+
+                // Add delivery men from deliveryMenData
+                deliveryMenData.forEach((dm) => {
+                    if (!deliveryPersons.has(String(dm.id))) {
+                        deliveryPersons.set(String(dm.id), dm.name);
+                    }
+                });
+
+                // Clear and populate options
+                select.innerHTML =
+                    '<option value="all">All Delivery Persons</option>';
+                deliveryPersons.forEach((name, id) => {
+                    const option = document.createElement("option");
+                    option.value = id;
+                    option.textContent = name;
+                    select.appendChild(option);
+                });
+            }
+
+            function populateDeliveryAssignments() {
+                const deliveryOrders = allOrders.filter(
+                    (order) =>
+                        order.status === "out_for_delivery" ||
+                        order.status === "confirmed"
+                );
+                const tbody = document.getElementById(
+                    "delivery-assignments-body"
+                );
+
+                if (!tbody) return;
+
+                if (deliveryOrders.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-light);">
+                                No active deliveries at the moment
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = deliveryOrders
+                    .map(
+                        (order) => `
+                            <tr>
+                                <td>#${String(
+                                    order.id || order.order_number || ""
+                                )
+                                    .substring(0, 8)
+                                    .toUpperCase()}</td>
+                                <td>${
+                                    order.delivery_man_name ||
+                                    order.deliveryPersonName ||
+                                    (order.delivery_man_id
+                                        ? "Assigned (ID: " +
+                                          order.delivery_man_id +
+                                          ")"
+                                        : "Not Assigned")
+                                }</td>
+                                <td>${
+                                    order.customer_name ||
+                                    order.customerName ||
+                                    "N/A"
+                                }</td>
+                                <td>${order.address || ""}, ${
+                            order.city || ""
+                        }</td>
+                                <td>${
+                                    order.item_count || order.items?.length || 0
+                                } items</td>
+                                <td><span class="status-badge status-${
+                                    order.status
+                                }">${order.status}</span></td>
+                                <td>
+                                    <button onclick="viewAdminOrderDetails('${
+                                        order.id
+                                    }')" class="btn-view">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                </td>
+                            </tr>
+                        `
+                    )
+                    .join("");
+            }
+
+            async function viewAdminOrderDetails(orderId) {
+                try {
+                    MoonCart.showLoading();
+                    const response = await MoonCartAPI.getOrder(orderId);
+                    MoonCart.hideLoading();
+
+                    if (response.success && response.order) {
+                        const order = response.order;
+                        const modal = document.getElementById(
+                            "order-details-modal"
+                        );
+                        const content = document.getElementById(
+                            "order-modal-content"
+                        );
+
+                        if (modal && content) {
+                            content.innerHTML = `
+                                <div style="margin-bottom: 25px;">
+                                    <h3 style="color: #667eea; margin-bottom: 10px; font-size: 20px;">Order #${
+                                        order.order_number || order.id
+                                    }</h3>
+                                    <span class="status-badge status-${
+                                        order.status
+                                    }" style="padding: 6px 12px; font-size: 12px; border-radius: 15px; font-weight: 600; text-transform: capitalize;
+                                        background: ${
+                                            order.status === "pending"
+                                                ? "#fff3cd"
+                                                : order.status === "confirmed"
+                                                ? "#d1ecf1"
+                                                : order.status === "delivered"
+                                                ? "#d4edda"
+                                                : order.status ===
+                                                  "out_for_delivery"
+                                                ? "#cce5ff"
+                                                : "#f8d7da"
+                                        }; 
+                                        color: ${
+                                            order.status === "pending"
+                                                ? "#856404"
+                                                : order.status === "confirmed"
+                                                ? "#0c5460"
+                                                : order.status === "delivered"
+                                                ? "#155724"
+                                                : order.status ===
+                                                  "out_for_delivery"
+                                                ? "#004085"
+                                                : "#721c24"
+                                        };">
+                                        ${order.status}
+                                    </span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+                                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                        <h4 style="color: #667eea; margin-bottom: 15px; font-size: 16px;"><i class="fas fa-user"></i> Customer Info</h4>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Name:</strong> ${
+                                            order.customer_name || "N/A"
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Email:</strong> ${
+                                            order.email || "N/A"
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Phone:</strong> ${
+                                            order.phone || "N/A"
+                                        }</p>
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                        <h4 style="color: #667eea; margin-bottom: 15px; font-size: 16px;"><i class="fas fa-map-marker-alt"></i> Delivery Info</h4>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Address:</strong> ${
+                                            order.address || "N/A"
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>City:</strong> ${
+                                            order.city || "N/A"
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Slot:</strong> ${
+                                            order.delivery_slot || "N/A"
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Payment:</strong> ${
+                                            order.payment_method || "N/A"
+                                        }</p>
+                                    </div>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px;">
+                                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                        <h4 style="color: #667eea; margin-bottom: 15px; font-size: 16px;"><i class="fas fa-truck"></i> Delivery Person</h4>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Name:</strong> ${
+                                            order.delivery_man_name ||
+                                            order.deliveryPersonName ||
+                                            (order.delivery_man_id
+                                                ? "Assigned (ID: " +
+                                                  order.delivery_man_id +
+                                                  ")"
+                                                : "Not Assigned")
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Phone:</strong> ${
+                                            order.delivery_man_phone ||
+                                            (order.delivery_man_id
+                                                ? "N/A"
+                                                : "N/A")
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Status:</strong> ${
+                                            order.delivery_man_id
+                                                ? '<span style="color: #28a745; font-weight: 600;">Assigned</span>'
+                                                : '<span style="color: #dc3545; font-weight: 600;">Not Assigned</span>'
+                                        }</p>
+                                        ${
+                                            order.delivery_man_id
+                                                ? `<p style="margin: 8px 0; font-size: 14px;"><strong>ID:</strong> ${order.delivery_man_id}</p>`
+                                                : ""
+                                        }
+                                    </div>
+                                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                        <h4 style="color: #667eea; margin-bottom: 15px; font-size: 16px;"><i class="fas fa-calendar"></i> Order Info</h4>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Order Date:</strong> ${new Date(
+                                            order.created_at || Date.now()
+                                        ).toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Order Number:</strong> ${
+                                            order.order_number || order.id
+                                        }</p>
+                                        <p style="margin: 8px 0; font-size: 14px;"><strong>Items:</strong> ${
+                                            order.item_count ||
+                                            order.items?.length ||
+                                            0
+                                        } items</p>
+                                    </div>
+                                </div>
+                                <h4 style="color: #667eea; margin-bottom: 15px; font-size: 16px;"><i class="fas fa-shopping-cart"></i> Order Items</h4>
+                                <table style="margin-top: 10px; width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background: #f8f9fa;">
+                                            <th style="padding: 12px; text-align: left; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Product</th>
+                                            <th style="padding: 12px; text-align: center; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Qty</th>
+                                            <th style="padding: 12px; text-align: right; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Price</th>
+                                            <th style="padding: 12px; text-align: right; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${(order.items || [])
+                                            .map(
+                                                (item) => `
+                                        <tr>
+                                            <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666;">${
+                                                item.product_name
+                                            }</td>
+                                            <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666; text-align: center;">${
+                                                item.quantity
+                                            }</td>
+                                            <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666; text-align: right;">৳${MoonCart.formatCurrency(
+                                                parseFloat(item.price)
+                                            )}</td>
+                                            <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666; text-align: right;">৳${MoonCart.formatCurrency(
+                                                parseFloat(item.total)
+                                            )}</td>
+                                        </tr>
+                                    `
+                                            )
+                                            .join("")}
+                                    </tbody>
+                                </table>
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Subtotal:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.subtotal || 0)
+                                    )}</span></div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Tax:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.tax || 0)
+                                    )}</span></div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Shipping:</span><span>${
+                                        order.shipping == 0
+                                            ? '<span style="color: #28a745;">FREE</span>'
+                                            : "৳" +
+                                              MoonCart.formatCurrency(
+                                                  parseFloat(
+                                                      order.shipping || 0
+                                                  )
+                                              )
+                                    }</span></div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: var(--primary-color); padding-top: 10px; border-top: 2px solid #ddd; margin-top: 10px;"><span>Total:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.total || 0)
+                                    )}</span></div>
+                                </div>
+                            `;
+                            modal.style.display = "flex";
+                            modal.classList.add("active");
+                        }
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Failed to load order details",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error("Error loading order details:", error);
+                    MoonCart.showNotification(
+                        "Failed to load order details",
+                        "error"
+                    );
+                }
+            }
+
+            function closeOrderDetailsModal() {
+                const modal = document.getElementById("order-details-modal");
+                if (modal) {
+                    modal.style.display = "none";
+                    modal.classList.remove("active");
+                }
+            }
+
+            // Close modal when clicking outside
+            document.addEventListener("click", function (event) {
+                const modal = document.getElementById("order-details-modal");
+                if (event.target === modal) {
+                    closeOrderDetailsModal();
+                }
+            });
+        </script>
+    </body>
+</html>

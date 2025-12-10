@@ -49,9 +49,10 @@ function getAllRequests() {
     
     $status = $_GET['status'] ?? null;
     
-    $sql = "SELECT pr.*, u.name as user_name 
+    $sql = "SELECT pr.*, u.name as user_name, u.email as user_email, dm.name as delivery_man_name 
             FROM product_requests pr 
-            LEFT JOIN users u ON pr.user_id = u.id";
+            LEFT JOIN users u ON pr.user_id = u.id
+            LEFT JOIN delivery_men dm ON pr.delivery_man_id = dm.id";
     
     $params = [];
     
@@ -80,9 +81,10 @@ function getRequest($id) {
     $conn = getConnection();
     
     $stmt = $conn->prepare("
-        SELECT pr.*, u.name as user_name, u.email as user_email 
+        SELECT pr.*, u.name as user_name, u.email as user_email, dm.name as delivery_man_name 
         FROM product_requests pr 
         LEFT JOIN users u ON pr.user_id = u.id 
+        LEFT JOIN delivery_men dm ON pr.delivery_man_id = dm.id
         WHERE pr.id = ?
     ");
     $stmt->execute([$id]);
@@ -177,9 +179,34 @@ function updateRequestStatus() {
     $sql = "UPDATE product_requests SET status = ?";
     $params = [$data['status']];
     
+    // Handle admin notes
     if (!empty($data['admin_notes'])) {
         $sql .= ", admin_notes = ?";
         $params[] = $data['admin_notes'];
+    }
+    
+    // Handle approval (delivery time and delivery man)
+    if ($data['status'] === 'approved') {
+        if (!empty($data['delivery_time'])) {
+            $sql .= ", delivery_time = ?";
+            $params[] = $data['delivery_time'];
+        }
+        if (!empty($data['delivery_man_id'])) {
+            $sql .= ", delivery_man_id = ?";
+            $params[] = $data['delivery_man_id'];
+        }
+        // Clear rejection reason if approving
+        $sql .= ", rejection_reason = NULL";
+    }
+    
+    // Handle rejection (rejection reason)
+    if ($data['status'] === 'rejected') {
+        if (!empty($data['rejection_reason'])) {
+            $sql .= ", rejection_reason = ?";
+            $params[] = $data['rejection_reason'];
+        }
+        // Clear delivery info if rejecting
+        $sql .= ", delivery_time = NULL, delivery_man_id = NULL";
     }
     
     $sql .= " WHERE id = ?";

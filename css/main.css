@@ -1433,7 +1433,11 @@ ol {
 
 /* Sidebar Profile */
 .sidebar-profile {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.7) 0%, rgba(250, 250, 255, 0.9) 100%);
+    background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(250, 250, 255, 0.9) 100%
+    );
     margin: 20px;
     padding: 30px 15px;
     border-radius: 22px;
@@ -1513,8 +1517,8 @@ ol {
     font-weight: 700;
     color: white;
     box-shadow: 0 12px 25px rgba(227, 30, 36, 0.3),
-                0 0 15px rgba(227, 30, 36, 0.2),
-                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+        0 0 15px rgba(227, 30, 36, 0.2),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3);
     border: 4px solid rgba(255, 255, 255, 0.9);
     position: relative;
     transform: translateY(0);
@@ -1525,8 +1529,8 @@ ol {
 .sidebar-avatar:hover {
     transform: translateY(-8px) scale(1.05);
     box-shadow: 0 18px 35px rgba(227, 30, 36, 0.4),
-                0 0 20px rgba(227, 30, 36, 0.25),
-                inset 0 2px 15px rgba(255, 255, 255, 0.4);
+        0 0 20px rgba(227, 30, 36, 0.25),
+        inset 0 2px 15px rgba(255, 255, 255, 0.4);
 }
 
 .sidebar-profile-info {
@@ -1707,7 +1711,7 @@ ol {
 }
 
 .sidebar-link i::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -1921,6 +1925,21 @@ ol {
 .status-cancelled {
     background: #f8d7da;
     color: #721c24;
+}
+
+.status-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-warning {
+    background: #fff3cd;
+    color: #856404;
 }
 
 /* ========== Footer ========== */

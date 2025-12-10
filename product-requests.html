@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-            name="description"
-            content="Request new products on MoonCart"
-        />
+        <meta name="description" content="Request new products on MoonCart" />
         <title>Product Requests - MoonCart</title>
-        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="assets/images/favicon.svg"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -21,6 +22,18 @@
         />
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/responsive.css" />
+        <style>
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-30px) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+        </style>
     </head>
     <body>
         <!-- Header -->
@@ -65,7 +78,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="product-requests.html" class="nav-link active">
+                            <a
+                                href="product-requests.html"
+                                class="nav-link active"
+                            >
                                 <i class="fas fa-comments"></i>
                                 <span>Product Requests</span>
                             </a>
@@ -130,15 +146,18 @@
                         Help us stock what you love
                     </h1>
                     <p style="color: var(--text-light); font-size: 18px">
-                        Submit product ideas and track your previous requests all
-                        in one place.
+                        Submit product ideas and track your previous requests
+                        all in one place.
                     </p>
                 </section>
 
                 <section
                     style="
                         display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                        grid-template-columns: repeat(
+                            auto-fit,
+                            minmax(320px, 1fr)
+                        );
                         gap: 30px;
                     "
                 >
@@ -153,7 +172,10 @@
                         <h2 style="margin-bottom: 20px">
                             <i
                                 class="fas fa-plus-circle"
-                                style="color: var(--primary-color); margin-right: 8px"
+                                style="
+                                    color: var(--primary-color);
+                                    margin-right: 8px;
+                                "
                             ></i>
                             Request a Product
                         </h2>
@@ -171,7 +193,11 @@
 
                             <div class="form-group">
                                 <label class="form-label">Category *</label>
-                                <select id="request-category" class="form-select" required>
+                                <select
+                                    id="request-category"
+                                    class="form-select"
+                                    required
+                                >
                                     <option value="">Select category</option>
                                     <option value="food">Food</option>
                                     <option value="grocery">Grocery</option>
@@ -193,7 +219,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Description/Details</label>
+                                <label class="form-label"
+                                    >Description/Details</label
+                                >
                                 <textarea
                                     id="request-description"
                                     class="form-textarea"
@@ -202,8 +230,13 @@
                                 ></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i> Submit Request
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                style="width: 100%"
+                            >
+                                <i class="fas fa-paper-plane"></i> Submit
+                                Request
                             </button>
                         </form>
                     </div>
@@ -220,23 +253,124 @@
                         <h2 style="margin-bottom: 20px">
                             <i
                                 class="fas fa-list"
-                                style="color: var(--primary-color); margin-right: 8px"
+                                style="
+                                    color: var(--primary-color);
+                                    margin-right: 8px;
+                                "
                             ></i>
                             My Requests
                         </h2>
 
                         <div id="my-requests-container">
                             <!-- Requests will be loaded here -->
-                            <div style="text-align: center; padding: 40px; color: var(--text-light);">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
-                                <p style="margin-top: 10px;">Loading requests...</p>
+                            <div
+                                style="
+                                    text-align: center;
+                                    padding: 40px;
+                                    color: var(--text-light);
+                                "
+                            >
+                                <i
+                                    class="fas fa-spinner fa-spin"
+                                    style="font-size: 24px"
+                                ></i>
+                                <p style="margin-top: 10px">
+                                    Loading requests...
+                                </p>
                             </div>
                         </div>
                     </div>
                 </section>
-
             </div>
         </main>
+
+        <!-- Request Details Modal -->
+        <div
+            id="request-details-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 800px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            var(--primary-color) 0%,
+                            var(--secondary-color) 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-info-circle"></i> Product Request
+                        Details
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeRequestDetailsModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div
+                    class="modal-body"
+                    id="request-details-body"
+                    style="padding: 30px"
+                >
+                    <div style="text-align: center; padding: 40px">
+                        <i
+                            class="fas fa-spinner fa-spin"
+                            style="font-size: 32px; color: var(--primary-color)"
+                        ></i>
+                        <p style="margin-top: 15px; color: var(--text-light)">
+                            Loading details...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="js/main.js"></script>
         <script src="js/api.js"></script>
@@ -245,77 +379,115 @@
             const currentUser = MoonCart.getCurrentUser();
 
             // Pre-fill email if logged in
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener("DOMContentLoaded", function () {
                 if (currentUser && currentUser.email) {
-                    document.getElementById('request-email').value = currentUser.email;
+                    document.getElementById("request-email").value =
+                        currentUser.email;
                 }
-                
+
                 // Load requests
                 loadMyRequests();
             });
 
             // Handle form submission
-            document.getElementById('product-request-form').addEventListener('submit', async function(e) {
-                e.preventDefault();
+            document
+                .getElementById("product-request-form")
+                .addEventListener("submit", async function (e) {
+                    e.preventDefault();
 
-                const productName = document.getElementById('request-product-name').value.trim();
-                const category = document.getElementById('request-category').value;
-                const email = document.getElementById('request-email').value.trim();
-                const description = document.getElementById('request-description').value.trim();
+                    const productName = document
+                        .getElementById("request-product-name")
+                        .value.trim();
+                    const category =
+                        document.getElementById("request-category").value;
+                    const email = document
+                        .getElementById("request-email")
+                        .value.trim();
+                    const description = document
+                        .getElementById("request-description")
+                        .value.trim();
 
-                if (!productName) {
-                    MoonCart.showNotification('Please enter a product name', 'error');
-                    return;
-                }
-
-                if (!category) {
-                    MoonCart.showNotification('Please select a category', 'error');
-                    return;
-                }
-
-                if (!email) {
-                    MoonCart.showNotification('Please enter your email', 'error');
-                    return;
-                }
-
-                MoonCart.showLoading();
-
-                const requestData = {
-                    product_name: productName,
-                    category: category,
-                    email: email,
-                    description: description,
-                    user_id: currentUser ? currentUser.id : null
-                };
-
-                try {
-                    const response = await MoonCartAPI.submitProductRequest(requestData);
-                    MoonCart.hideLoading();
-
-                    if (response.success) {
-                        MoonCart.showNotification('Product request submitted successfully! We\'ll review it soon.', 'success');
-                        
-                        // Clear form
-                        document.getElementById('request-product-name').value = '';
-                        document.getElementById('request-category').value = '';
-                        document.getElementById('request-description').value = '';
-                        
-                        // Reload requests
-                        loadMyRequests();
-                    } else {
-                        MoonCart.showNotification(response.message || 'Failed to submit request', 'error');
+                    if (!productName) {
+                        MoonCart.showNotification(
+                            "Please enter a product name",
+                            "error"
+                        );
+                        return;
                     }
-                } catch (error) {
-                    MoonCart.hideLoading();
-                    console.error('Request error:', error);
-                    MoonCart.showNotification(error.message || 'Failed to submit request. Please try again.', 'error');
-                }
-            });
+
+                    if (!category) {
+                        MoonCart.showNotification(
+                            "Please select a category",
+                            "error"
+                        );
+                        return;
+                    }
+
+                    if (!email) {
+                        MoonCart.showNotification(
+                            "Please enter your email",
+                            "error"
+                        );
+                        return;
+                    }
+
+                    MoonCart.showLoading();
+
+                    const requestData = {
+                        product_name: productName,
+                        category: category,
+                        email: email,
+                        description: description,
+                        user_id: currentUser ? currentUser.id : null,
+                    };
+
+                    try {
+                        const response = await MoonCartAPI.submitProductRequest(
+                            requestData
+                        );
+                        MoonCart.hideLoading();
+
+                        if (response.success) {
+                            MoonCart.showNotification(
+                                "Product request submitted successfully! We'll review it soon.",
+                                "success"
+                            );
+
+                            // Clear form
+                            document.getElementById(
+                                "request-product-name"
+                            ).value = "";
+                            document.getElementById("request-category").value =
+                                "";
+                            document.getElementById(
+                                "request-description"
+                            ).value = "";
+
+                            // Reload requests
+                            loadMyRequests();
+                        } else {
+                            MoonCart.showNotification(
+                                response.message || "Failed to submit request",
+                                "error"
+                            );
+                        }
+                    } catch (error) {
+                        MoonCart.hideLoading();
+                        console.error("Request error:", error);
+                        MoonCart.showNotification(
+                            error.message ||
+                                "Failed to submit request. Please try again.",
+                            "error"
+                        );
+                    }
+                });
 
             // Load user's requests
             async function loadMyRequests() {
-                const container = document.getElementById('my-requests-container');
-                
+                const container = document.getElementById(
+                    "my-requests-container"
+                );
+
                 if (!currentUser) {
                     container.innerHTML = `
                         <div style="text-align: center; padding: 30px; color: var(--text-light);">
@@ -327,9 +499,15 @@
                 }
 
                 try {
-                    const response = await MoonCartAPI.getUserProductRequests(currentUser.id);
-                    
-                    if (response.success && response.requests && response.requests.length > 0) {
+                    const response = await MoonCartAPI.getUserProductRequests(
+                        currentUser.id
+                    );
+
+                    if (
+                        response.success &&
+                        response.requests &&
+                        response.requests.length > 0
+                    ) {
                         container.innerHTML = `
                             <table class="data-table">
                                 <thead>
@@ -338,21 +516,41 @@
                                         <th>Product Name</th>
                                         <th>Category</th>
                                         <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${response.requests.map(req => `
+                                    ${response.requests
+                                        .map(
+                                            (req) => `
                                         <tr>
-                                            <td>${formatDate(req.created_at)}</td>
-                                            <td>${escapeHtml(req.product_name)}</td>
-                                            <td style="text-transform: capitalize;">${escapeHtml(req.category || 'N/A')}</td>
+                                            <td>${formatDate(
+                                                req.created_at
+                                            )}</td>
+                                            <td>${escapeHtml(
+                                                req.product_name
+                                            )}</td>
+                                            <td style="text-transform: capitalize;">${escapeHtml(
+                                                req.category || "N/A"
+                                            )}</td>
                                             <td>
-                                                <span class="status-badge status-${getStatusClass(req.status)}">
+                                                <span class="status-badge status-${getStatusClass(
+                                                    req.status
+                                                )}">
                                                     ${formatStatus(req.status)}
                                                 </span>
                                             </td>
+                                            <td>
+                                                <button onclick="viewRequestDetails(${
+                                                    req.id
+                                                })" class="btn btn-sm" style="background: var(--primary-color); color: white;">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
+                                            </td>
                                         </tr>
-                                    `).join('')}
+                                    `
+                                        )
+                                        .join("")}
                                 </tbody>
                             </table>
                         `;
@@ -366,7 +564,7 @@
                         `;
                     }
                 } catch (error) {
-                    console.error('Error loading requests:', error);
+                    console.error("Error loading requests:", error);
                     container.innerHTML = `
                         <div style="text-align: center; padding: 30px; color: var(--text-light);">
                             <i class="fas fa-exclamation-circle" style="font-size: 40px; margin-bottom: 15px; color: var(--danger-color);"></i>
@@ -377,51 +575,240 @@
                 }
             }
 
-
             // Helper functions
             function formatDate(dateStr) {
-                if (!dateStr) return 'N/A';
+                if (!dateStr) return "N/A";
                 const date = new Date(dateStr);
-                return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                return date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                });
             }
 
             function formatStatus(status) {
                 const statusMap = {
-                    'pending': 'Pending',
-                    'under_review': 'Under Review',
-                    'approved': 'Approved',
-                    'rejected': 'Rejected'
+                    pending: "Pending",
+                    under_review: "Under Review",
+                    approved: "Approved",
+                    rejected: "Rejected",
                 };
                 return statusMap[status] || status;
             }
 
             function getStatusClass(status) {
                 const classMap = {
-                    'pending': 'pending',
-                    'under_review': 'pending',
-                    'approved': 'confirmed',
-                    'rejected': 'cancelled'
+                    pending: "pending",
+                    under_review: "pending",
+                    approved: "confirmed",
+                    rejected: "cancelled",
                 };
-                return classMap[status] || 'pending';
+                return classMap[status] || "pending";
             }
 
             function getStatusColor(status) {
                 const colorMap = {
-                    'pending': '#ffc107',
-                    'under_review': '#17a2b8',
-                    'approved': '#28a745',
-                    'rejected': '#dc3545'
+                    pending: "#ffc107",
+                    under_review: "#17a2b8",
+                    approved: "#28a745",
+                    rejected: "#dc3545",
                 };
-                return colorMap[status] || '#6c757d';
+                return colorMap[status] || "#6c757d";
             }
 
             function escapeHtml(text) {
-                if (!text) return '';
-                const div = document.createElement('div');
+                if (!text) return "";
+                const div = document.createElement("div");
                 div.textContent = text;
                 return div.innerHTML;
             }
+
+            // View request details
+            async function viewRequestDetails(requestId) {
+                const modal = document.getElementById("request-details-modal");
+                const body = document.getElementById("request-details-body");
+
+                // Show modal with loading state
+                modal.style.display = "flex";
+                body.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 32px; color: var(--primary-color);"></i>
+                        <p style="margin-top: 15px; color: var(--text-light);">Loading details...</p>
+                    </div>
+                `;
+
+                try {
+                    const response = await MoonCartAPI.request(
+                        `product_requests.php?action=single&id=${requestId}`
+                    );
+
+                    if (response.success && response.request) {
+                        const req = response.request;
+                        const statusClass = getStatusClass(req.status);
+
+                        body.innerHTML = `
+                            <div style="display: grid; gap: 20px;">
+                                <!-- Request Information -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                    <h3 style="margin: 0 0 15px; color: var(--primary-color); display: flex; align-items: center; gap: 10px;">
+                                        <i class="fas fa-info-circle"></i> Request Information
+                                    </h3>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Request ID</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">#${
+                                                req.id
+                                            }</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Status</p>
+                                            <p style="margin: 0;">
+                                                <span class="status-badge status-${statusClass}">${formatStatus(
+                            req.status
+                        )}</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Date Submitted</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">${formatDate(
+                                                req.created_at
+                                            )}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Product Details -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                    <h3 style="margin: 0 0 15px; color: var(--primary-color); display: flex; align-items: center; gap: 10px;">
+                                        <i class="fas fa-box"></i> Product Details
+                                    </h3>
+                                    <div style="display: grid; gap: 15px;">
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Product Name</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark); font-size: 18px;">${escapeHtml(
+                                                req.product_name || "N/A"
+                                            )}</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Category</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark); text-transform: capitalize;">${escapeHtml(
+                                                req.category || "N/A"
+                                            )}</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Description</p>
+                                            <p style="margin: 0; color: var(--text-dark); line-height: 1.6; white-space: pre-wrap;">${escapeHtml(
+                                                req.description ||
+                                                    "No description provided"
+                                            )}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                ${
+                                    req.admin_notes
+                                        ? `
+                                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                                        <h3 style="margin: 0 0 15px; color: #856404; display: flex; align-items: center; gap: 10px;">
+                                            <i class="fas fa-sticky-note"></i> Admin Notes
+                                        </h3>
+                                        <p style="margin: 0; color: #856404; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(
+                                            req.admin_notes
+                                        )}</p>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                                
+                                ${
+                                    req.rejection_reason
+                                        ? `
+                                    <div style="background: #f8d7da; padding: 20px; border-radius: 10px; border-left: 4px solid #dc3545;">
+                                        <h3 style="margin: 0 0 15px; color: #721c24; display: flex; align-items: center; gap: 10px;">
+                                            <i class="fas fa-times-circle"></i> Rejection Reason
+                                        </h3>
+                                        <p style="margin: 0; color: #721c24; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(
+                                            req.rejection_reason
+                                        )}</p>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                                
+                                ${
+                                    req.delivery_time && req.delivery_man_name
+                                        ? `
+                                    <div style="background: #d1ecf1; padding: 20px; border-radius: 10px; border-left: 4px solid #17a2b8;">
+                                        <h3 style="margin: 0 0 15px; color: #0c5460; display: flex; align-items: center; gap: 10px;">
+                                            <i class="fas fa-truck"></i> Delivery Information
+                                        </h3>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                            <div>
+                                                <p style="margin: 5px 0; font-size: 13px; color: #0c5460;">Delivery Man</p>
+                                                <p style="margin: 0; font-weight: 600; color: #0c5460;">${escapeHtml(
+                                                    req.delivery_man_name
+                                                )}</p>
+                                            </div>
+                                            <div>
+                                                <p style="margin: 5px 0; font-size: 13px; color: #0c5460;">Delivery Time</p>
+                                                <p style="margin: 0; font-weight: 600; color: #0c5460;">${formatDateTime(
+                                                    req.delivery_time
+                                                )}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                            </div>
+                        `;
+                    } else {
+                        body.innerHTML = `
+                            <div style="text-align: center; padding: 40px;">
+                                <i class="fas fa-exclamation-circle" style="font-size: 48px; color: var(--danger-color); margin-bottom: 15px;"></i>
+                                <p style="color: var(--text-light);">Failed to load request details.</p>
+                                <button class="btn btn-sm" onclick="closeRequestDetailsModal()" style="margin-top: 15px;">Close</button>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error("Error loading request details:", error);
+                    body.innerHTML = `
+                        <div style="text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-circle" style="font-size: 48px; color: var(--danger-color); margin-bottom: 15px;"></i>
+                            <p style="color: var(--text-light);">Failed to load request details. Please try again.</p>
+                            <button class="btn btn-sm" onclick="closeRequestDetailsModal()" style="margin-top: 15px;">Close</button>
+                        </div>
+                    `;
+                }
+            }
+
+            // Close request details modal
+            function closeRequestDetailsModal() {
+                document.getElementById("request-details-modal").style.display =
+                    "none";
+            }
+
+            // Format date time helper
+            function formatDateTime(dateStr) {
+                if (!dateStr) return "N/A";
+                const date = new Date(dateStr);
+                return date.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function (event) {
+                const modal = document.getElementById("request-details-modal");
+                if (event.target === modal) {
+                    closeRequestDetailsModal();
+                }
+            };
         </script>
     </body>
 </html>
-

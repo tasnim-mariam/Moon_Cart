@@ -7,7 +7,11 @@
         <title>Shopping Cart - MoonCart</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="assets/images/favicon.svg"
+        />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -193,7 +197,6 @@
             </div>
         </section>
 
-
         <!-- Footer -->
         <footer class="footer">
             <div class="container">
@@ -263,9 +266,17 @@
                         <h3>Contact Info</h3>
                         <ul>
                             <li>
-                                <a href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka" target="_blank" style="color: inherit; text-decoration: none;">
+                                <a
+                                    href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka"
+                                    target="_blank"
+                                    style="
+                                        color: inherit;
+                                        text-decoration: none;
+                                    "
+                                >
                                     <i class="fas fa-map-marker-alt"></i> 123
-                                    MoonCart St, Bashundhara R/A, Dhaka, Bangladesh
+                                    MoonCart St, Bashundhara R/A, Dhaka,
+                                    Bangladesh
                                 </a>
                             </li>
                             <li>
@@ -275,7 +286,9 @@
                                 <i class="fas fa-envelope"></i>
                                 info@mooncart.com
                             </li>
-                            <li><i class="fas fa-clock"></i> 12:00 AM - 4:00 AM</li>
+                            <li>
+                                <i class="fas fa-clock"></i> 12:00 AM - 4:00 AM
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -297,9 +310,19 @@
         <script src="js/ui.js"></script>
         <!-- Direct initialization script for account section -->
         <script>
-            // Ensure login/signup buttons are shown
-            document.addEventListener("DOMContentLoaded", function () {
-                // Final page-specific fallback if all else fails
+            // Initialize cart page when DOM is ready
+            document.addEventListener("DOMContentLoaded", async function () {
+                // Render cart items first
+                await renderCart();
+
+                // Event delegation removed - using direct onclick on button instead
+
+                // Update cart count in header
+                if (window.MoonCart && window.MoonCart.updateCartCount) {
+                    window.MoonCart.updateCartCount();
+                }
+
+                // Ensure login/signup buttons are shown
                 setTimeout(function () {
                     try {
                         if (
@@ -308,7 +331,6 @@
                         ) {
                             window.MoonCart.forceRenderAuthButtons();
                         } else {
-                            console.log("Inline fallback for auth buttons");
                             var accountSection =
                                 document.getElementById("account-section");
                             if (

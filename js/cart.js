@@ -10,16 +10,16 @@ let cartData = {
     tax: 0,
     shipping: 0,
     total: 0,
-    itemCount: 0
+    itemCount: 0,
 };
 
 // Check if user is logged in
-function requireLogin(action = 'add items to cart') {
+function requireLogin(action = "add items to cart") {
     const currentUser = MoonCart.getCurrentUser();
     if (!currentUser) {
-        MoonCart.showNotification(`Please login to ${action}`, 'error');
+        MoonCart.showNotification(`Please login to ${action}`, "error");
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = "login.html";
         }, 1500);
         return null;
     }
@@ -28,19 +28,22 @@ function requireLogin(action = 'add items to cart') {
 
 // Add product to cart (requires login)
 async function addToCart(product) {
-    const currentUser = requireLogin('add items to cart');
+    const currentUser = requireLogin("add items to cart");
     if (!currentUser) return;
 
     // Get product ID - ensure it's a number
     let productId = product.id;
-    if (typeof productId === 'string') {
+    if (typeof productId === "string") {
         // Try to extract numeric ID
         productId = parseInt(productId) || productId;
     }
 
     // If product ID is not numeric, we need to find it in the database
     if (isNaN(productId)) {
-        MoonCart.showNotification('Invalid product. Please try again.', 'error');
+        MoonCart.showNotification(
+            "Invalid product. Please try again.",
+            "error"
+        );
         return;
     }
 
@@ -51,7 +54,7 @@ async function addToCart(product) {
             currentUser.id,
             productId,
             1,
-            product.category || 'Product'
+            product.category || "Product"
         );
 
         MoonCart.hideLoading();
@@ -59,7 +62,10 @@ async function addToCart(product) {
         if (response.success) {
             cartData = response.cart;
             updateCartCount();
-            MoonCart.showNotification(response.message || 'Added to cart!', 'success');
+            MoonCart.showNotification(
+                response.message || "Added to cart!",
+                "success"
+            );
 
             // Add animation to cart icon
             const cartIcon = document.querySelector(".cart-icon");
@@ -70,55 +76,80 @@ async function addToCart(product) {
                 }, 300);
             }
         } else {
-            MoonCart.showNotification(response.message || 'Failed to add to cart', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to add to cart",
+                "error"
+            );
         }
     } catch (error) {
         MoonCart.hideLoading();
-        console.error('Add to cart error:', error);
-        MoonCart.showNotification('Failed to add to cart. Please try again.', 'error');
+        console.error("Add to cart error:", error);
+        MoonCart.showNotification(
+            "Failed to add to cart. Please try again.",
+            "error"
+        );
     }
 }
 
 // Remove product from cart
 async function removeFromCart(productId) {
-    const currentUser = requireLogin('manage cart');
+    const currentUser = requireLogin("manage cart");
     if (!currentUser) return;
 
     try {
-        const response = await MoonCartAPI.removeFromCart(currentUser.id, productId);
+        const response = await MoonCartAPI.removeFromCart(
+            currentUser.id,
+            productId
+        );
 
         if (response.success) {
             cartData = response.cart;
-            MoonCart.showNotification('Item removed from cart', 'success');
+            MoonCart.showNotification("Item removed from cart", "success");
             renderCart();
             updateCartCount();
         } else {
-            MoonCart.showNotification(response.message || 'Failed to remove item', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to remove item",
+                "error"
+            );
         }
     } catch (error) {
-        console.error('Remove from cart error:', error);
-        MoonCart.showNotification('Failed to remove item. Please try again.', 'error');
+        console.error("Remove from cart error:", error);
+        MoonCart.showNotification(
+            "Failed to remove item. Please try again.",
+            "error"
+        );
     }
 }
 
 // Update product quantity
 async function updateQuantity(productId, change) {
-    const currentUser = requireLogin('manage cart');
+    const currentUser = requireLogin("manage cart");
     if (!currentUser) return;
 
     try {
-        const response = await MoonCartAPI.updateCartItem(currentUser.id, productId, change);
+        const response = await MoonCartAPI.updateCartItem(
+            currentUser.id,
+            productId,
+            change
+        );
 
         if (response.success) {
             cartData = response.cart;
             renderCart();
             updateCartCount();
         } else {
-            MoonCart.showNotification(response.message || 'Failed to update quantity', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to update quantity",
+                "error"
+            );
         }
     } catch (error) {
-        console.error('Update quantity error:', error);
-        MoonCart.showNotification('Failed to update quantity. Please try again.', 'error');
+        console.error("Update quantity error:", error);
+        MoonCart.showNotification(
+            "Failed to update quantity. Please try again.",
+            "error"
+        );
     }
 }
 
@@ -126,7 +157,14 @@ async function updateQuantity(productId, change) {
 async function loadCart() {
     const currentUser = MoonCart.getCurrentUser();
     if (!currentUser) {
-        cartData = { items: [], subtotal: 0, tax: 0, shipping: 0, total: 0, itemCount: 0 };
+        cartData = {
+            items: [],
+            subtotal: 0,
+            tax: 0,
+            shipping: 0,
+            total: 0,
+            itemCount: 0,
+        };
         updateCartCount();
         return cartData;
     }
@@ -139,7 +177,7 @@ async function loadCart() {
             return cartData;
         }
     } catch (error) {
-        console.error('Load cart error:', error);
+        console.error("Load cart error:", error);
     }
 
     return cartData;
@@ -147,8 +185,8 @@ async function loadCart() {
 
 // Update cart count in header
 function updateCartCount() {
-    const cartCountElements = document.querySelectorAll('.cart-count');
-    cartCountElements.forEach(el => {
+    const cartCountElements = document.querySelectorAll(".cart-count");
+    cartCountElements.forEach((el) => {
         el.textContent = cartData.itemCount || 0;
     });
 }
@@ -160,7 +198,7 @@ function calculateCartDetails() {
         tax: cartData.tax || 0,
         shipping: cartData.shipping || 0,
         total: cartData.total || 0,
-        itemCount: cartData.itemCount || 0
+        itemCount: cartData.itemCount || 0,
     };
 }
 
@@ -218,24 +256,35 @@ async function renderCart() {
     // Render cart items
     cartData.items.forEach((item) => {
         const row = document.createElement("tr");
-        const itemTotal = (parseFloat(item.price) || 0) * (parseInt(item.quantity) || 0);
+        const itemTotal =
+            (parseFloat(item.price) || 0) * (parseInt(item.quantity) || 0);
         row.innerHTML = `
             <td data-label="Image">
-                <img src="${item.image}" alt="${item.product_name}" class="cart-item-image" 
+                <img src="${item.image}" alt="${
+            item.product_name
+        }" class="cart-item-image" 
                      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27100%27 height=%27100%27%3E%3Crect fill=%27%23f0f0f0%27 width=%27100%27 height=%27100%27/%3E%3Ctext x=%2750%27 y=%2750%27 text-anchor=%27middle%27 fill=%27%23999%27 font-family=%27Arial%27 font-size=%2712%27%3ENo Image%3C/text%3E%3C/svg%3E'">
             </td>
             <td data-label="Product">${item.product_name}</td>
-            <td data-label="Price">${MoonCart.formatCurrency(parseFloat(item.price) || 0)}</td>
+            <td data-label="Price">${MoonCart.formatCurrency(
+                parseFloat(item.price) || 0
+            )}</td>
             <td data-label="Quantity">
                 <div class="quantity-control">
-                    <button class="quantity-btn" onclick="updateQuantity(${item.product_id}, -1)">-</button>
+                    <button class="quantity-btn" onclick="updateQuantity(${
+                        item.product_id
+                    }, -1)">-</button>
                     <span>${item.quantity}</span>
-                    <button class="quantity-btn" onclick="updateQuantity(${item.product_id}, 1)">+</button>
+                    <button class="quantity-btn" onclick="updateQuantity(${
+                        item.product_id
+                    }, 1)">+</button>
                 </div>
             </td>
             <td data-label="Total">${MoonCart.formatCurrency(itemTotal)}</td>
             <td data-label="Remove">
-                <button class="remove-btn" onclick="removeFromCart(${item.product_id})">Remove</button>
+                <button class="remove-btn" onclick="removeFromCart(${
+                    item.product_id
+                })">Remove</button>
             </td>
         `;
         cartTableBody.appendChild(row);
@@ -257,38 +306,99 @@ async function renderCart() {
             </div>
             <div class="summary-row">
                 <span>Shipping:</span>
-                <span>${cartData.shipping === 0 ? "FREE" : MoonCart.formatCurrency(cartData.shipping)}</span>
+                <span>${
+                    cartData.shipping === 0
+                        ? "FREE"
+                        : MoonCart.formatCurrency(cartData.shipping)
+                }</span>
             </div>
             <div class="summary-row total">
                 <span>Total:</span>
                 <span>${MoonCart.formatCurrency(cartData.total)}</span>
             </div>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="proceedToCheckout()">
+            <button type="button" class="btn btn-primary" onclick="handleCheckoutClick(event)" style="width: 100%; margin-top: 20px;">
                 Proceed to Checkout
             </button>
-            <button class="btn btn-outline" style="width: 100%; margin-top: 10px;" onclick="window.location.href='products.html'">
+            <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 10px;" onclick="window.location.href='products.html'">
                 Continue Shopping
             </button>
         `;
     }
 }
 
-// Proceed to checkout
-function proceedToCheckout() {
-    const currentUser = requireLogin('checkout');
-    if (!currentUser) return;
+// Proceed to checkout - make it globally accessible (kept for backward compatibility)
+function proceedToCheckout(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+    }
+
+    const currentUser = MoonCart.getCurrentUser();
+    if (!currentUser) {
+        MoonCart.showNotification("Please login to checkout", "error");
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
+        return false;
+    }
 
     if (!cartData.items || cartData.items.length === 0) {
         MoonCart.showNotification("Your cart is empty!", "error");
-        return;
+        return false;
     }
 
     window.location.href = "checkout.html";
+    return false;
 }
+
+// Make function globally accessible
+window.proceedToCheckout = proceedToCheckout;
+
+// Handle checkout click - simple direct function
+function handleCheckoutClick(event) {
+    console.log("=== Checkout button clicked ===");
+
+    try {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        const currentUser = MoonCart.getCurrentUser();
+        console.log("Current user:", currentUser);
+
+        if (!currentUser) {
+            console.log("No user found, redirecting to login");
+            MoonCart.showNotification("Please login to checkout", "error");
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
+            return false;
+        }
+
+        if (!cartData.items || cartData.items.length === 0) {
+            console.log("Cart is empty");
+            MoonCart.showNotification("Your cart is empty!", "error");
+            return false;
+        }
+
+        console.log("All checks passed, redirecting to checkout.html...");
+        window.location.href = "checkout.html";
+        return false;
+    } catch (error) {
+        console.error("Error in handleCheckoutClick:", error);
+        alert("Error: " + error.message);
+        return false;
+    }
+}
+
+// Make it globally accessible
+window.handleCheckoutClick = handleCheckoutClick;
 
 // Clear cart
 async function clearCart() {
-    const currentUser = requireLogin('clear cart');
+    const currentUser = requireLogin("clear cart");
     if (!currentUser) return;
 
     if (!confirm("Are you sure you want to clear your cart?")) return;
@@ -302,17 +412,23 @@ async function clearCart() {
             renderCart();
             updateCartCount();
         } else {
-            MoonCart.showNotification(response.message || 'Failed to clear cart', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to clear cart",
+                "error"
+            );
         }
     } catch (error) {
-        console.error('Clear cart error:', error);
-        MoonCart.showNotification('Failed to clear cart. Please try again.', 'error');
+        console.error("Clear cart error:", error);
+        MoonCart.showNotification(
+            "Failed to clear cart. Please try again.",
+            "error"
+        );
     }
 }
 
 // Add to cart from product detail page
 async function addToCartFromDetail() {
-    const currentUser = requireLogin('add items to cart');
+    const currentUser = requireLogin("add items to cart");
     if (!currentUser) return;
 
     const productIdEl = document.getElementById("product-id");
@@ -321,13 +437,13 @@ async function addToCartFromDetail() {
     const productCategoryEl = document.getElementById("product-category");
 
     if (!productIdEl) {
-        MoonCart.showNotification('Product information not found', 'error');
+        MoonCart.showNotification("Product information not found", "error");
         return;
     }
 
     const productId = parseInt(productIdEl.value);
     if (isNaN(productId)) {
-        MoonCart.showNotification('Invalid product', 'error');
+        MoonCart.showNotification("Invalid product", "error");
         return;
     }
 
@@ -338,7 +454,7 @@ async function addToCartFromDetail() {
             currentUser.id,
             productId,
             1,
-            productCategoryEl ? productCategoryEl.textContent : 'Product'
+            productCategoryEl ? productCategoryEl.textContent : "Product"
         );
 
         MoonCart.hideLoading();
@@ -346,20 +462,26 @@ async function addToCartFromDetail() {
         if (response.success) {
             cartData = response.cart;
             updateCartCount();
-            MoonCart.showNotification('Added to cart!', 'success');
+            MoonCart.showNotification("Added to cart!", "success");
         } else {
-            MoonCart.showNotification(response.message || 'Failed to add to cart', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to add to cart",
+                "error"
+            );
         }
     } catch (error) {
         MoonCart.hideLoading();
-        console.error('Add to cart error:', error);
-        MoonCart.showNotification('Failed to add to cart. Please try again.', 'error');
+        console.error("Add to cart error:", error);
+        MoonCart.showNotification(
+            "Failed to add to cart. Please try again.",
+            "error"
+        );
     }
 }
 
 // Add to cart from API products (products page)
 async function addToCartFromAPI(productId, name, price, image, category) {
-    const currentUser = requireLogin('add items to cart');
+    const currentUser = requireLogin("add items to cart");
     if (!currentUser) return;
 
     MoonCart.showLoading();
@@ -377,7 +499,7 @@ async function addToCartFromAPI(productId, name, price, image, category) {
         if (response.success) {
             cartData = response.cart;
             updateCartCount();
-            MoonCart.showNotification(`${name} added to cart!`, 'success');
+            MoonCart.showNotification(`${name} added to cart!`, "success");
 
             // Add animation to cart icon
             const cartIcon = document.querySelector(".cart-icon");
@@ -388,17 +510,23 @@ async function addToCartFromAPI(productId, name, price, image, category) {
                 }, 300);
             }
         } else {
-            MoonCart.showNotification(response.message || 'Failed to add to cart', 'error');
+            MoonCart.showNotification(
+                response.message || "Failed to add to cart",
+                "error"
+            );
         }
     } catch (error) {
         MoonCart.hideLoading();
-        console.error('Add to cart error:', error);
-        MoonCart.showNotification('Failed to add to cart. Please try again.', 'error');
+        console.error("Add to cart error:", error);
+        MoonCart.showNotification(
+            "Failed to add to cart. Please try again.",
+            "error"
+        );
     }
 }
 
 // Initialize cart on page load
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", async function () {
     // Load cart data
     await loadCart();
 
@@ -408,7 +536,9 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     // Setup "Add to Cart" buttons on static product cards
-    const addToCartButtons = document.querySelectorAll(".add-to-cart:not([onclick])");
+    const addToCartButtons = document.querySelectorAll(
+        ".add-to-cart:not([onclick])"
+    );
     addToCartButtons.forEach((button) => {
         button.addEventListener("click", function (e) {
             e.preventDefault();
@@ -416,9 +546,12 @@ document.addEventListener("DOMContentLoaded", async function() {
 
             const currentUser = MoonCart.getCurrentUser();
             if (!currentUser) {
-                MoonCart.showNotification('Please login to add items to cart', 'error');
+                MoonCart.showNotification(
+                    "Please login to add items to cart",
+                    "error"
+                );
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = "login.html";
                 }, 1500);
                 return;
             }
@@ -429,20 +562,34 @@ document.addEventListener("DOMContentLoaded", async function() {
             // Get product ID from data attribute
             const productId = productCard.dataset.id;
             if (!productId || isNaN(parseInt(productId))) {
-                MoonCart.showNotification('Invalid product. Please refresh and try again.', 'error');
+                MoonCart.showNotification(
+                    "Invalid product. Please refresh and try again.",
+                    "error"
+                );
                 return;
             }
 
             // Extract price
-            const priceText = productCard.querySelector(".product-price")?.textContent.trim() || "0";
-            const priceValue = parseFloat(priceText.replace(/[৳$,\s]/g, "")) || 0;
+            const priceText =
+                productCard
+                    .querySelector(".product-price")
+                    ?.textContent.trim() || "0";
+            const priceValue =
+                parseFloat(priceText.replace(/[৳$,\s]/g, "")) || 0;
 
             const product = {
                 id: parseInt(productId),
-                name: productCard.querySelector(".product-name")?.textContent.trim() || "Product",
+                name:
+                    productCard
+                        .querySelector(".product-name")
+                        ?.textContent.trim() || "Product",
                 price: priceValue,
-                image: productCard.querySelector(".product-image img")?.src || "",
-                category: productCard.querySelector(".product-category")?.textContent.trim() || "Product"
+                image:
+                    productCard.querySelector(".product-image img")?.src || "",
+                category:
+                    productCard
+                        .querySelector(".product-category")
+                        ?.textContent.trim() || "Product",
             };
 
             addToCart(product);

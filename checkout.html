@@ -7,7 +7,11 @@
         <title>Checkout - MoonCart</title>
 
         <!-- Favicon -->
-        <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="assets/images/favicon.svg"
+        />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -117,17 +121,11 @@
                         <!-- Account Section (Static) -->
                         <div id="account-section" class="account-section">
                             <div class="auth-buttons">
-                                <a
-                                    href="login.html"
-                                    class="btn-login"
-                                >
+                                <a href="login.html" class="btn-login">
                                     <i class="fas fa-sign-in-alt"></i>
                                     <span>Login</span>
                                 </a>
-                                <a
-                                    href="signup.html"
-                                    class="btn-signup"
-                                >
+                                <a href="signup.html" class="btn-signup">
                                     <i class="fas fa-user-plus"></i>
                                     <span>Sign Up</span>
                                 </a>
@@ -441,30 +439,15 @@
                                     </label>
                                 </div>
                             </div>
-                        </form>
-                    </div>
 
-                    <!-- Order Summary -->
-                    <div>
-                        <div
-                            style="
-                                background: white;
-                                padding: 30px;
-                                border-radius: var(--border-radius);
-                                box-shadow: var(--shadow);
-                                position: sticky;
-                                top: 100px;
-                            "
-                        >
-                            <div id="order-summary">
-                                <!-- Order summary will be inserted here by JavaScript -->
-                            </div>
-
+                            <!-- Terms and Conditions Agreement -->
                             <div
                                 style="
-                                    padding: 20px 0;
-                                    border-top: 1px solid var(--border-color);
-                                    margin-top: 20px;
+                                    background: white;
+                                    padding: 20px 30px;
+                                    border-radius: var(--border-radius);
+                                    box-shadow: var(--shadow);
+                                    margin-bottom: 30px;
                                 "
                             >
                                 <label
@@ -477,8 +460,13 @@
                                 >
                                     <input
                                         type="checkbox"
+                                        name="terms"
                                         required
-                                        style="margin-top: 3px"
+                                        style="
+                                            margin-top: 3px;
+                                            width: 20px;
+                                            height: 20px;
+                                        "
                                     />
                                     <span
                                         style="
@@ -501,12 +489,30 @@
                                     </span>
                                 </label>
                             </div>
+                        </form>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div>
+                        <div
+                            style="
+                                background: white;
+                                padding: 30px;
+                                border-radius: var(--border-radius);
+                                box-shadow: var(--shadow);
+                                position: sticky;
+                                top: 100px;
+                            "
+                        >
+                            <div id="order-summary">
+                                <!-- Order summary will be inserted here by JavaScript -->
+                            </div>
 
                             <button
                                 type="submit"
                                 form="checkout-form"
                                 class="btn btn-primary"
-                                style="width: 100%"
+                                style="width: 100%; margin-top: 20px"
                             >
                                 <i class="fas fa-check-circle"></i> Place Order
                             </button>
@@ -685,9 +691,17 @@
                         <h3>Contact Info</h3>
                         <ul>
                             <li>
-                                <a href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka" target="_blank" style="color: inherit; text-decoration: none;">
+                                <a
+                                    href="https://www.google.com/maps/place/Bashundhara+R/A,+Dhaka"
+                                    target="_blank"
+                                    style="
+                                        color: inherit;
+                                        text-decoration: none;
+                                    "
+                                >
                                     <i class="fas fa-map-marker-alt"></i> 123
-                                    MoonCart St, Bashundhara R/A, Dhaka, Bangladesh
+                                    MoonCart St, Bashundhara R/A, Dhaka,
+                                    Bangladesh
                                 </a>
                             </li>
                             <li>
@@ -697,7 +711,9 @@
                                 <i class="fas fa-envelope"></i>
                                 info@mooncart.com
                             </li>
-                            <li><i class="fas fa-clock"></i> 12:00 AM - 4:00 AM</li>
+                            <li>
+                                <i class="fas fa-clock"></i> 12:00 AM - 4:00 AM
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -719,35 +735,47 @@
         <script src="js/order.js"></script>
         <script src="js/ui.js"></script>
         <script>
-            // Check if user is logged in
-            const currentUser = MoonCart.getCurrentUser();
-            if (!currentUser) {
-                MoonCart.showNotification('Please login to checkout', 'error');
-                setTimeout(function() { window.location.href = 'login.html'; }, 1500);
-            }
-
             // Load and display cart on page load
-            document.addEventListener('DOMContentLoaded', async function() {
-                if (!currentUser) return;
+            document.addEventListener("DOMContentLoaded", async function () {
+                // Check if user is logged in
+                const currentUser = MoonCart.getCurrentUser();
+                if (!currentUser) {
+                    MoonCart.showNotification(
+                        "Please login to checkout",
+                        "error"
+                    );
+                    setTimeout(function () {
+                        window.location.href = "login.html";
+                    }, 1500);
+                    return;
+                }
 
                 // Load cart from backend
                 await loadCart();
 
                 // Check if cart is empty
                 if (!cartData.items || cartData.items.length === 0) {
-                    MoonCart.showNotification('Your cart is empty', 'error');
-                    setTimeout(function() { window.location.href = 'cart.html'; }, 1500);
+                    MoonCart.showNotification("Your cart is empty", "error");
+                    setTimeout(function () {
+                        window.location.href = "cart.html";
+                    }, 1500);
                     return;
                 }
 
                 // Pre-fill user info
-                const nameInput = document.querySelector('input[name="fullname"]');
-                const emailInput = document.querySelector('input[name="email"]');
-                const phoneInput = document.querySelector('input[name="phone"]');
-                
-                if (nameInput) nameInput.value = currentUser.name || '';
-                if (emailInput) emailInput.value = currentUser.email || '';
-                if (phoneInput) phoneInput.value = currentUser.phone || '';
+                const nameInput = document.querySelector(
+                    'input[name="fullname"]'
+                );
+                const emailInput = document.querySelector(
+                    'input[name="email"]'
+                );
+                const phoneInput = document.querySelector(
+                    'input[name="phone"]'
+                );
+
+                if (nameInput) nameInput.value = currentUser.name || "";
+                if (emailInput) emailInput.value = currentUser.email || "";
+                if (phoneInput) phoneInput.value = currentUser.phone || "";
 
                 // Display order summary
                 displayOrderSummary();
@@ -755,22 +783,32 @@
 
             // Display order summary from cart data
             function displayOrderSummary() {
-                const summaryContainer = document.getElementById('order-summary') || document.querySelector('.order-summary');
+                const summaryContainer =
+                    document.getElementById("order-summary") ||
+                    document.querySelector(".order-summary");
                 if (!summaryContainer || !cartData.items) return;
 
-                let itemsHtml = cartData.items.map(item => `
+                let itemsHtml = cartData.items
+                    .map(
+                        (item) => `
                     <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
                         <span>${item.product_name} x ${item.quantity}</span>
-                        <span>${MoonCart.formatCurrency(item.price * item.quantity)}</span>
+                        <span>${MoonCart.formatCurrency(
+                            item.price * item.quantity
+                        )}</span>
                     </div>
-                `).join('');
+                `
+                    )
+                    .join("");
 
                 summaryContainer.innerHTML = `
                     <h3 style="margin-bottom: 15px;">Order Summary</h3>
                     <div style="margin-bottom: 15px;">${itemsHtml}</div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                         <span>Subtotal:</span>
-                        <span>${MoonCart.formatCurrency(cartData.subtotal)}</span>
+                        <span>${MoonCart.formatCurrency(
+                            cartData.subtotal
+                        )}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                         <span>Tax (10%):</span>
@@ -778,7 +816,11 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 8px 0;">
                         <span>Shipping:</span>
-                        <span>${cartData.shipping === 0 ? 'FREE' : MoonCart.formatCurrency(cartData.shipping)}</span>
+                        <span>${
+                            cartData.shipping === 0
+                                ? "FREE"
+                                : MoonCart.formatCurrency(cartData.shipping)
+                        }</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid var(--primary-color); font-weight: bold; font-size: 18px;">
                         <span>Total:</span>
@@ -788,48 +830,56 @@
             }
 
             // Handle checkout form submission
-            document.getElementById('checkout-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (!cartData.items || cartData.items.length === 0) {
-                    MoonCart.showNotification('Your cart is empty', 'error');
-                    return;
-                }
+            document
+                .getElementById("checkout-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
 
-                // Store order details in localStorage for payment page
-                const formData = new FormData(this);
-                const orderDetails = {
-                    fullname: formData.get('fullname'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone'),
-                    address: formData.get('address'),
-                    city: formData.get('city'),
-                    zipcode: formData.get('zipcode'),
-                    instructions: formData.get('instructions'),
-                    deliverySlot: formData.get('delivery-slot'),
-                    paymentMethod: formData.get('payment-method'),
-                    // Use cart data from backend
-                    cart: cartData.items.map(item => ({
-                        id: item.product_id,
-                        name: item.product_name,
-                        price: item.price,
-                        quantity: item.quantity,
-                        image: item.image
-                    })),
-                    cartDetails: {
-                        subtotal: cartData.subtotal,
-                        tax: cartData.tax,
-                        shipping: cartData.shipping,
-                        total: cartData.total,
-                        itemCount: cartData.itemCount
+                    if (!cartData.items || cartData.items.length === 0) {
+                        MoonCart.showNotification(
+                            "Your cart is empty",
+                            "error"
+                        );
+                        return;
                     }
-                };
-                
-                localStorage.setItem('mooncart_pending_order', JSON.stringify(orderDetails));
-                
-                // Redirect to payment page
-                window.location.href = 'payment.html';
-            });
+
+                    // Store order details in localStorage for payment page
+                    const formData = new FormData(this);
+                    const orderDetails = {
+                        fullname: formData.get("fullname"),
+                        email: formData.get("email"),
+                        phone: formData.get("phone"),
+                        address: formData.get("address"),
+                        city: formData.get("city"),
+                        zipcode: formData.get("zipcode"),
+                        instructions: formData.get("instructions"),
+                        deliverySlot: formData.get("delivery-slot"),
+                        paymentMethod: formData.get("payment-method"),
+                        // Use cart data from backend
+                        cart: cartData.items.map((item) => ({
+                            id: item.product_id,
+                            name: item.product_name,
+                            price: item.price,
+                            quantity: item.quantity,
+                            image: item.image,
+                        })),
+                        cartDetails: {
+                            subtotal: cartData.subtotal,
+                            tax: cartData.tax,
+                            shipping: cartData.shipping,
+                            total: cartData.total,
+                            itemCount: cartData.itemCount,
+                        },
+                    };
+
+                    localStorage.setItem(
+                        "mooncart_pending_order",
+                        JSON.stringify(orderDetails)
+                    );
+
+                    // Redirect to payment page
+                    window.location.href = "payment.html";
+                });
         </script>
     </body>
 </html>

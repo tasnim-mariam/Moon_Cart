@@ -102,9 +102,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="admin-customers.html" class="nav-link">
-                                <i class="fas fa-users"></i>
-                                <span>Customers</span>
+                            <a href="admin-delivery.html" class="nav-link">
+                                <i class="fas fa-truck"></i>
+                                <span>Delivery</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#product-requests"
+                                class="nav-link"
+                                onclick="showSection('product-requests', this)"
+                            >
+                                <i class="fas fa-comments"></i>
+                                <span>Product Requests</span>
                             </a>
                         </li>
                     </ul>
@@ -147,13 +157,6 @@
                         <i class="fas fa-chart-line"></i> Overview
                     </a>
                     <a
-                        href="#products"
-                        class="sidebar-link"
-                        onclick="showSection('products', this)"
-                    >
-                        <i class="fas fa-box"></i> Products
-                    </a>
-                    <a
                         href="#customers"
                         class="sidebar-link"
                         onclick="showSection('customers', this)"
@@ -165,7 +168,14 @@
                         class="sidebar-link"
                         onclick="showSection('delivery', this)"
                     >
-                        <i class="fas fa-truck"></i> Delivery
+                        <i class="fas fa-truck"></i> Delivery Man
+                    </a>
+                    <a
+                        href="#product-requests"
+                        class="sidebar-link"
+                        onclick="showSection('product-requests', this)"
+                    >
+                        <i class="fas fa-comments"></i> Product Requests
                     </a>
                     <a
                         href="#settings"
@@ -181,6 +191,28 @@
             <main class="dashboard-content">
                 <!-- Overview Section -->
                 <section id="overview-section" class="dashboard-section">
+                    <div style="margin-bottom: 30px">
+                        <h2
+                            style="
+                                font-size: 28px;
+                                font-weight: 700;
+                                color: var(--text-dark);
+                                margin-bottom: 10px;
+                            "
+                        >
+                            <i
+                                class="fas fa-chart-line"
+                                style="
+                                    color: var(--primary-color);
+                                    margin-right: 10px;
+                                "
+                            ></i>
+                            Overview
+                        </h2>
+                        <p style="color: var(--text-light); font-size: 15px">
+                            Dashboard statistics and key metrics
+                        </p>
+                    </div>
                     <!-- Stats Grid - Modern Cards -->
                     <div
                         style="
@@ -533,394 +565,189 @@
                     </div>
                 </section>
 
-                <!-- Orders Section -->
-                <section
-                    id="orders-section"
-                    class="dashboard-section"
-                    style="display: none"
-                >
-                    <!-- Night Delivery Info Cards -->
-                    <div
-                        style="
-                            display: grid;
-                            grid-template-columns: repeat(
-                                auto-fit,
-                                minmax(250px, 1fr)
-                            );
-                            gap: 20px;
-                            margin-bottom: 30px;
-                        "
-                    >
-                        <div
-                            style="
-                                background: linear-gradient(
-                                    135deg,
-                                    #667eea 0%,
-                                    #764ba2 100%
-                                );
-                                padding: 20px;
-                                border-radius: 12px;
-                                color: white;
-                            "
-                        >
-                            <div
-                                style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 10px;
-                                    margin-bottom: 10px;
-                                "
-                            >
-                                <i
-                                    class="fas fa-moon"
-                                    style="font-size: 24px"
-                                ></i>
-                                <h4 style="margin: 0">Night Operations</h4>
-                            </div>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                Active Hours: 12:00 AM - 4:00 AM
-                            </p>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                Current Shift: Night Shift
-                            </p>
-                        </div>
-
-                        <div
-                            style="
-                                background: linear-gradient(
-                                    135deg,
-                                    #f093fb 0%,
-                                    #f5576c 100%
-                                );
-                                padding: 20px;
-                                border-radius: 12px;
-                                color: white;
-                            "
-                        >
-                            <div
-                                style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 10px;
-                                    margin-bottom: 10px;
-                                "
-                            >
-                                <i
-                                    class="fas fa-shield-alt"
-                                    style="font-size: 24px"
-                                ></i>
-                                <h4 style="margin: 0">Safety Priority</h4>
-                            </div>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                ✓ GPS Tracking Enabled
-                            </p>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                ✓ Emergency Contact Active
-                            </p>
-                        </div>
-
-                        <div
-                            style="
-                                background: linear-gradient(
-                                    135deg,
-                                    #fa709a 0%,
-                                    #fee140 100%
-                                );
-                                padding: 20px;
-                                border-radius: 12px;
-                                color: white;
-                            "
-                        >
-                            <div
-                                style="
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 10px;
-                                    margin-bottom: 10px;
-                                "
-                            >
-                                <i
-                                    class="fas fa-bell"
-                                    style="font-size: 24px"
-                                ></i>
-                                <h4 style="margin: 0">Smart Notifications</h4>
-                            </div>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                ✓ Silent Delivery Alerts
-                            </p>
-                            <p
-                                style="
-                                    margin: 5px 0;
-                                    font-size: 14px;
-                                    opacity: 0.9;
-                                "
-                            >
-                                ✓ SMS Before Arrival
-                            </p>
-                        </div>
-                    </div>
-
-                    <div
-                        style="
-                            background: white;
-                            padding: 30px;
-                            border-radius: var(--border-radius);
-                            box-shadow: var(--shadow);
-                        "
-                    >
-                        <h3
-                            style="margin-bottom: 20px; color: var(--text-dark)"
-                        >
-                            <i class="fas fa-clipboard-list"></i> Order
-                            Management System
-                        </h3>
-
-                        <div
-                            style="
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                margin-bottom: 20px;
-                                flex-wrap: wrap;
-                                gap: 15px;
-                            "
-                        >
-                            <div
-                                style="
-                                    display: flex;
-                                    gap: 10px;
-                                    flex-wrap: wrap;
-                                "
-                            >
-                                <input
-                                    type="text"
-                                    id="order-search-input"
-                                    class="form-input"
-                                    placeholder="Search by order ID, customer name..."
-                                    style="width: 300px; margin: 0"
-                                    onkeyup="filterOrders()"
-                                />
-                                <select
-                                    id="time-slot-filter"
-                                    class="form-select"
-                                    style="margin: 0; width: 180px"
-                                    onchange="filterOrders()"
-                                >
-                                    <option value="all">All Time Slots</option>
-                                    <option value="12:00 AM - 1:00 AM">
-                                        12:00 AM - 1:00 AM
-                                    </option>
-                                    <option value="1:00 AM - 2:00 AM">
-                                        1:00 AM - 2:00 AM
-                                    </option>
-                                    <option value="2:00 AM - 3:00 AM">
-                                        2:00 AM - 3:00 AM
-                                    </option>
-                                    <option value="3:00 AM - 4:00 AM">
-                                        3:00 AM - 4:00 AM
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <select
-                                    id="status-filter"
-                                    class="form-select"
-                                    style="margin: 0"
-                                    onchange="filterOrders()"
-                                >
-                                    <option value="all">All Orders</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="confirmed">Confirmed</option>
-                                    <option value="out_for_delivery">
-                                        Out for Delivery
-                                    </option>
-                                    <option value="delivered">Delivered</option>
-                                    <option value="cancelled">Cancelled</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Night Delivery Features -->
-                        <div
-                            style="
-                                background: #f8f9fa;
-                                padding: 15px;
-                                border-radius: 8px;
-                                margin-bottom: 20px;
-                                border-left: 4px solid var(--primary-color);
-                            "
-                        >
-                            <h4
-                                style="
-                                    margin: 0 0 10px;
-                                    color: var(--text-dark);
-                                "
-                            >
-                                <i class="fas fa-info-circle"></i> Night
-                                Delivery Features
-                            </h4>
-                            <div
-                                style="
-                                    display: grid;
-                                    grid-template-columns: repeat(
-                                        auto-fit,
-                                        minmax(200px, 1fr)
-                                    );
-                                    gap: 10px;
-                                    font-size: 14px;
-                                "
-                            >
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    Contact-less Delivery
-                                </div>
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    Real-time GPS Tracking
-                                </div>
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    Pre-arrival SMS Alert
-                                </div>
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    Silent Doorbell Option
-                                </div>
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    Photo Proof Delivery
-                                </div>
-                                <div>
-                                    <i
-                                        class="fas fa-check-circle"
-                                        style="color: #28a745"
-                                    ></i>
-                                    24/7 Customer Support
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="admin-orders-full">
-                            <!-- Full orders list will be inserted here -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Products Section -->
-                <section
-                    id="products-section"
-                    class="dashboard-section"
-                    style="display: none"
-                >
-                    <div
-                        style="
-                            background: white;
-                            padding: 30px;
-                            border-radius: var(--border-radius);
-                            box-shadow: var(--shadow);
-                        "
-                    >
-                        <div style="margin-bottom: 20px">
-                            <button
-                                class="btn btn-primary"
-                                onclick="window.location.href='admin-products.html'"
-                            >
-                                <i class="fas fa-plus"></i> Manage Products
-                            </button>
-                        </div>
-
-                        <div id="admin-products-list">
-                            <!-- Products will be loaded dynamically -->
-                            <div style="text-align: center; padding: 40px">
-                                <i
-                                    class="fas fa-spinner fa-spin"
-                                    style="font-size: 24px"
-                                ></i>
-                                <p>Loading products...</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Customers Section -->
                 <section
                     id="customers-section"
                     class="dashboard-section"
                     style="display: none"
                 >
+                    <div style="margin-bottom: 30px">
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                flex-wrap: wrap;
+                                gap: 20px;
+                            "
+                        >
+                            <div>
+                                <h2
+                                    style="
+                                        font-size: 28px;
+                                        font-weight: 700;
+                                        color: var(--text-dark);
+                                        margin-bottom: 10px;
+                                    "
+                                >
+                                    <i
+                                        class="fas fa-users"
+                                        style="
+                                            color: var(--primary-color);
+                                            margin-right: 10px;
+                                        "
+                                    ></i>
+                                    Customers Management
+                                </h2>
+                                <p
+                                    style="
+                                        color: var(--text-light);
+                                        font-size: 15px;
+                                    "
+                                >
+                                    Manage and view all customer accounts
+                                </p>
+                            </div>
+                            <div
+                                style="
+                                    position: relative;
+                                    max-width: 400px;
+                                    width: 100%;
+                                "
+                            >
+                                <input
+                                    type="text"
+                                    id="customer-search-input"
+                                    placeholder="Search customers..."
+                                    onkeyup="searchCustomers()"
+                                    style="
+                                        width: 100%;
+                                        padding: 12px 45px 12px 20px;
+                                        border: 2px solid #e0e0e0;
+                                        border-radius: 25px;
+                                        font-size: 15px;
+                                        transition: all 0.3s ease;
+                                    "
+                                    onfocus="this.style.borderColor='#667eea'; this.style.outline='none';"
+                                    onblur="this.style.borderColor='#e0e0e0';"
+                                />
+                                <i
+                                    class="fas fa-search"
+                                    style="
+                                        position: absolute;
+                                        right: 20px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        color: #999;
+                                    "
+                                ></i>
+                            </div>
+                        </div>
+                    </div>
                     <div
                         style="
                             background: white;
                             padding: 30px;
                             border-radius: var(--border-radius);
                             box-shadow: var(--shadow);
+                            overflow-x: auto;
                         "
                     >
-                        <h3 style="margin-bottom: 20px">
-                            <i
-                                class="fas fa-users"
-                                style="
-                                    color: var(--primary-color);
-                                    margin-right: 10px;
-                                "
-                            ></i
-                            >All Customers
-                        </h3>
-                        <div id="admin-customers-list">
-                            <!-- Customers will be loaded dynamically -->
-                            <div style="text-align: center; padding: 40px">
-                                <i
-                                    class="fas fa-spinner fa-spin"
-                                    style="font-size: 24px"
-                                ></i>
-                                <p>Loading customers...</p>
-                            </div>
-                        </div>
+                        <table
+                            class="data-table"
+                            style="width: 100%; border-collapse: collapse"
+                        >
+                            <thead>
+                                <tr>
+                                    <th
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            color: white;
+                                            padding: 18px 15px;
+                                            text-align: left;
+                                            font-weight: 600;
+                                            font-size: 15px;
+                                            white-space: nowrap;
+                                        "
+                                    >
+                                        Customer Name
+                                    </th>
+                                    <th
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            color: white;
+                                            padding: 18px 15px;
+                                            text-align: left;
+                                            font-weight: 600;
+                                            font-size: 15px;
+                                            white-space: nowrap;
+                                        "
+                                    >
+                                        Email
+                                    </th>
+                                    <th
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            color: white;
+                                            padding: 18px 15px;
+                                            text-align: left;
+                                            font-weight: 600;
+                                            font-size: 15px;
+                                            white-space: nowrap;
+                                        "
+                                    >
+                                        Total Spent
+                                    </th>
+                                    <th
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            color: white;
+                                            padding: 18px 15px;
+                                            text-align: left;
+                                            font-weight: 600;
+                                            font-size: 15px;
+                                            white-space: nowrap;
+                                        "
+                                    >
+                                        Total Orders
+                                    </th>
+                                    <th
+                                        style="
+                                            background: linear-gradient(
+                                                135deg,
+                                                var(--primary-color) 0%,
+                                                var(--secondary-color) 100%
+                                            );
+                                            color: white;
+                                            padding: 18px 15px;
+                                            text-align: left;
+                                            font-weight: 600;
+                                            font-size: 15px;
+                                            white-space: nowrap;
+                                        "
+                                    >
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-tbody"></tbody>
+                        </table>
                     </div>
                 </section>
 
@@ -930,90 +757,154 @@
                     class="dashboard-section"
                     style="display: none"
                 >
+                    <div style="margin-bottom: 30px">
+                        <div
+                            style="
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                flex-wrap: wrap;
+                                gap: 20px;
+                            "
+                        >
+                            <div>
+                                <h2
+                                    style="
+                                        font-size: 28px;
+                                        font-weight: 700;
+                                        color: var(--text-dark);
+                                        margin-bottom: 10px;
+                                    "
+                                >
+                                    <i
+                                        class="fas fa-truck"
+                                        style="
+                                            color: var(--primary-color);
+                                            margin-right: 10px;
+                                        "
+                                    ></i>
+                                    Delivery Men Management
+                                </h2>
+                                <p
+                                    style="
+                                        color: var(--text-light);
+                                        font-size: 15px;
+                                    "
+                                >
+                                    Manage delivery personnel and track
+                                    deliveries
+                                </p>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="openAddDeliveryManDialog()"
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                "
+                            >
+                                <i class="fas fa-plus"></i>
+                                Add Delivery Man
+                            </button>
+                        </div>
+                    </div>
                     <div
-                        style="
-                            background: white;
-                            padding: 30px;
-                            border-radius: var(--border-radius);
-                            box-shadow: var(--shadow);
-                            margin-bottom: 30px;
-                        "
+                        id="delivery-men-container"
+                        style="margin-bottom: 30px"
                     >
-                        <h3 style="margin-bottom: 20px">Delivery Personnel</h3>
+                        <!-- Delivery men will be loaded here -->
+                        <div
+                            style="
+                                text-align: center;
+                                padding: 40px;
+                                background: white;
+                                border-radius: var(--border-radius);
+                                box-shadow: var(--shadow);
+                            "
+                        >
+                            <i
+                                class="fas fa-spinner fa-spin"
+                                style="font-size: 24px"
+                            ></i>
+                            <p>Loading delivery men...</p>
+                        </div>
+                    </div>
+                </section>
 
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
-                                    <th>Active Deliveries</th>
-                                    <th>Total Completed</th>
-                                    <th>Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#D001</td>
-                                    <td>Mike Johnson</td>
-                                    <td>+880 1756 234567</td>
-                                    <td>
-                                        <span
-                                            class="status-badge status-confirmed"
-                                            >Active</span
-                                        >
-                                    </td>
-                                    <td>2</td>
-                                    <td>147</td>
-                                    <td>4.8 ⭐</td>
-                                </tr>
-                                <tr>
-                                    <td>#D002</td>
-                                    <td>Sarah Wilson</td>
-                                    <td>+880 1834 567890</td>
-                                    <td>
-                                        <span
-                                            class="status-badge status-confirmed"
-                                            >Active</span
-                                        >
-                                    </td>
-                                    <td>1</td>
-                                    <td>203</td>
-                                    <td>4.9 ⭐</td>
-                                </tr>
-                                <tr>
-                                    <td>#D003</td>
-                                    <td>Ahmed Hassan</td>
-                                    <td>+880 1912 345678</td>
-                                    <td>
-                                        <span
-                                            class="status-badge status-confirmed"
-                                            >Active</span
-                                        >
-                                    </td>
-                                    <td>3</td>
-                                    <td>189</td>
-                                    <td>4.7 ⭐</td>
-                                </tr>
-                                <tr>
-                                    <td>#D004</td>
-                                    <td>Rahim Khan</td>
-                                    <td>+880 1645 789012</td>
-                                    <td>
-                                        <span
-                                            class="status-badge status-pending"
-                                            >Offline</span
-                                        >
-                                    </td>
-                                    <td>0</td>
-                                    <td>156</td>
-                                    <td>4.6 ⭐</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <!-- Product Requests Section -->
+                <section
+                    id="product-requests-section"
+                    class="dashboard-section"
+                    style="display: none"
+                >
+                    <div style="margin-bottom: 30px">
+                        <h2
+                            style="
+                                font-size: 28px;
+                                font-weight: 700;
+                                color: var(--text-dark);
+                                margin-bottom: 10px;
+                            "
+                        >
+                            <i
+                                class="fas fa-comments"
+                                style="
+                                    color: var(--primary-color);
+                                    margin-right: 10px;
+                                "
+                            ></i>
+                            Product Requests
+                        </h2>
+                        <p style="color: var(--text-light); font-size: 15px">
+                            Manage customer product requests
+                        </p>
                     </div>
 
+                    <!-- Filter Tabs -->
+                    <div
+                        style="
+                            margin-bottom: 20px;
+                            display: flex;
+                            gap: 10px;
+                            flex-wrap: wrap;
+                        "
+                    >
+                        <button
+                            class="btn btn-sm"
+                            onclick="filterProductRequests(null)"
+                            id="filter-all"
+                            style="
+                                background: var(--primary-color);
+                                color: white;
+                            "
+                        >
+                            All Requests
+                        </button>
+                        <button
+                            class="btn btn-sm"
+                            onclick="filterProductRequests('pending')"
+                            id="filter-pending"
+                        >
+                            Pending
+                        </button>
+                        <button
+                            class="btn btn-sm"
+                            onclick="filterProductRequests('approved')"
+                            id="filter-approved"
+                        >
+                            Approved
+                        </button>
+                        <button
+                            class="btn btn-sm"
+                            onclick="filterProductRequests('rejected')"
+                            id="filter-rejected"
+                        >
+                            Rejected
+                        </button>
+                    </div>
+
+                    <!-- Requests Table -->
                     <div
                         style="
                             background: white;
@@ -1022,26 +913,25 @@
                             box-shadow: var(--shadow);
                         "
                     >
-                        <h3 style="margin-bottom: 20px">
-                            Active Deliveries & Order Details
-                        </h3>
-
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Delivery Person</th>
-                                    <th>Customer</th>
-                                    <th>Address</th>
-                                    <th>Items</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="delivery-assignments-body">
-                                <!-- Will be populated dynamically -->
-                            </tbody>
-                        </table>
+                        <div id="product-requests-container">
+                            <div style="text-align: center; padding: 40px">
+                                <i
+                                    class="fas fa-spinner fa-spin"
+                                    style="
+                                        font-size: 32px;
+                                        color: var(--primary-color);
+                                    "
+                                ></i>
+                                <p
+                                    style="
+                                        margin-top: 15px;
+                                        color: var(--text-light);
+                                    "
+                                >
+                                    Loading requests...
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -1051,6 +941,28 @@
                     class="dashboard-section"
                     style="display: none"
                 >
+                    <div style="margin-bottom: 30px">
+                        <h2
+                            style="
+                                font-size: 28px;
+                                font-weight: 700;
+                                color: var(--text-dark);
+                                margin-bottom: 10px;
+                            "
+                        >
+                            <i
+                                class="fas fa-cog"
+                                style="
+                                    color: var(--primary-color);
+                                    margin-right: 10px;
+                                "
+                            ></i>
+                            Settings
+                        </h2>
+                        <p style="color: var(--text-light); font-size: 15px">
+                            Configure store settings and preferences
+                        </p>
+                    </div>
                     <div
                         style="
                             background: white;
@@ -1798,6 +1710,770 @@
             }
         </style>
 
+        <!-- Customer Profile Modal -->
+        <div
+            id="profile-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            var(--primary-color) 0%,
+                            var(--secondary-color) 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-user-circle"></i> Customer Profile
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeProfileModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div
+                    class="modal-body"
+                    id="profile-modal-body"
+                    style="padding: 30px"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Customer Orders Modal -->
+        <div
+            id="orders-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 900px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #30cfd0 0%,
+                            #330867 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-shopping-bag"></i> Customer Orders
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeOrdersModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div
+                    class="modal-body"
+                    id="orders-modal-body"
+                    style="padding: 30px"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Delivery Man Dialog -->
+        <div
+            id="delivery-man-dialog"
+            class="custom-dialog"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 10000;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="dialog-content"
+                style="
+                    background: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    max-width: 500px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                    position: relative;
+                "
+            >
+                <div
+                    class="dialog-header"
+                    style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 25px;
+                        padding-bottom: 15px;
+                        border-bottom: 2px solid #f0f0f0;
+                    "
+                >
+                    <h2
+                        id="dialog-title"
+                        style="
+                            margin: 0;
+                            font-size: 24px;
+                            color: var(--text-dark);
+                        "
+                    >
+                        <i class="fas fa-user-plus"></i> Add Delivery Man
+                    </h2>
+                    <button
+                        class="dialog-close"
+                        onclick="closeDeliveryManDialog()"
+                        style="
+                            background: none;
+                            border: none;
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: #999;
+                            padding: 0;
+                            width: 30px;
+                            height: 30px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            transition: all 0.3s ease;
+                        "
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div class="dialog-body">
+                    <form
+                        id="delivery-man-form"
+                        onsubmit="saveDeliveryMan(event)"
+                    >
+                        <input type="hidden" id="delivery-man-id" />
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <label
+                                class="form-label"
+                                style="
+                                    display: block;
+                                    margin-bottom: 8px;
+                                    font-weight: 600;
+                                    color: var(--text-dark);
+                                    font-size: 14px;
+                                "
+                                >Name *</label
+                            >
+                            <input
+                                type="text"
+                                id="delivery-man-name"
+                                class="form-input"
+                                placeholder="Enter full name"
+                                required
+                                style="
+                                    width: 100%;
+                                    padding: 12px 15px;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                "
+                            />
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <label
+                                class="form-label"
+                                style="
+                                    display: block;
+                                    margin-bottom: 8px;
+                                    font-weight: 600;
+                                    color: var(--text-dark);
+                                    font-size: 14px;
+                                "
+                                >Phone Number *</label
+                            >
+                            <input
+                                type="tel"
+                                id="delivery-man-phone"
+                                class="form-input"
+                                placeholder="Enter phone number"
+                                required
+                                style="
+                                    width: 100%;
+                                    padding: 12px 15px;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                "
+                            />
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <label
+                                class="form-label"
+                                style="
+                                    display: block;
+                                    margin-bottom: 8px;
+                                    font-weight: 600;
+                                    color: var(--text-dark);
+                                    font-size: 14px;
+                                "
+                                >NID (National ID) *</label
+                            >
+                            <input
+                                type="text"
+                                id="delivery-man-nid"
+                                class="form-input"
+                                placeholder="Enter NID number"
+                                required
+                                style="
+                                    width: 100%;
+                                    padding: 12px 15px;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                "
+                            />
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <label
+                                class="form-label"
+                                style="
+                                    display: block;
+                                    margin-bottom: 8px;
+                                    font-weight: 600;
+                                    color: var(--text-dark);
+                                    font-size: 14px;
+                                "
+                                >Profile Image URL (Optional)</label
+                            >
+                            <input
+                                type="url"
+                                id="delivery-man-image"
+                                class="form-input"
+                                placeholder="https://example.com/image.jpg"
+                                style="
+                                    width: 100%;
+                                    padding: 12px 15px;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                "
+                            />
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <label
+                                class="form-label"
+                                style="
+                                    display: block;
+                                    margin-bottom: 8px;
+                                    font-weight: 600;
+                                    color: var(--text-dark);
+                                    font-size: 14px;
+                                "
+                                >Status</label
+                            >
+                            <select
+                                id="delivery-man-status"
+                                class="form-input"
+                                style="
+                                    width: 100%;
+                                    padding: 12px 15px;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    font-size: 14px;
+                                    transition: all 0.3s ease;
+                                    font-family: inherit;
+                                "
+                            >
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div
+                            class="dialog-footer"
+                            style="
+                                display: flex;
+                                gap: 10px;
+                                justify-content: flex-end;
+                                margin-top: 25px;
+                            "
+                        >
+                            <button
+                                type="button"
+                                class="btn-dialog btn-dialog-secondary"
+                                onclick="closeDeliveryManDialog()"
+                                style="
+                                    padding: 12px 24px;
+                                    border: none;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;
+                                    font-size: 14px;
+                                    background: #f0f0f0;
+                                    color: var(--text-dark);
+                                "
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn-dialog btn-dialog-primary"
+                                style="
+                                    padding: 12px 24px;
+                                    border: none;
+                                    border-radius: 8px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    transition: all 0.3s ease;
+                                    font-size: 14px;
+                                    background: linear-gradient(
+                                        135deg,
+                                        var(--primary-color),
+                                        var(--secondary-color)
+                                    );
+                                    color: white;
+                                "
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Request View Modal -->
+        <div
+            id="product-request-view-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 800px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            var(--primary-color) 0%,
+                            var(--secondary-color) 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-eye"></i> Product Request Details
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeProductRequestViewModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div
+                    class="modal-body"
+                    id="product-request-view-body"
+                    style="padding: 30px"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Accept Product Request Modal -->
+        <div
+            id="accept-request-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #28a745 0%,
+                            #20c997 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-check-circle"></i> Accept Product
+                        Request
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeAcceptRequestModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div class="modal-body" style="padding: 30px">
+                    <form
+                        id="accept-request-form"
+                        onsubmit="submitAcceptRequest(event)"
+                    >
+                        <div class="form-group">
+                            <label class="form-label"
+                                >Delivery Time
+                                <span style="color: red">*</span></label
+                            >
+                            <input
+                                type="datetime-local"
+                                id="accept-delivery-time"
+                                class="form-input"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >Delivery Man
+                                <span style="color: red">*</span></label
+                            >
+                            <select
+                                id="accept-delivery-man"
+                                class="form-input"
+                                required
+                            >
+                                <option value="">Select Delivery Man</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"
+                                >Admin Notes (Optional)</label
+                            >
+                            <textarea
+                                id="accept-admin-notes"
+                                class="form-input"
+                                rows="3"
+                                placeholder="Add any additional notes..."
+                            ></textarea>
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                gap: 10px;
+                                justify-content: flex-end;
+                                margin-top: 20px;
+                            "
+                        >
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                onclick="closeAcceptRequestModal()"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                style="background: #28a745"
+                            >
+                                Accept Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reject Product Request Modal -->
+        <div
+            id="reject-request-modal"
+            class="modal"
+            style="
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <div
+                class="modal-content"
+                style="
+                    background: white;
+                    border-radius: 20px;
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                    animation: slideDown 0.3s ease;
+                "
+            >
+                <div
+                    class="modal-header"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #dc3545 0%,
+                            #c82333 100%
+                        );
+                        padding: 25px 30px;
+                        border-radius: 20px 20px 0 0;
+                        position: relative;
+                    "
+                >
+                    <h2
+                        style="
+                            margin: 0;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: 700;
+                        "
+                    >
+                        <i class="fas fa-times-circle"></i> Reject Product
+                        Request
+                    </h2>
+                    <span
+                        class="modal-close"
+                        onclick="closeRejectRequestModal()"
+                        style="
+                            position: absolute;
+                            right: 25px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 28px;
+                            cursor: pointer;
+                            color: white;
+                            opacity: 0.9;
+                        "
+                        >&times;</span
+                    >
+                </div>
+                <div class="modal-body" style="padding: 30px">
+                    <form
+                        id="reject-request-form"
+                        onsubmit="submitRejectRequest(event)"
+                    >
+                        <div class="form-group">
+                            <label class="form-label"
+                                >Rejection Reason
+                                <span style="color: red">*</span></label
+                            >
+                            <textarea
+                                id="reject-reason"
+                                class="form-input"
+                                rows="4"
+                                placeholder="Please provide a reason for rejecting this request..."
+                                required
+                            ></textarea>
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                gap: 10px;
+                                justify-content: flex-end;
+                                margin-top: 20px;
+                            "
+                        >
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                onclick="closeRejectRequestModal()"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                style="background: #dc3545"
+                            >
+                                Reject Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Scripts -->
         <script src="js/main.js"></script>
         <script src="js/api.js"></script>
@@ -1816,7 +2492,7 @@
                 }, 1500);
             }
 
-            // Show section function for sidebar navigation (defined early for onclick handlers)
+            // Show section function for sidebar navigation
             function showSection(sectionId, element) {
                 // Hide all sections
                 const sections =
@@ -1839,6 +2515,9 @@
                 }
             }
 
+            // Make showSection globally available
+            window.showSection = showSection;
+
             // Global data stores
             let allOrders = [];
             let allProducts = [];
@@ -1850,39 +2529,29 @@
                 totalCustomers: 0,
             };
 
-            // Show/hide sections (must be global for onclick handlers)
-            window.showSection = function (section, eventElement) {
-                // Hide all sections
-                document
-                    .querySelectorAll(".dashboard-section")
-                    .forEach((s) => (s.style.display = "none"));
-
-                // Remove active class from all links
-                document
-                    .querySelectorAll(".sidebar-link")
-                    .forEach((l) => l.classList.remove("active"));
-
-                // Show selected section
-                const sectionEl = document.getElementById(section + "-section");
-                if (sectionEl) {
-                    sectionEl.style.display = "block";
-                }
-
-                // Add active class to clicked link
-                if (eventElement) {
-                    eventElement.classList.add("active");
-                } else if (window.event && window.event.target) {
-                    const clickedLink =
-                        window.event.target.closest(".sidebar-link");
-                    if (clickedLink) {
-                        clickedLink.classList.add("active");
-                    }
-                }
-            };
-
             // Initialize dashboard on page load
             document.addEventListener("DOMContentLoaded", async function () {
                 MoonCart.showLoading();
+
+                // Check for hash in URL and show corresponding section
+                const hash = window.location.hash.substring(1);
+                if (
+                    hash &&
+                    [
+                        "overview",
+                        "customers",
+                        "delivery",
+                        "product-requests",
+                        "settings",
+                    ].includes(hash)
+                ) {
+                    const sectionLink = document.querySelector(
+                        `.sidebar-link[href="#${hash}"]`
+                    );
+                    if (sectionLink) {
+                        showSection(hash, sectionLink);
+                    }
+                }
 
                 // Load all data in parallel
                 await Promise.all([
@@ -1899,7 +2568,6 @@
                 renderAllOrders();
                 renderAllProducts();
                 renderAllCustomers();
-                populateDeliveryAssignments();
                 initCharts();
             });
 
@@ -2298,7 +2966,6 @@
                         updateDashboardStats();
                         renderRecentOrders();
                         renderAllOrders();
-                        populateDeliveryAssignments();
                     } else {
                         MoonCart.showNotification(
                             response.message || "Failed to update status",
@@ -3284,11 +3951,1152 @@
                         `Order assigned to ${selectedDeliveryPerson.name}. GPS tracking enabled.`,
                         "success"
                     );
-                    populateDeliveryAssignments(); // Update delivery section
                 }
             }
 
             // showSection function is already defined above in global scope
+
+            // Customer Management Functions
+            let allCustomersData = [];
+            let allOrdersData = [];
+            let currentCustomerId = null;
+
+            async function loadCustomersData() {
+                try {
+                    const usersResponse = await MoonCartAPI.getAllUsers(
+                        "customer"
+                    );
+                    if (usersResponse.success && usersResponse.users) {
+                        allCustomersData = usersResponse.users;
+                    }
+                    const ordersResponse = await MoonCartAPI.getAllOrders();
+                    if (ordersResponse.success && ordersResponse.orders) {
+                        allOrdersData = ordersResponse.orders;
+                    }
+                    renderCustomersTable();
+                } catch (error) {
+                    console.error("Error loading customers:", error);
+                }
+            }
+
+            function getCustomerStats(customerId) {
+                const customerOrders = allOrdersData.filter(
+                    (o) => o.user_id == customerId
+                );
+                const totalSpent = customerOrders.reduce(
+                    (sum, o) => sum + parseFloat(o.total || 0),
+                    0
+                );
+                return { orderCount: customerOrders.length, totalSpent };
+            }
+
+            function renderCustomersTable() {
+                const tbody = document.getElementById("customers-tbody");
+                if (!tbody) return;
+
+                if (allCustomersData.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 60px; color: #999;"><i class="fas fa-users" style="font-size: 48px; display: block; margin-bottom: 15px;"></i>No customers found</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = allCustomersData
+                    .map((customer) => {
+                        const stats = getCustomerStats(customer.id);
+                        const initials = customer.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase();
+                        return `
+                        <tr style="transition: all 0.2s ease;">
+                            <td style="padding: 18px 15px; border-bottom: 1px solid #f0f0f0;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div style="width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; flex-shrink: 0;">${initials}</div>
+                                    <div>
+                                        <h4 style="margin: 0; font-size: 15px; font-weight: 600; color: #333;">${
+                                            customer.name
+                                        }</h4>
+                                        <p style="margin: 3px 0 0 0; font-size: 13px; color: #666;"><i class="fas fa-phone"></i> ${
+                                            customer.phone || "N/A"
+                                        }</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="padding: 18px 15px; border-bottom: 1px solid #f0f0f0; color: #333;">${
+                                customer.email
+                            }</td>
+                            <td style="padding: 18px 15px; border-bottom: 1px solid #f0f0f0; font-weight: 600; color: #30cfd0; font-size: 16px;">৳${MoonCart.formatCurrency(
+                                stats.totalSpent
+                            )}</td>
+                            <td style="padding: 18px 15px; border-bottom: 1px solid #f0f0f0; text-align: center; font-weight: 600; font-size: 16px;">${
+                                stats.orderCount
+                            }</td>
+                            <td style="padding: 18px 15px; border-bottom: 1px solid #f0f0f0;">
+                                <button onclick="viewCustomerProfile('${
+                                    customer.id
+                                }')" style="padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s ease; margin-right: 8px; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white;"><i class="fas fa-user"></i> View Profile</button>
+                                <button onclick="viewCustomerOrders('${
+                                    customer.id
+                                }')" style="padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s ease; background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); color: white;"><i class="fas fa-shopping-bag"></i> View Orders</button>
+                            </td>
+                        </tr>
+                    `;
+                    })
+                    .join("");
+            }
+
+            function searchCustomers() {
+                const searchTerm =
+                    document
+                        .getElementById("customer-search-input")
+                        ?.value.toLowerCase() || "";
+                const filtered = allCustomersData.filter(
+                    (customer) =>
+                        customer.name.toLowerCase().includes(searchTerm) ||
+                        customer.email.toLowerCase().includes(searchTerm) ||
+                        (customer.phone && customer.phone.includes(searchTerm))
+                );
+                const tbody = document.getElementById("customers-tbody");
+                if (!tbody) return;
+                if (filtered.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 60px; color: #999;">No customers found</td></tr>`;
+                    return;
+                }
+                const originalData = allCustomersData;
+                allCustomersData = filtered;
+                renderCustomersTable();
+                allCustomersData = originalData;
+            }
+
+            function viewCustomerProfile(customerId) {
+                const customer = allCustomersData.find(
+                    (c) => c.id == customerId
+                );
+                if (!customer) return;
+                const stats = getCustomerStats(customerId);
+                const initials = customer.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                    .toUpperCase();
+                const memberSince = new Date(
+                    customer.created_at
+                ).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                });
+                document.getElementById("profile-modal-body").innerHTML = `
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start; margin-bottom: 30px;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; font-weight: 700; box-shadow: 0 5px 20px rgba(48, 207, 208, 0.3);">${initials}</div>
+                        <div>
+                            <h3 style="margin: 0 0 8px 0; font-size: 26px; color: #333;">${
+                                customer.name
+                            }</h3>
+                            <p style="margin: 5px 0; color: #666; font-size: 15px;"><i class="fas fa-envelope" style="color: #30cfd0; margin-right: 8px; width: 20px;"></i>${
+                                customer.email
+                            }</p>
+                            <p style="margin: 5px 0; color: #666; font-size: 15px;"><i class="fas fa-phone" style="color: #30cfd0; margin-right: 8px; width: 20px;"></i>${
+                                customer.phone || "N/A"
+                            }</p>
+                            <p style="margin: 5px 0; color: #666; font-size: 15px;"><i class="fas fa-calendar" style="color: #30cfd0; margin-right: 8px; width: 20px;"></i>Member since ${memberSince}</p>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px;">
+                        <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); padding: 20px; border-radius: 12px; text-align: center; color: white;">
+                            <h4 style="margin: 0 0 5px 0; font-size: 28px; font-weight: 700;">${
+                                stats.orderCount
+                            }</h4>
+                            <p style="margin: 0; font-size: 13px; opacity: 0.9;">Total Orders</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 20px; border-radius: 12px; text-align: center; color: white;">
+                            <h4 style="margin: 0 0 5px 0; font-size: 28px; font-weight: 700;">৳${MoonCart.formatCurrency(
+                                stats.totalSpent
+                            )}</h4>
+                            <p style="margin: 0; font-size: 13px; opacity: 0.9;">Total Spent</p>
+                        </div>
+                    </div>
+                `;
+                document.getElementById("profile-modal").style.display = "flex";
+            }
+
+            function closeProfileModal() {
+                document.getElementById("profile-modal").style.display = "none";
+            }
+
+            function viewCustomerOrders(customerId) {
+                currentCustomerId = customerId;
+                const customer = allCustomersData.find(
+                    (c) => c.id == customerId
+                );
+                if (!customer) return;
+                const customerOrders = allOrdersData.filter(
+                    (o) => o.user_id == customerId
+                );
+                const modalBody = document.getElementById("orders-modal-body");
+                if (customerOrders.length === 0) {
+                    modalBody.innerHTML = `<div style="text-align: center; padding: 60px 20px; color: #999;"><i class="fas fa-shopping-cart" style="font-size: 60px; display: block; margin-bottom: 15px; opacity: 0.5;"></i><h3>No orders yet</h3><p>${customer.name} hasn't placed any orders.</p></div>`;
+                } else {
+                    modalBody.innerHTML = customerOrders
+                        .map(
+                            (order) => `
+                        <div style="border: 2px solid #f0f0f0; border-radius: 12px; margin-bottom: 15px; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--primary-color)'; this.style.boxShadow='0 3px 10px rgba(227, 30, 36, 0.2)';" onmouseout="this.style.borderColor='#f0f0f0'; this.style.boxShadow='none';">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; background: #f8f9fa; cursor: pointer;" onclick="toggleOrderDetails('${
+                                order.id
+                            }')">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0; font-size: 16px; font-weight: 700; color: var(--primary-color);">#${String(
+                                        order.order_number || order.id
+                                    )
+                                        .substring(0, 12)
+                                        .toUpperCase()}</h4>
+                                    <p style="margin: 0; font-size: 13px; color: #666;"><i class="fas fa-calendar"></i> ${new Date(
+                                        order.created_at
+                                    ).toLocaleDateString()} | ${
+                                order.item_count || order.items?.length || 0
+                            } items</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 20px; font-weight: 700; color: #30cfd0; margin-bottom: 5px;">৳${MoonCart.formatCurrency(
+                                        parseFloat(order.total)
+                                    )}</div>
+                                    <span class="status-badge status-${
+                                        order.status
+                                    }" style="padding: 6px 14px; border-radius: 15px; font-size: 12px; font-weight: 600; text-transform: capitalize; background: ${
+                                order.status === "pending"
+                                    ? "#fff3cd"
+                                    : order.status === "confirmed"
+                                    ? "#d1ecf1"
+                                    : order.status === "delivered"
+                                    ? "#d4edda"
+                                    : "#f8d7da"
+                            }; color: ${
+                                order.status === "pending"
+                                    ? "#856404"
+                                    : order.status === "confirmed"
+                                    ? "#0c5460"
+                                    : order.status === "delivered"
+                                    ? "#155724"
+                                    : "#721c24"
+                            };">${order.status}</span>
+                                </div>
+                            </div>
+                            <div id="order-details-${
+                                order.id
+                            }" style="display: none; padding: 20px; background: white; border-top: 2px solid #f0f0f0;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                    <div>
+                                        <h5 style="margin: 0 0 10px 0; color: var(--primary-color); font-size: 14px; font-weight: 600;"><i class="fas fa-user"></i> CUSTOMER INFO</h5>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>Name:</strong> ${
+                                            order.customer_name
+                                        }</p>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>Email:</strong> ${
+                                            order.email
+                                        }</p>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>Phone:</strong> ${
+                                            order.phone
+                                        }</p>
+                                    </div>
+                                    <div>
+                                        <h5 style="margin: 0 0 10px 0; color: var(--primary-color); font-size: 14px; font-weight: 600;"><i class="fas fa-map-marker-alt"></i> DELIVERY INFO</h5>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>Address:</strong> ${
+                                            order.address
+                                        }</p>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>City:</strong> ${
+                                            order.city
+                                        }</p>
+                                        <p style="margin: 5px 0; font-size: 14px; color: #666;"><strong>Payment:</strong> ${
+                                            order.payment_method || "N/A"
+                                        }</p>
+                                    </div>
+                                </div>
+                                <h5 style="margin: 20px 0 10px 0; color: #667eea;"><i class="fas fa-box"></i> ORDER ITEMS</h5>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                                    <thead>
+                                        <tr style="background: #f8f9fa;">
+                                            <th style="padding: 12px; text-align: left; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Product</th>
+                                            <th style="padding: 12px; text-align: left; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Quantity</th>
+                                            <th style="padding: 12px; text-align: left; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Price</th>
+                                            <th style="padding: 12px; text-align: left; font-size: 13px; font-weight: 600; color: #333; border-bottom: 2px solid #e0e0e0;">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${(order.items || [])
+                                            .map(
+                                                (item) => `
+                                            <tr>
+                                                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666;">${
+                                                    item.product_name
+                                                }</td>
+                                                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666;">${
+                                                    item.quantity
+                                                }</td>
+                                                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666;">৳${MoonCart.formatCurrency(
+                                                    parseFloat(item.price)
+                                                )}</td>
+                                                <td style="padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #666;">৳${MoonCart.formatCurrency(
+                                                    parseFloat(item.total)
+                                                )}</td>
+                                            </tr>
+                                        `
+                                            )
+                                            .join("")}
+                                    </tbody>
+                                </table>
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Subtotal:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.subtotal)
+                                    )}</span></div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Tax:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.tax)
+                                    )}</span></div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;"><span>Shipping:</span><span>${
+                                        order.shipping == 0
+                                            ? '<span style="color: #28a745;">FREE</span>'
+                                            : "৳" +
+                                              MoonCart.formatCurrency(
+                                                  parseFloat(order.shipping)
+                                              )
+                                    }</span></div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: var(--primary-color); padding-top: 10px; border-top: 2px solid #ddd; margin-top: 10px;"><span>Total:</span><span>৳${MoonCart.formatCurrency(
+                                        parseFloat(order.total)
+                                    )}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                        )
+                        .join("");
+                }
+                document.getElementById("orders-modal").style.display = "flex";
+            }
+
+            function toggleOrderDetails(orderId) {
+                const detailsDiv = document.getElementById(
+                    `order-details-${orderId}`
+                );
+                if (detailsDiv) {
+                    detailsDiv.style.display =
+                        detailsDiv.style.display === "none" ? "block" : "none";
+                }
+            }
+
+            function closeOrdersModal() {
+                document.getElementById("orders-modal").style.display = "none";
+            }
+
+            // Delivery Man Management Functions
+            let deliveryMenData = [];
+
+            async function loadDeliveryMenData() {
+                MoonCart.showLoading();
+                try {
+                    const response = await MoonCartAPI.getDeliveryMen();
+                    if (response.success && response.delivery_men) {
+                        deliveryMenData = response.delivery_men;
+                        displayDeliveryMen();
+                    }
+                } catch (error) {
+                    console.error("Failed to load delivery men:", error);
+                    MoonCart.showNotification(
+                        "Failed to load delivery men",
+                        "error"
+                    );
+                    deliveryMenData = [];
+                }
+                MoonCart.hideLoading();
+            }
+
+            function getDeliveryManStats(deliveryManId) {
+                if (!deliveryManId)
+                    return {
+                        activeDeliveries: 0,
+                        completedDeliveries: 0,
+                        totalDeliveries: 0,
+                    };
+
+                const deliveryManOrders = allOrders.filter(
+                    (o) => o.delivery_man_id == deliveryManId
+                );
+                const activeDeliveries = deliveryManOrders.filter(
+                    (o) =>
+                        o.status === "out_for_delivery" ||
+                        o.status === "confirmed"
+                ).length;
+                const completedDeliveries = deliveryManOrders.filter(
+                    (o) => o.status === "delivered"
+                ).length;
+                const totalDeliveries = deliveryManOrders.length;
+
+                return {
+                    activeDeliveries,
+                    completedDeliveries,
+                    totalDeliveries,
+                };
+            }
+
+            function displayDeliveryMen() {
+                const container = document.getElementById(
+                    "delivery-men-container"
+                );
+                if (!container) return;
+
+                if (deliveryMenData.length === 0) {
+                    container.innerHTML = `<div style="text-align: center; padding: 60px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);"><i class="fas fa-truck" style="font-size: 80px; color: #ddd; margin-bottom: 20px;"></i><h3 style="color: var(--text-light);">No delivery men found</h3><p>Click "Add Delivery Man" to get started</p></div>`;
+                    return;
+                }
+
+                container.innerHTML = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+                    ${deliveryMenData
+                        .map((dm) => {
+                            const initial = dm.name.charAt(0).toUpperCase();
+                            const avatar = dm.profile_image
+                                ? `<img src="${dm.profile_image}" alt="${dm.name}" style="width: 100%; height: 100%; object-fit: cover;" />`
+                                : initial;
+                            const stats = getDeliveryManStats(dm.id);
+
+                            return `
+                            <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(0, 0, 0, 0.08)';">
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 24px; overflow: hidden;">${avatar}</div>
+                                    <div style="flex: 1;">
+                                        <h3 style="margin: 0; font-size: 18px; color: var(--text-dark);">${
+                                            dm.name
+                                        }</h3>
+                                        <p style="margin: 5px 0 0; font-size: 13px; color: var(--text-light);">
+                                            <span style="display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: ${
+                                                dm.is_active
+                                                    ? "#d4edda"
+                                                    : "#f8d7da"
+                                            }; color: ${
+                                dm.is_active ? "#155724" : "#721c24"
+                            };">${dm.is_active ? "Active" : "Inactive"}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Delivery Statistics -->
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 24px; font-weight: 700; color: var(--primary-color);">${
+                                            stats.activeDeliveries
+                                        }</div>
+                                        <div style="font-size: 11px; color: var(--text-light); text-transform: uppercase; margin-top: 5px;">Active</div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 24px; font-weight: 700; color: #28a745;">${
+                                            stats.completedDeliveries
+                                        }</div>
+                                        <div style="font-size: 11px; color: var(--text-light); text-transform: uppercase; margin-top: 5px;">Completed</div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 24px; font-weight: 700; color: #007bff;">${
+                                            stats.totalDeliveries
+                                        }</div>
+                                        <div style="font-size: 11px; color: var(--text-light); text-transform: uppercase; margin-top: 5px;">Total</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Contact Info -->
+                                <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px;">
+                                        <i class="fas fa-phone" style="color: var(--primary-color); width: 20px;"></i>
+                                        <span style="color: var(--text-dark);">${
+                                            dm.phone
+                                        }</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
+                                        <i class="fas fa-id-card" style="color: var(--primary-color); width: 20px;"></i>
+                                        <span style="color: var(--text-dark);">NID: ${
+                                            dm.nid
+                                        }</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Actions -->
+                                <div style="display: flex; gap: 10px;">
+                                    <button onclick="editDeliveryMan(${
+                                        dm.id
+                                    })" style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 13px; background: #007bff; color: white;" onmouseover="this.style.background='#0056b3';" onmouseout="this.style.background='#007bff';"><i class="fas fa-edit"></i> Edit</button>
+                                    <button onclick="deleteDeliveryMan(${
+                                        dm.id
+                                    })" style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 13px; background: #dc3545; color: white;" onmouseover="this.style.background='#c82333';" onmouseout="this.style.background='#dc3545';"><i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        `;
+                        })
+                        .join("")}
+                </div>`;
+            }
+
+            function openAddDeliveryManDialog() {
+                document.getElementById("dialog-title").innerHTML =
+                    '<i class="fas fa-user-plus"></i> Add Delivery Man';
+                document.getElementById("delivery-man-form").reset();
+                document.getElementById("delivery-man-id").value = "";
+                document.getElementById("delivery-man-status").value = "1";
+                document.getElementById("delivery-man-dialog").style.display =
+                    "flex";
+            }
+
+            function editDeliveryMan(id) {
+                const dm = deliveryMenData.find((d) => d.id == id);
+                if (!dm) return;
+                document.getElementById("dialog-title").innerHTML =
+                    '<i class="fas fa-edit"></i> Edit Delivery Man';
+                document.getElementById("delivery-man-id").value = dm.id;
+                document.getElementById("delivery-man-name").value = dm.name;
+                document.getElementById("delivery-man-phone").value = dm.phone;
+                document.getElementById("delivery-man-nid").value = dm.nid;
+                document.getElementById("delivery-man-image").value =
+                    dm.profile_image || "";
+                document.getElementById("delivery-man-status").value =
+                    dm.is_active ? "1" : "0";
+                document.getElementById("delivery-man-dialog").style.display =
+                    "flex";
+            }
+
+            function closeDeliveryManDialog() {
+                document.getElementById("delivery-man-dialog").style.display =
+                    "none";
+            }
+
+            async function saveDeliveryMan(event) {
+                event.preventDefault();
+                const id = document.getElementById("delivery-man-id").value;
+                const data = {
+                    name: document
+                        .getElementById("delivery-man-name")
+                        .value.trim(),
+                    phone: document
+                        .getElementById("delivery-man-phone")
+                        .value.trim(),
+                    nid: document
+                        .getElementById("delivery-man-nid")
+                        .value.trim(),
+                    profile_image:
+                        document
+                            .getElementById("delivery-man-image")
+                            .value.trim() || null,
+                    is_active: parseInt(
+                        document.getElementById("delivery-man-status").value
+                    ),
+                };
+                if (!data.name || !data.phone || !data.nid) {
+                    MoonCart.showNotification(
+                        "Please fill all required fields",
+                        "error"
+                    );
+                    return;
+                }
+                MoonCart.showLoading();
+                try {
+                    let response;
+                    if (id) {
+                        data.id = parseInt(id);
+                        response = await MoonCartAPI.updateDeliveryMan(data);
+                    } else {
+                        response = await MoonCartAPI.createDeliveryMan(data);
+                    }
+                    MoonCart.hideLoading();
+                    if (response.success) {
+                        MoonCart.showNotification(
+                            id
+                                ? "Delivery man updated successfully"
+                                : "Delivery man added successfully",
+                            "success"
+                        );
+                        closeDeliveryManDialog();
+                        await loadDeliveryMenData();
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Failed to save delivery man",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification(
+                        "Failed to save delivery man",
+                        "error"
+                    );
+                }
+            }
+
+            async function deleteDeliveryMan(id) {
+                if (
+                    !confirm(
+                        "Are you sure you want to delete this delivery man?"
+                    )
+                )
+                    return;
+                MoonCart.showLoading();
+                try {
+                    const response = await MoonCartAPI.deleteDeliveryMan(id);
+                    MoonCart.hideLoading();
+                    if (response.success) {
+                        MoonCart.showNotification(
+                            "Delivery man deleted successfully",
+                            "success"
+                        );
+                        await loadDeliveryMenData();
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Failed to delete delivery man",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification(
+                        "Failed to delete delivery man",
+                        "error"
+                    );
+                }
+            }
+
+            // Close modals on outside click
+            window.onclick = function (event) {
+                if (event.target.classList.contains("modal")) {
+                    event.target.style.display = "none";
+                    // Reset forms when closing
+                    if (event.target.id === "accept-request-modal") {
+                        closeAcceptRequestModal();
+                    } else if (event.target.id === "reject-request-modal") {
+                        closeRejectRequestModal();
+                    } else if (
+                        event.target.id === "product-request-view-modal"
+                    ) {
+                        closeProductRequestViewModal();
+                    }
+                }
+                if (event.target.classList.contains("custom-dialog")) {
+                    closeDeliveryManDialog();
+                }
+            };
+
+            // Load data when customers section is shown
+            const originalShowSection = window.showSection;
+            window.showSection = function (sectionId, element) {
+                originalShowSection(sectionId, element);
+                if (
+                    sectionId === "customers" &&
+                    allCustomersData.length === 0
+                ) {
+                    loadCustomersData();
+                }
+                if (sectionId === "delivery") {
+                    if (deliveryMenData.length === 0) {
+                        loadDeliveryMenData();
+                    }
+                }
+                if (sectionId === "product-requests") {
+                    if (productRequestsData.length === 0) {
+                        loadProductRequests();
+                    }
+                }
+            };
+
+            // ==========================================
+            // PRODUCT REQUESTS MANAGEMENT
+            // ==========================================
+            let productRequestsData = [];
+            let currentRequestId = null;
+            let currentFilterStatus = null;
+
+            // Load product requests
+            async function loadProductRequests(status = null) {
+                try {
+                    MoonCart.showLoading();
+                    const response = await MoonCartAPI.getProductRequests(
+                        status
+                    );
+                    MoonCart.hideLoading();
+                    if (response.success && response.requests) {
+                        productRequestsData = response.requests;
+                        renderProductRequests();
+                    } else {
+                        productRequestsData = [];
+                        renderProductRequests();
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    console.error("Failed to load product requests:", error);
+                    productRequestsData = [];
+                    renderProductRequests();
+                }
+            }
+
+            // Filter product requests
+            function filterProductRequests(status) {
+                currentFilterStatus = status;
+                // Update active filter button
+                document.querySelectorAll('[id^="filter-"]').forEach((btn) => {
+                    btn.style.background = "";
+                    btn.style.color = "";
+                });
+                const filterBtn = status
+                    ? document.getElementById(`filter-${status}`)
+                    : document.getElementById("filter-all");
+                if (filterBtn) {
+                    filterBtn.style.background = "var(--primary-color)";
+                    filterBtn.style.color = "white";
+                }
+                loadProductRequests(status);
+            }
+
+            // Render product requests table
+            function renderProductRequests() {
+                const container = document.getElementById(
+                    "product-requests-container"
+                );
+                if (!container) return;
+
+                if (productRequestsData.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <i class="fas fa-inbox" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+                            <h3 style="color: var(--text-light); margin-bottom: 10px;">No Product Requests</h3>
+                            <p style="color: var(--text-light);">There are no product requests ${
+                                currentFilterStatus
+                                    ? `with status "${currentFilterStatus}"`
+                                    : ""
+                            }.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <table class="data-table" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--primary-color); color: white;">
+                                <th style="padding: 15px; text-align: left;">ID</th>
+                                <th style="padding: 15px; text-align: left;">Product Name</th>
+                                <th style="padding: 15px; text-align: left;">Customer</th>
+                                <th style="padding: 15px; text-align: left;">Category</th>
+                                <th style="padding: 15px; text-align: left;">Status</th>
+                                <th style="padding: 15px; text-align: left;">Date</th>
+                                <th style="padding: 15px; text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${productRequestsData
+                                .map((req) => {
+                                    const statusClass =
+                                        req.status === "approved"
+                                            ? "status-success"
+                                            : req.status === "rejected"
+                                            ? "status-danger"
+                                            : req.status === "under_review"
+                                            ? "status-warning"
+                                            : "status-pending";
+                                    return `
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 15px;">#${
+                                            req.id
+                                        }</td>
+                                        <td style="padding: 15px; font-weight: 600;">${
+                                            req.product_name || "N/A"
+                                        }</td>
+                                        <td style="padding: 15px;">${
+                                            req.user_name ||
+                                            req.email ||
+                                            "Guest"
+                                        }</td>
+                                        <td style="padding: 15px;">${
+                                            req.category || "N/A"
+                                        }</td>
+                                        <td style="padding: 15px;">
+                                            <span class="status-badge ${statusClass}">${
+                                        req.status
+                                    }</span>
+                                        </td>
+                                        <td style="padding: 15px;">${formatDate(
+                                            req.created_at
+                                        )}</td>
+                                        <td style="padding: 15px; text-align: center;">
+                                            <button onclick="viewProductRequest(${
+                                                req.id
+                                            })" class="btn btn-sm" style="margin-right: 5px;">
+                                                <i class="fas fa-eye"></i> View
+                                            </button>
+                                            ${
+                                                req.status === "pending"
+                                                    ? `
+                                                <button onclick="openAcceptRequestModal(${req.id})" class="btn btn-sm" style="background: #28a745; color: white; margin-right: 5px;">
+                                                    <i class="fas fa-check"></i> Accept
+                                                </button>
+                                                <button onclick="openRejectRequestModal(${req.id})" class="btn btn-sm" style="background: #dc3545; color: white;">
+                                                    <i class="fas fa-times"></i> Reject
+                                                </button>
+                                            `
+                                                    : ""
+                                            }
+                                        </td>
+                                    </tr>
+                                `;
+                                })
+                                .join("")}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            // View product request details
+            async function viewProductRequest(id) {
+                try {
+                    MoonCart.showLoading();
+                    const response = await MoonCartAPI.request(
+                        `product_requests.php?action=single&id=${id}`
+                    );
+                    MoonCart.hideLoading();
+                    if (response.success && response.request) {
+                        const req = response.request;
+                        const modal = document.getElementById(
+                            "product-request-view-modal"
+                        );
+                        const body = document.getElementById(
+                            "product-request-view-body"
+                        );
+
+                        const statusClass =
+                            req.status === "approved"
+                                ? "status-success"
+                                : req.status === "rejected"
+                                ? "status-danger"
+                                : req.status === "under_review"
+                                ? "status-warning"
+                                : "status-pending";
+
+                        body.innerHTML = `
+                            <div style="display: grid; gap: 20px;">
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                    <h3 style="margin: 0 0 15px; color: var(--primary-color);">Request Information</h3>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Request ID</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">#${
+                                                req.id
+                                            }</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Status</p>
+                                            <p style="margin: 0;"><span class="status-badge ${statusClass}">${
+                            req.status
+                        }</span></p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Date Submitted</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">${formatDate(
+                                                req.created_at
+                                            )}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                    <h3 style="margin: 0 0 15px; color: var(--primary-color);">Product Details</h3>
+                                    <div style="display: grid; gap: 15px;">
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Product Name</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark); font-size: 18px;">${
+                                                req.product_name || "N/A"
+                                            }</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Category</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">${
+                                                req.category || "N/A"
+                                            }</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Description</p>
+                                            <p style="margin: 0; color: var(--text-dark); line-height: 1.6;">${
+                                                req.description ||
+                                                "No description provided"
+                                            }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                    <h3 style="margin: 0 0 15px; color: var(--primary-color);">Customer Information</h3>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Name</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">${
+                                                req.user_name || "Guest"
+                                            }</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 5px 0; font-size: 13px; color: var(--text-light);">Email</p>
+                                            <p style="margin: 0; font-weight: 600; color: var(--text-dark);">${
+                                                req.user_email ||
+                                                req.email ||
+                                                "N/A"
+                                            }</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                ${
+                                    req.admin_notes
+                                        ? `
+                                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 4px solid #ffc107;">
+                                        <h3 style="margin: 0 0 15px; color: #856404;">Admin Notes</h3>
+                                        <p style="margin: 0; color: #856404; line-height: 1.6;">${req.admin_notes}</p>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                                
+                                ${
+                                    req.rejection_reason
+                                        ? `
+                                    <div style="background: #f8d7da; padding: 20px; border-radius: 10px; border-left: 4px solid #dc3545;">
+                                        <h3 style="margin: 0 0 15px; color: #721c24;">Rejection Reason</h3>
+                                        <p style="margin: 0; color: #721c24; line-height: 1.6;">${req.rejection_reason}</p>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                                
+                                ${
+                                    req.delivery_time && req.delivery_man_name
+                                        ? `
+                                    <div style="background: #d1ecf1; padding: 20px; border-radius: 10px; border-left: 4px solid #17a2b8;">
+                                        <h3 style="margin: 0 0 15px; color: #0c5460;">Delivery Information</h3>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                            <div>
+                                                <p style="margin: 5px 0; font-size: 13px; color: #0c5460;">Delivery Man</p>
+                                                <p style="margin: 0; font-weight: 600; color: #0c5460;">${
+                                                    req.delivery_man_name
+                                                }</p>
+                                            </div>
+                                            <div>
+                                                <p style="margin: 5px 0; font-size: 13px; color: #0c5460;">Delivery Time</p>
+                                                <p style="margin: 0; font-weight: 600; color: #0c5460;">${formatDateTime(
+                                                    req.delivery_time
+                                                )}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `
+                                        : ""
+                                }
+                            </div>
+                        `;
+                        modal.style.display = "flex";
+                    } else {
+                        MoonCart.showNotification(
+                            "Failed to load request details",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification(
+                        "Failed to load request details",
+                        "error"
+                    );
+                }
+            }
+
+            // Close view modal
+            function closeProductRequestViewModal() {
+                document.getElementById(
+                    "product-request-view-modal"
+                ).style.display = "none";
+            }
+
+            // Open accept request modal
+            async function openAcceptRequestModal(id) {
+                currentRequestId = id;
+                // Load delivery men
+                try {
+                    const response = await MoonCartAPI.getDeliveryMen(true);
+                    const select = document.getElementById(
+                        "accept-delivery-man"
+                    );
+                    select.innerHTML =
+                        '<option value="">Select Delivery Man</option>';
+                    if (response.success && response.delivery_men) {
+                        response.delivery_men.forEach((dm) => {
+                            const option = document.createElement("option");
+                            option.value = dm.id;
+                            option.textContent = `${dm.name} (${dm.phone})`;
+                            select.appendChild(option);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Failed to load delivery men:", error);
+                }
+                document.getElementById("accept-request-modal").style.display =
+                    "flex";
+            }
+
+            // Close accept request modal
+            function closeAcceptRequestModal() {
+                document.getElementById("accept-request-modal").style.display =
+                    "none";
+                document.getElementById("accept-request-form").reset();
+                currentRequestId = null;
+            }
+
+            // Submit accept request
+            async function submitAcceptRequest(event) {
+                event.preventDefault();
+                if (!currentRequestId) return;
+
+                const deliveryTime = document.getElementById(
+                    "accept-delivery-time"
+                ).value;
+                const deliveryManId = document.getElementById(
+                    "accept-delivery-man"
+                ).value;
+                const adminNotes =
+                    document.getElementById("accept-admin-notes").value;
+
+                if (!deliveryTime || !deliveryManId) {
+                    MoonCart.showNotification(
+                        "Please fill all required fields",
+                        "error"
+                    );
+                    return;
+                }
+
+                try {
+                    MoonCart.showLoading();
+                    const response = await MoonCartAPI.request(
+                        "product_requests.php",
+                        {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                id: currentRequestId,
+                                status: "approved",
+                                delivery_time: deliveryTime,
+                                delivery_man_id: deliveryManId,
+                                admin_notes: adminNotes,
+                            }),
+                        }
+                    );
+                    MoonCart.hideLoading();
+
+                    if (response.success) {
+                        MoonCart.showNotification(
+                            "Product request accepted successfully",
+                            "success"
+                        );
+                        closeAcceptRequestModal();
+                        await loadProductRequests(currentFilterStatus);
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Failed to accept request",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification(
+                        "Failed to accept request",
+                        "error"
+                    );
+                }
+            }
+
+            // Open reject request modal
+            function openRejectRequestModal(id) {
+                currentRequestId = id;
+                document.getElementById("reject-request-modal").style.display =
+                    "flex";
+            }
+
+            // Close reject request modal
+            function closeRejectRequestModal() {
+                document.getElementById("reject-request-modal").style.display =
+                    "none";
+                document.getElementById("reject-request-form").reset();
+                currentRequestId = null;
+            }
+
+            // Submit reject request
+            async function submitRejectRequest(event) {
+                event.preventDefault();
+                if (!currentRequestId) return;
+
+                const reason = document
+                    .getElementById("reject-reason")
+                    .value.trim();
+
+                if (!reason) {
+                    MoonCart.showNotification(
+                        "Please provide a rejection reason",
+                        "error"
+                    );
+                    return;
+                }
+
+                try {
+                    MoonCart.showLoading();
+                    const response = await MoonCartAPI.request(
+                        "product_requests.php",
+                        {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                id: currentRequestId,
+                                status: "rejected",
+                                rejection_reason: reason,
+                            }),
+                        }
+                    );
+                    MoonCart.hideLoading();
+
+                    if (response.success) {
+                        MoonCart.showNotification(
+                            "Product request rejected successfully",
+                            "success"
+                        );
+                        closeRejectRequestModal();
+                        await loadProductRequests(currentFilterStatus);
+                    } else {
+                        MoonCart.showNotification(
+                            response.message || "Failed to reject request",
+                            "error"
+                        );
+                    }
+                } catch (error) {
+                    MoonCart.hideLoading();
+                    MoonCart.showNotification(
+                        "Failed to reject request",
+                        "error"
+                    );
+                }
+            }
+
+            // Format date helper
+            function formatDate(dateStr) {
+                if (!dateStr) return "N/A";
+                const date = new Date(dateStr);
+                return date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                });
+            }
+
+            // Format date time helper
+            function formatDateTime(dateStr) {
+                if (!dateStr) return "N/A";
+                const date = new Date(dateStr);
+                return date.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+            }
 
             // Logout function
             function logout() {
@@ -3465,7 +5273,6 @@
             // Initialize charts when page loads
             document.addEventListener("DOMContentLoaded", function () {
                 initCharts();
-                populateDeliveryAssignments();
             });
 
             // Product management functions
@@ -3785,28 +5592,36 @@
                 tbody.innerHTML = deliveryOrders
                     .map(
                         (order) => `
-                    <tr>
-                        <td>#${String(order.id || order.order_number || "")
-                            .substring(0, 8)
-                            .toUpperCase()}</td>
-                        <td>${order.deliveryPersonName || "Not Assigned"}</td>
-                        <td>${
-                            order.customer_name || order.customerName || "N/A"
+                            <tr>
+                                <td>#${String(
+                                    order.id || order.order_number || ""
+                                )
+                                    .substring(0, 8)
+                                    .toUpperCase()}</td>
+                                <td>${
+                                    order.deliveryPersonName || "Not Assigned"
+                                }</td>
+                                <td>${
+                                    order.customer_name ||
+                                    order.customerName ||
+                                    "N/A"
+                                }</td>
+                                <td>${order.address || ""}, ${
+                            order.city || ""
                         }</td>
-                        <td>${order.address || ""}, ${order.city || ""}</td>
-                        <td>${
-                            order.item_count || order.items?.length || 0
-                        } items</td>
-                        <td><span class="status-badge status-${order.status}">${
-                            order.status
-                        }</span></td>
-                        <td>
-                            <button class="btn btn-sm" onclick="viewAdminOrderDetails('${
-                                order.id
-                            }')" style="background: #007bff; color: white; border: none;">View</button>
-                        </td>
-                    </tr>
-                `
+                                <td>${
+                                    order.item_count || order.items?.length || 0
+                                } items</td>
+                                <td><span class="status-badge status-${
+                                    order.status
+                                }">${order.status}</span></td>
+                                <td>
+                                    <button class="btn btn-sm" onclick="viewAdminOrderDetails('${
+                                        order.id
+                                    }')" style="background: #007bff; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">View</button>
+                                </td>
+                            </tr>
+                        `
                     )
                     .join("");
             }

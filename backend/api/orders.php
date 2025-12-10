@@ -99,6 +99,11 @@ function getAllOrders() {
         $order['id'] = (string)$order['id'];
         $order['user_id'] = (string)$order['user_id'];
         
+        // Convert delivery_man_id to string if it exists
+        if (isset($order['delivery_man_id']) && $order['delivery_man_id'] !== null) {
+            $order['delivery_man_id'] = (string)$order['delivery_man_id'];
+        }
+        
         // Ensure order_number exists
         if (empty($order['order_number'])) {
             $order['order_number'] = 'ORD' . str_pad($order['id'], 8, '0', STR_PAD_LEFT);
@@ -107,6 +112,17 @@ function getAllOrders() {
         // Add customer_name for frontend compatibility
         if (empty($order['customer_name']) && !empty($order['user_name'])) {
             $order['customer_name'] = $order['user_name'];
+        }
+        
+        // If delivery_man_id exists but delivery_man_name is null, try to fetch it
+        if (!empty($order['delivery_man_id']) && empty($order['delivery_man_name']) && $deliveryMenTableExists) {
+            $dmStmt = $conn->prepare("SELECT name, phone FROM delivery_men WHERE id = ?");
+            $dmStmt->execute([$order['delivery_man_id']]);
+            $dm = $dmStmt->fetch();
+            if ($dm) {
+                $order['delivery_man_name'] = $dm['name'];
+                $order['delivery_man_phone'] = $dm['phone'];
+            }
         }
         
         $stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
@@ -179,6 +195,11 @@ function getOrder($id) {
     $order['id'] = (string)$order['id'];
     $order['user_id'] = (string)$order['user_id'];
     
+    // Convert delivery_man_id to string if it exists
+    if (isset($order['delivery_man_id']) && $order['delivery_man_id'] !== null) {
+        $order['delivery_man_id'] = (string)$order['delivery_man_id'];
+    }
+    
     // Ensure order_number exists
     if (empty($order['order_number'])) {
         $order['order_number'] = 'ORD' . str_pad($order['id'], 8, '0', STR_PAD_LEFT);
@@ -187,6 +208,17 @@ function getOrder($id) {
     // Add customer_name for frontend compatibility
     if (empty($order['customer_name']) && !empty($order['user_name'])) {
         $order['customer_name'] = $order['user_name'];
+    }
+    
+    // If delivery_man_id exists but delivery_man_name is null, try to fetch it
+    if (!empty($order['delivery_man_id']) && empty($order['delivery_man_name']) && $deliveryMenTableExists) {
+        $dmStmt = $conn->prepare("SELECT name, phone FROM delivery_men WHERE id = ?");
+        $dmStmt->execute([$order['delivery_man_id']]);
+        $dm = $dmStmt->fetch();
+        if ($dm) {
+            $order['delivery_man_name'] = $dm['name'];
+            $order['delivery_man_phone'] = $dm['phone'];
+        }
     }
     
     // Get order items
